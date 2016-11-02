@@ -1,9 +1,8 @@
 """Utility file to seed movies_advisor database"""
 
 from sqlalchemy import func
-from model import Movie
-from model import Source
-from model import MovieSource
+from model import Movie,Source,MovieSource,Genre,MovieGenre
+
 
 from model import connect_to_db, db
 from server import app
@@ -65,11 +64,10 @@ def load_movies():
                       runtime=runtime,
                       actors=actors)
 
-        print movie_id, amazon_link, netflix_hulu_link
-
         db.session.add(movie)
         db.session.commit() 
         load_movie_source_links(movie_id,amazon_link,netflix_hulu_link)
+        load_movie_genre_info(movie_id,genres)
 
 
 
@@ -95,9 +93,12 @@ def load_sources():
 def load_movie_source_links(movie_id,amazon_link,netflix_hulu_link):
     """Loads the source urls where the movie can be found"""
 
-    movie_src1 = MovieSource(movie_id=movie_id,
-                            src_code="AZN",
-                            source_url=amazon_link)
+    if re.search("amazon",amazon_link) is not None:
+        movie_src1 = MovieSource(movie_id=movie_id,
+                                src_code="AZN",
+                                source_url=amazon_link)
+        db.session.add(movie_src1)
+
 
     if re.search("netflix",netflix_hulu_link) is not None:
         movie_src2 = MovieSource(movie_id=movie_id,
@@ -111,10 +112,42 @@ def load_movie_source_links(movie_id,amazon_link,netflix_hulu_link):
                             source_url=netflix_hulu_link)
         db.session.add(movie_src2)
 
-
-
-    db.session.add(movie_src1)
     db.session.commit()
+
+
+def load_genres():
+    """Loads genres available"""
+
+    Genre.query.delete() 
+
+    json_data = open("genres.json").read()
+
+    genre_info = json.loads(json_data)
+
+
+    results = genre_info["results"]   
+
+    for i in range(len(results)):
+        genre_id = results[i].get("id")
+        genre = results[i].get("genre")
+
+        genre_info = Genre(genre_id=genre_id,
+                           genre=genre)
+        db.session.add(genre_info)
+
+    db.session.commit() 
+
+
+def load_movie_genre_info(movie_id,genres):
+    """Loads genres for movies"""
+
+    for genre in genres:
+        movie_genre = MovieGenre(movie_id=movie_id,
+                                genre_id=genre["id"])
+        db.session.add(movie_genre)
+
+    db.session.commit()    
+       
 
 
                    
@@ -131,5 +164,6 @@ if __name__ == "__main__":
     db.create_all()
 
     # Import different types of data
+    load_genres()
     load_sources()
     load_movies()

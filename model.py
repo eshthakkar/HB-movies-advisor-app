@@ -27,6 +27,10 @@ class Movie(db.Model):
     runtime = db.Column(db.String(20),nullable=False)
     actors = db.Column(db.String(300),nullable=False)
 
+    genres = db.relationship("Genre",
+                            secondary="movies_genres",
+                            backref="movies")
+
 
     def __repr__(self):
         """ Provide helpful representation of movie when printed"""
@@ -55,7 +59,7 @@ class MovieSource(db.Model):
     src_code = db.Column(db.String(5),
                db.ForeignKey("sources.src_code"),
                nullable=False)
-    source_url = db.Column(db.String(50))
+    source_url = db.Column(db.String(100))
 
     movie = db.relationship("Movie",backref="movies_sources")
     source = db.relationship("Source",backref="movies_sources")
@@ -66,6 +70,28 @@ class MovieSource(db.Model):
         return "<MovieSource movie_source_id=%s movie_id=%s src_code=%s source_url=%s>" % (self.movie_source_id, self.movie_id, self.src_code, 
                self.source_url)
 
+
+class Genre(db.Model):
+    """Genres for the movies"""
+
+    __tablename__ = "genres"
+
+    genre_id = db.Column(db.Integer,primary_key=True)
+    genre = db.Column(db.String(50),nullable=False,unique=True)
+
+
+class MovieGenre(db.Model):
+    """Genre information for movies"""
+
+    __tablename__ = "movies_genres" 
+
+    movie_genre_id = db.Column(db.Integer,autoincrement=True,primary_key=True) 
+    movie_id = db.Column(db.Integer,
+               db.ForeignKey("movies.movie_id"),
+               nullable=False)
+    genre_id = db.Column(db.Integer,
+                         db.ForeignKey("genres.genre_id"),
+                         nullable=False)
 
 
 
