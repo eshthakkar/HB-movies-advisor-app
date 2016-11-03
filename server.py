@@ -32,10 +32,10 @@ def show_browse():
 
     return render_template("browse.html",genres=genres)  
 
-@app.route('/browse',methods=['POST'])  
-def get_thumbnails():
+@app.route('/browse.json',methods=['POST'])  
+def thumbnails():
     """Returns movie thumbnails for selected genres as json"""
-    
+
     selected_genre = request.form.get("genre").replace("/","") 
     genre_id = db.session.query(Genre.genre_id).filter(Genre.genre == selected_genre).one()
     movies = Genre.query.filter(Genre.genre_id == genre_id).one().movies
