@@ -1,7 +1,7 @@
 """Utility file to seed movies_advisor database"""
 
 from sqlalchemy import func
-from model import Movie,Source,MovieSource,Genre,MovieGenre
+from model import Movie,Source,MovieSource,Genre,MovieGenre,User,MovieWatched  
 
 
 from model import connect_to_db, db
@@ -44,7 +44,11 @@ def load_movies():
         overview_text = detail["overview"]
         genres = detail["genres"]
         amazon_link = detail["purchase_web_sources"][1]["link"]
-        netflix_hulu_link = detail["subscription_web_sources"][0]["link"]
+
+        if len(detail["subscription_web_sources"]) != 0:
+            netflix_hulu_link = detail["subscription_web_sources"][0]["link"]
+        else:
+            netflix_hulu_link = None    
 
         payload = {"i": imdb_id}
         imdb_resp = requests.get("http://www.omdbapi.com/?plot=short&r=json",params=payload).json()
@@ -100,18 +104,23 @@ def load_movie_source_links(movie_id,amazon_link,netflix_hulu_link):
         db.session.add(movie_src1)
 
 
-    if re.search("netflix",netflix_hulu_link) is not None:
+    if netflix_hulu_link is None:
+        movie_src2 = MovieSource(movie_id=movie_id)
+        db.session.add(movie_src2)
+
+    elif re.search("netflix",netflix_hulu_link) is not None:
         movie_src2 = MovieSource(movie_id=movie_id,
                             src_code="NFX",
                             source_url=netflix_hulu_link)
         db.session.add(movie_src2)
 
-    if re.search("hulu",netflix_hulu_link) is not None:
+    elif re.search("hulu",netflix_hulu_link) is not None:
         movie_src2 = MovieSource(movie_id=movie_id,
                             src_code="HULU",
                             source_url=netflix_hulu_link)
         db.session.add(movie_src2)
 
+    
     db.session.commit()
 
 
@@ -120,7 +129,7 @@ def load_genres():
 
     Genre.query.delete() 
 
-    json_data = open("genres.json").read()
+    json_data = open("data/genres.json").read()
 
     genre_info = json.loads(json_data)
 

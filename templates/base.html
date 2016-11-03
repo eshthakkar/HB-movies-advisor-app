@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <title>Movies Advisor</title>
+</head>
+<body>
+  <h1>Movies Advisor</h1>
+  <!-- {% if 'user_id' in session %}
+    <a href="/logout">Logout</a>
+  {% else %}  
+    <a href="/register">Register</a>
+    <a href="/login">Login</a>
+  {% endif %} -->
+
+  <hr>
+
+  <div class="flash_message">
+    {% for message in get_flashed_messages() %}
+    {{ message }}
+    {% endfor %}
+  </div>
+
+
+  {% block content %} put your content here {% endblock %}
+
+
+
+</body>
+</html>

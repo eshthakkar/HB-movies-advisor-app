@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h2>Genres</h2>
+<form>
+    {% for genre in genres %}
+    <li><input type="checkbox" class="chk" value={{ genre.genre }}/>{{ genre.genre }}</li>
+    {% endfor %}
+</form>
+
+
+
+<div id="movies">
+  <img src="" class="thumbnail">
+</div>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="static/js/script.js"></script>
+
+
+
+
+  
+
+
+
+{% endblock %}
