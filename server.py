@@ -36,17 +36,23 @@ def show_browse():
 def thumbnails():
     """Returns movie thumbnails for selected genres as json"""
 
-    selected_genre = request.form.get("genre").replace("/","") 
-    genre_id = db.session.query(Genre.genre_id).filter(Genre.genre == selected_genre).one()
-    movies = Genre.query.filter(Genre.genre_id == genre_id).one().movies
+    selected_genre = request.form.getlist("genre[]") 
+    final = set()
+
+    for genre in selected_genre:
+        genre = genre.replace("/","")
+        genre_id = db.session.query(Genre.genre_id).filter(Genre.genre == genre).one()
+        movies = Genre.query.filter(Genre.genre_id == genre_id).one().movies
+        movies = set(movies)
+        final = movies | final
 
     movie_thumbnails = {}
 
-    for movie in movies:
+    for movie in final:
         movie_thumbnails[movie.movie_id] = movie.thumbnail_url
 
  
-    return jsonify(movie_thumbnails)  
+    return jsonify(movie_thumbnails) 
 
 
 if __name__ == "__main__":

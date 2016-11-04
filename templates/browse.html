@@ -3,15 +3,22 @@
 
 
 <h2>Genres</h2>
-<form>
+<form id="genre-form">
     {% for genre in genres %}
     <li><input type="checkbox" class="chk" value={{ genre.genre }}/>{{ genre.genre }}</li>
     {% endfor %}
 </form>
 
 
-
 <div id="thumbnails"></div>
+
+<!-- Movie Details-->
+<div id="details">
+  <section>
+    <h2 id="title"></h2>
+  </section>
+</div>
+
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="static/js/script.js"></script>
 
