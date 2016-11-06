@@ -3,10 +3,12 @@
 
 function showMovieResults(results){
   //Display movie thumbnails for the selected genre/genres 
+  
   $('#thumbnails').empty();
   for (var movieid in results) {
     var thumbnail_url = results[movieid];
-    $('<img src=' + thumbnail_url + ' class="image" id=' + movieid + '>').appendTo('#thumbnails');
+    $('<img src=' + thumbnail_url + ' data-toggle="modal" data-target=".bs-example-modal-lg" class="image" id=' + movieid + '>').appendTo('#thumbnails');
+
   }
   $('.image').on('click',showDetails);
 }
@@ -19,12 +21,37 @@ function sendGenre(){
     "genre" : selections
   };
 
-  $.post("/browse.json",checkedGenre,showMovieResults);
+  $.get("/browse.json",checkedGenre,showMovieResults);
 
 }
 
 function showDetails(){
-  console.log($(this).attr('id'));
+  // Show details related to a movie
+
+  var mid = $(this).attr('id');
+  $.get("/movie.json/" + mid,function(results){
+    $('#myModalLabel').html(results["title"]);
+
+    $('#rating').html("imdb rating: " + results["imdb_rating"]);
+    $('#release').html("Released On: " + results["released_at"]);
+    $('#runtime').html("Runtime: " + results["runtime"]);
+    $('#actors').html("Actors: " + results["actors"]);
+
+    $("#genres").empty();
+    for(var i=0; i < results["genres"].length; i++){
+      $("#genres").append("<li>" + results["genres"][i] + "</li>");
+    }
+
+    $("#sources").empty();
+    for (var k in results["sources"]){
+      $("#sources").append('<a href=' + results["sources"][k] + '><button>' + k + '</button></a>')
+    }
+
+
+    $('#synopsis p').html(results["plot"]);
+    $('#poster img').attr('src',results["poster_url"]);
+
+  });
 }
 
 $('.chk').change(sendGenre);

@@ -32,11 +32,11 @@ def show_browse():
 
     return render_template("browse.html",genres=genres)  
 
-@app.route('/browse.json',methods=['POST'])  
+@app.route('/browse.json')  
 def thumbnails():
     """Returns movie thumbnails for selected genres as json"""
 
-    selected_genre = request.form.getlist("genre[]") 
+    selected_genre = request.args.getlist("genre[]") 
     final = set()
 
     for genre in selected_genre:
@@ -53,6 +53,35 @@ def thumbnails():
 
  
     return jsonify(movie_thumbnails) 
+
+@app.route('/movie.json/<movie_id>')
+def movie_details(movie_id): 
+    
+    movie = Movie.query.filter(Movie.movie_id == movie_id).one() 
+    
+    genre_list = []
+    sources = {}
+
+    for genre in movie.genres:
+        genre_list.append(genre.genre)
+
+    for source in movie.movies_sources:
+        sources[source.src_code] = source.source_url
+        
+
+    movie_details = {"title": movie.title,
+                    "imdb_rating": movie.imdb_rating,
+                    "plot": movie.plot,
+                    "poster_url": movie.poster_url,
+                    "released_at": movie.released_at,
+                    "runtime": movie.runtime,
+                    "actors": movie.actors,
+                    "genres": genre_list,
+                    "sources": sources}
+
+    return jsonify(movie_details)
+
+
 
 
 if __name__ == "__main__":
