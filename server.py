@@ -37,18 +37,18 @@ def thumbnails():
     """Returns movie thumbnails for selected genres as json"""
 
     selected_genre = request.args.getlist("genre[]") 
-    final = set()
-
-    for genre in selected_genre:
-        genre = genre.replace("/","")
-        genre_id = db.session.query(Genre.genre_id).filter(Genre.genre == genre).one()
-        movies = Genre.query.filter(Genre.genre_id == genre_id).one().movies
-        movies = set(movies)
-        final = movies | final
+        
+    movies = db.session.\
+    query(Movie).\
+    distinct().\
+    join(MovieGenre,MovieGenre.movie_id == Movie.movie_id).\
+    join(Genre,MovieGenre.genre_id == Genre.genre_id).\
+    filter(Genre.genre.in_(selected_genre)).\
+    all()
 
     movie_thumbnails = {}
 
-    for movie in final:
+    for movie in movies:
         movie_thumbnails[movie.movie_id] = movie.thumbnail_url
 
  
@@ -56,6 +56,7 @@ def thumbnails():
 
 @app.route('/movie.json/<movie_id>')
 def movie_details(movie_id): 
+    """ Returns movie details in json"""
     
     movie = Movie.query.filter(Movie.movie_id == movie_id).one() 
     

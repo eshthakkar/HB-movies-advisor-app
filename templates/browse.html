@@ -5,7 +5,7 @@
 <h2>Genres</h2>
 <form id="genre-form">
     {% for genre in genres %}
-    <li><input type="checkbox" class="chk" value={{ genre.genre }}/>{{ genre.genre }}</li>
+    <li><input type="checkbox" class="chk" value="{{ genre.genre }}">{{ genre.genre }}</li>
     {% endfor %}
 </form>
 

@@ -3,7 +3,7 @@
 
 function showMovieResults(results){
   //Display movie thumbnails for the selected genre/genres 
-  
+
   $('#thumbnails').empty();
   for (var movieid in results) {
     var thumbnail_url = results[movieid];
