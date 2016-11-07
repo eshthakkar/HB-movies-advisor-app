@@ -24,7 +24,7 @@ def index():
 
     return render_template("homepage.html")
 
-@app.route('/browse',methods=['GET'])
+@app.route('/browse')
 def show_browse():
     """Displays the browse movies page"""
 
@@ -37,9 +37,11 @@ def thumbnails():
     """Returns movie thumbnails for selected genres as json"""
 
     selected_genre = request.args.getlist("genre[]") 
+    selected_rating = request.args.get("rating")
+    
     movie_thumbnails = {}
 
-
+    # Query based on genre and rating
     if selected_genre:
         
         movies = db.session.\
@@ -47,15 +49,20 @@ def thumbnails():
         distinct().\
         join(MovieGenre,MovieGenre.movie_id == Movie.movie_id).\
         join(Genre,MovieGenre.genre_id == Genre.genre_id).\
-        filter(Genre.genre.in_(selected_genre)).\
+        filter(Genre.genre.in_(selected_genre), Movie.imdb_rating == selected_rating).\
         all()
 
-
-        for movie in movies:
-            movie_thumbnails[movie.movie_id] = movie.thumbnail_url
-
+    # Query just based on rating
     else:
-        pass
+        movies = db.session.\
+        query(Movie).\
+        distinct().\
+        filter(Movie.imdb_rating == selected_rating).\
+        all()
+
+    for movie in movies:
+            movie_thumbnails[movie.movie_id] = movie.thumbnail_url
+    
 
     return jsonify(movie_thumbnails)        
 

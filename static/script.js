@@ -23,11 +23,14 @@ function sendGenre(){
   // Send selected genre/genres to the browse.json route
 
   var selections = $('.chk:checked').map(function() {return this.value;}).get();
-  var checkedGenre = {
-    "genre" : selections
+  var rating = $('#slider').val();
+
+  var filterCriteria = {
+    "genre" : selections,
+    "rating": parseFloat(rating)
   };
 
-  $.get("/browse.json",checkedGenre,showMovieResults);
+  $.get("/browse.json",filterCriteria,showMovieResults);
 
 }
 
@@ -60,8 +63,12 @@ function showDetails(){
   });
 }
 
-$('#check').change(sendGenre);
+$('#check, #slider').change(sendGenre);
 
+// update slider text value while sliding
+$('#slider').on('input',function(){
+  $('#range').html(this.value);
+});
 
 
 
