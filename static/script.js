@@ -1,6 +1,12 @@
 
 "use strict";
 
+$('select[multiple]').multiselect({
+    columns: 1,
+    placeholder: 'Select options',
+    selectAll : true
+});
+
 function showMovieResults(results){
   //Display movie thumbnails for the selected genre/genres 
 
@@ -54,7 +60,8 @@ function showDetails(){
   });
 }
 
-$('.chk').change(sendGenre);
+$('#check').change(sendGenre);
+
 
 
 

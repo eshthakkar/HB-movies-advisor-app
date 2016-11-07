@@ -3,11 +3,13 @@
 
 
 <h2>Genres</h2>
-<form id="genre-form">
-    {% for genre in genres %}
-    <li><input type="checkbox" class="chk" value="{{ genre.genre }}">{{ genre.genre }}</li>
-    {% endfor %}
-</form>
+<div class="container">
+<select name="multicheckbox[]" multiple="multiple" class="4col formcls" id="check">
+  {% for genre in genres %}
+    <option class="chk" value="{{ genre.genre }}">{{ genre.genre }}</option>
+  {% endfor %}
+</select> 
+</div> 
 
 
 <div id="thumbnails"></div>
@@ -42,6 +44,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 
 
