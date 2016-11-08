@@ -99,7 +99,7 @@ def movie_details(movie_id):
 
     return jsonify(movie_details)
 
-@app.route('/register',methods=["POST"])
+@app.route('/signup',methods=["POST"])
 def register_process():
     """ User added to database"""
 
@@ -122,6 +122,29 @@ def register_process():
         flash("You have signed up successfully")  
 
     return redirect("/")
+
+@app.route('/signin',methods=["POST"])
+def signin_process():
+    """ Sign the user in. """
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+
+    try: 
+        verify_user_info = User.query.filter(User.email == email).one()
+        if bcrypt.hashpw(password.encode('utf-8'), verify_user_info.password.encode('utf-8')) == verify_user_info.password:
+            session['user_id'] = verify_user_info.user_id
+            flash("Logged in as %s" % email)
+            print session['user_id']
+            return redirect("/browse")
+        else:
+            flash("Incorrect password!") 
+            return redirect("/") 
+
+    except NoResultFound:
+        flash("Invalid email")
+        return redirect("/")      
     
 
 if __name__ == "__main__":

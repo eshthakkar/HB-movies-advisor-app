@@ -39,8 +39,16 @@
   
   <hr>
 
-<!--   <button type="button" class="btn btn-primary">Small modal</button>
- -->
+  {% if 'user_id' in session %}
+    <a href="">My Watch List</a><br>
+    <a href="/signout">Sign Out</a>
+  {% else %} 
+    <a href="/signup" data-toggle="modal" data-target=".bs-example-modal-sm">Sign Up</a>
+    <a href="/signin" data-toggle="modal" data-target=".bs-example-modal-sm-signin">Sign In</a>     
+  {% endif %}
+
+
+<!-- Sign up modal window-->  
   <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
@@ -63,6 +71,27 @@
       <a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">Sign In</a>
   </div>
 
+<!-- Sign in modal window-->  
+  <div class="modal fade bs-example-modal-sm-signin" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+
+        <h2>Sign In</h2>
+
+        <form action="/signin" method="POST">
+          <label>Email: </label>
+            <input type="text" name="email" id="email" required><br>
+          <label>Password: </label>
+            <input type="password" name="password" id="password" required><br>  
+          <input type="submit" value="Sign in">
+        </form>
+
+      </div>
+    </div>
+
+      <a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">Sign Up</a>
+  </div>
+
   <div class="flash_message">
     {% for message in get_flashed_messages() %}
     {{ message }}
@@ -73,7 +102,7 @@
   {% block content %} put your content here {% endblock %}
 
 <script src="http://code.jquery.com/jquery.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 <script src="../static/jquery.multiselect.js"></script>
 <script src="../static/script.js"></script>
