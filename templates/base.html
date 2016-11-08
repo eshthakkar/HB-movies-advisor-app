@@ -35,14 +35,33 @@
 </head>
 <body>
   <h1>Movies Advisor</h1>
-  <!-- {% if 'user_id' in session %}
-    <a href="/logout">Logout</a>
-  {% else %}  
-    <a href="/register">Register</a>
-    <a href="/login">Login</a>
-  {% endif %} -->
 
+  
   <hr>
+
+<!--   <button type="button" class="btn btn-primary">Small modal</button>
+ -->
+  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+
+        <h2>Sign Up</h2>
+        <p>Sign up using email address</p>
+
+        <form action="/register" method="POST">
+          <label>Email: </label>
+            <input type="text" name="email" id="email" required><br>
+          <label>Password: </label>
+            <input type="password" name="password" id="password" required><br>  
+          <input type="submit" value="Sign up">
+        </form>
+
+      </div>
+    </div>
+
+      Already Registered?
+      <a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">Sign In</a>
+  </div>
 
   <div class="flash_message">
     {% for message in get_flashed_messages() %}

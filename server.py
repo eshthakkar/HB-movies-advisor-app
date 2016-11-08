@@ -5,6 +5,11 @@ from jinja2 import StrictUndefined
 from model import (connect_to_db, db)
 from flask_debugtoolbar import DebugToolbarExtension
 from model import (connect_to_db,db,User,Movie,Source,MovieSource,Genre,MovieGenre,MovieWatched)
+import bcrypt
+
+
+from sqlalchemy.orm.exc import NoResultFound
+
 
 
 app = Flask(__name__)
@@ -94,8 +99,30 @@ def movie_details(movie_id):
 
     return jsonify(movie_details)
 
+@app.route('/register',methods=["POST"])
+def register_process():
+    """ User added to database"""
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+    ROUNDS = 10
+
+    # Hash a password for the first time
+    password=bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(ROUNDS))
 
 
+
+    try:
+        User.query.filter(User.email == email).one()
+        flash("User already exists!")
+    except NoResultFound:
+        new_user = User(email=email,password=password) 
+        db.session.add(new_user)
+        db.session.commit() 
+        flash("You have signed up successfully")  
+
+    return redirect("/")
+    
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
