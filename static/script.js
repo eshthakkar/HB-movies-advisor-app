@@ -13,14 +13,34 @@ function showMovieResults(results){
   $('#thumbnails').empty();
   for (var movieid in results) {
     var thumbnail_url = results[movieid];
-    $('<img src=' + thumbnail_url + ' data-toggle="modal" data-target=".bs-example-modal-lg" class="image" id=' + movieid + '>').appendTo('#thumbnails');
+    $('<div class="image-container"><img src=' + thumbnail_url + ' data-toggle="modal" data-target=".bs-example-modal-lg" class="image" id=' + movieid + '><div class="addbutton btn btn-default" id=button_' + movieid + '>Add</div></div>').appendTo('#thumbnails');
 
   }
   $('.image').on('click',showDetails);
+  $('.image-container').on('mouseover',showbuttons);
+  $('.image-container').on('mouseout',hidebuttons);
+  $('.addbutton').on('click',showWatchList);
+
 }
 
+function showbuttons(){
+  $(this).find('.addbutton').css('display','inline');
+}
+
+function hidebuttons(){
+  $(this).find('.addbutton').css('display','none');
+}
+
+function showWatchList(){
+  console.log("I was clicked");
+  var m = $(this).attr('id');
+  console.log(m);
+  
+
+
+}
 function sendGenre(){
-  // Send selected genre/genres to the browse.json route
+  // Send selected genre/genres and ratings to the browse.json route
 
   var selections = $('.chk:checked').map(function() {return this.value;}).get();
   var rating = $('#slider').val();
@@ -63,6 +83,7 @@ function showDetails(){
   });
 }
 
+// Event when checkbox or slider value changes
 $('#check, #slider').change(sendGenre);
 
 // update slider text value while sliding

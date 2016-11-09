@@ -19,7 +19,7 @@ import re
 def load_movies():
     """Load movies into database"""
 
-    Movie.query.delete()
+    # Movie.query.delete()
 
     json_string = open(argv[1]).read()
 
@@ -41,9 +41,15 @@ def load_movies():
         thumbnail_link = movie_info["results"][i].get("poster_240x342")
 
         detail = requests.get("https://api-public.guidebox.com/v1.43/US/" + guidebox_key + "/movie/" + str(movie_id)).json()
-        overview_text = detail["overview"]
         genres = detail["genres"]
-        amazon_link = detail["purchase_web_sources"][1]["link"]
+
+        for source in detail["purchase_web_sources"]:
+            if source["source"] == "amazon_buy":
+                amazon_link = source["link"]
+                break
+            else:
+                amazon_link = None                
+
 
         if len(detail["subscription_web_sources"]) != 0:
             netflix_hulu_link = detail["subscription_web_sources"][0]["link"]
@@ -61,7 +67,6 @@ def load_movies():
                       title=title,
                       imdb_rating=float(imdb_rating),
                       released_at=released_at,
-                      description=overview_text,
                       poster_url=poster_link,
                       thumbnail_url=thumbnail_link,
                       plot=plot,
@@ -78,7 +83,7 @@ def load_movies():
 def load_sources():
     """Loads the available sources"""
 
-    Source.query.delete()  
+    # Source.query.delete()  
 
     source1 = Source(src_code="AZN",
                     source="Amazon")
@@ -97,11 +102,15 @@ def load_sources():
 def load_movie_source_links(movie_id,amazon_link,netflix_hulu_link):
     """Loads the source urls where the movie can be found"""
 
-    if re.search("amazon",amazon_link) is not None:
+    if amazon_link is None:
+        movie_src1 = MovieSource(movie_id=movie_id)
+        db.session.add(movie_src1)
+
+    elif re.search("amazon",amazon_link) is not None:
         movie_src1 = MovieSource(movie_id=movie_id,
                                 src_code="AZN",
                                 source_url=amazon_link)
-        db.session.add(movie_src1)
+        db.session.add(movie_src1)    
 
 
     if netflix_hulu_link is None:
@@ -173,6 +182,6 @@ if __name__ == "__main__":
     db.create_all()
 
     # Import different types of data
-    load_genres()
-    load_sources()
+    # load_genres()
+    # load_sources()
     load_movies()

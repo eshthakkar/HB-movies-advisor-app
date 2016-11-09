@@ -5,6 +5,7 @@
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../static/jquery.multiselect.css">
+  <link rel="stylesheet" type="text/css" href="../static/style.css">
 
 <style>
 .ms-options-wrap > .ms-options > ul label {
@@ -35,12 +36,16 @@
 </head>
 <body>
   <h1>Movies Advisor</h1>
-
-  
   <hr>
 
+  <div class="flash_message">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-info" role="alert">{{ message }}</div>
+    {% endfor %}
+  </div>
+
   {% if 'user_id' in session %}
-    <a href="">My Watch List</a><br>
+    <a href="/watchlist">My Watch List</a><br>
     <a href="/signout">Sign Out</a>
   {% else %} 
     <a href="/signup" data-toggle="modal" data-target=".bs-example-modal-sm">Sign Up</a>
@@ -56,7 +61,7 @@
         <h2>Sign Up</h2>
         <p>Sign up using email address</p>
 
-        <form action="/register" method="POST">
+        <form action="/signup" method="POST">
           <label>Email: </label>
             <input type="text" name="email" id="email" required><br>
           <label>Password: </label>
@@ -67,8 +72,8 @@
       </div>
     </div>
 
-      Already Registered?
-      <a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">Sign In</a>
+      <!-- Already Registered?
+      <a href="/signin" class=" modal-action modal-close waves-effect waves-green btn-flat">Sign In</a> -->
   </div>
 
 <!-- Sign in modal window-->  
@@ -89,14 +94,10 @@
       </div>
     </div>
 
-      <a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">Sign Up</a>
+      <!-- <a href="/signup" data-toggle="modal" data-target=".bs-example-modal-sm" class=" modal-action modal-close waves-effect waves-green btn-flat">Sign Up</a> -->
   </div>
 
-  <div class="flash_message">
-    {% for message in get_flashed_messages() %}
-    {{ message }}
-    {% endfor %}
-  </div>
+  
 
 
   {% block content %} put your content here {% endblock %}

@@ -27,7 +27,10 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage"""
 
-    return render_template("homepage.html")
+    if 'user_id' in session:
+        return redirect("/browse")
+    else:    
+        return render_template("homepage.html")
 
 @app.route('/browse')
 def show_browse():
@@ -54,7 +57,7 @@ def thumbnails():
         distinct().\
         join(MovieGenre,MovieGenre.movie_id == Movie.movie_id).\
         join(Genre,MovieGenre.genre_id == Genre.genre_id).\
-        filter(Genre.genre.in_(selected_genre), Movie.imdb_rating == selected_rating).\
+        filter(Genre.genre.in_(selected_genre), Movie.imdb_rating >= selected_rating).\
         all()
 
     # Query just based on rating
@@ -62,7 +65,7 @@ def thumbnails():
         movies = db.session.\
         query(Movie).\
         distinct().\
-        filter(Movie.imdb_rating == selected_rating).\
+        filter(Movie.imdb_rating >= selected_rating).\
         all()
 
     for movie in movies:
@@ -84,7 +87,10 @@ def movie_details(movie_id):
         genre_list.append(genre.genre)
 
     for source in movie.movies_sources:
-        sources[source.src_code] = source.source_url
+        if source.src_code is not None:
+            sources[source.src_code] = source.source_url
+        else:
+            continue    
         
 
     movie_details = {"title": movie.title,
@@ -143,19 +149,40 @@ def signin_process():
             return redirect("/") 
 
     except NoResultFound:
-        flash("Invalid email")
-        return redirect("/")      
+        flash("Invalid email! Please sign up!")
+        return redirect("/") 
+
+
+@app.route('/signout')
+def signout():
+    """Sign out user"""
+
+    if 'user_id' in session:
+        del session['user_id']
+        flash("Logged Out!") 
+        return redirect('/') 
+
+
+@app.route('/watchlist',methods=["GET"])
+def show_watch_list():
+    """Show movie watch list for the user"""
+
+
+@app.route('/watchlist',methods=["POST"]) 
+def add_movie_to_watchlist():  
+    """Add a movie to user's watchlist"""                        
     
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
     # point that we invoke the DebugToolbarExtension
-    app.debug = True
-
     connect_to_db(app)
 
+    app.debug = True
+    app.jinja_env.auto_reload = True
+
     # Use the DebugToolbar
-    DebugToolbarExtension(app)
+    # DebugToolbarExtension(app)
 
     
     app.run(host="0.0.0.0")

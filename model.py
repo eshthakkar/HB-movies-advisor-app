@@ -24,7 +24,6 @@ class Movie(db.Model):
     title = db.Column(db.String(150), nullable=False)
     imdb_rating = db.Column(db.Float)
     released_at = db.Column(db.DateTime)
-    description = db.Column(db.String(2000),nullable=False)
     poster_url = db.Column(db.String(200),nullable=False)
     thumbnail_url = db.Column(db.String(200),nullable=False)
     plot = db.Column(db.String(500))
