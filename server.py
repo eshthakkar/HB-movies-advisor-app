@@ -175,9 +175,6 @@ def show_watch_list():
         return redirect('/')     
 
 
-
-
-
 @app.route('/watchlist',methods=["POST"]) 
 def add_movie_to_watchlist():  
     """Add a movie to user's watchlist""" 
@@ -201,10 +198,20 @@ def add_movie_to_watchlist():
         return Movie.query.filter(Movie.movie_id == movie_add_id).one().title + " has been added to your watch list" 
 
     else:
-        return "Please sign in to add a movie to your watch list"
+        return "Sign in to add a movie to your watch list"
             
 
+@app.route('/remove',methods=["POST"])
+def remove_movie_from_watchlist():
+    """Remove the movie from user's watchlist"""
+
+    movie_remove_id = int(request.form.get("movie_remove_id"))
+    MovieWatched.query.filter(MovieWatched.movie_id == movie_remove_id, MovieWatched.user_id == session['user_id']).delete()
+    db.session.commit()
     
+    return "container_" + str(movie_remove_id)
+    
+       
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the

@@ -97,6 +97,23 @@ $('#slider').on('input',function(){
   $('#range').html(this.value);
 });
 
+// Event when remove button is clicked
+$('.remove').on('click',function(){
+  var remove_id = {
+    "movie_remove_id" : $(this).attr('id')
+  };
+
+  $.post('/remove',remove_id,function(data){
+    $('#' + data).empty();
+
+  });
+
+});
+
+
+
+
+
 
 
 

@@ -5,9 +5,9 @@
 
 <div>
 {% for movie in user_movies %}
-<div class="image-container">
+<div class="image-container" id="container_{{ movie.movie_id }}">
     <img src="{{ movie.thumbnail_url }}">
-    <div class="remove btn btn-default">Remove</div>
+    <div class="remove btn btn-default" id="{{ movie.movie_id }}">Remove</div>
 </div>
 {% endfor %}
 </div>
