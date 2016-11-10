@@ -19,25 +19,31 @@ function showMovieResults(results){
   $('.image').on('click',showDetails);
   $('.image-container').on('mouseover',showbuttons);
   $('.image-container').on('mouseout',hidebuttons);
-  $('.addbutton').on('click',showWatchList);
+  $('.addbutton').on('click',addMovieToWatchList);
 
 }
 
 function showbuttons(){
+  // Show add buttons on top of thumbnail
   $(this).find('.addbutton').css('display','inline');
 }
 
 function hidebuttons(){
+  // Hide add button which displayed on top of thumbnail
   $(this).find('.addbutton').css('display','none');
 }
 
-function showWatchList(){
-  console.log("I was clicked");
-  var m = $(this).attr('id');
-  console.log(m);
-  
+function addMovieToWatchList(){
+  // Add the movie to user's watch list
 
+  var movie_to_add = {
+    "movie_identifier": $(this).attr('id')
+  };
 
+  $.post('/watchlist',movie_to_add,function(result){
+    console.log(result);
+    $('#movie_add_resp').html(result);
+  });
 }
 function sendGenre(){
   // Send selected genre/genres and ratings to the browse.json route

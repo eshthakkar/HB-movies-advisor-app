@@ -170,7 +170,30 @@ def show_watch_list():
 
 @app.route('/watchlist',methods=["POST"]) 
 def add_movie_to_watchlist():  
-    """Add a movie to user's watchlist"""                        
+    """Add a movie to user's watchlist""" 
+
+    if 'user_id' in session:
+        movie_to_add_id = request.form.get("movie_identifier")
+        movie_add_id = int(movie_to_add_id.split("_")[-1])
+
+        user_movies = User.query.filter(User.user_id == session['user_id']).one().movies
+        for movie in user_movies:
+            if movie_add_id == movie.movie_id:
+                return "Movie already in watch list"
+            else:
+                continue 
+
+        movie_watched = MovieWatched(movie_id=movie_add_id,
+                                     user_id=session['user_id'])
+        db.session.add(movie_watched)
+
+        db.session.commit() 
+        return Movie.query.filter(Movie.movie_id == movie_add_id).one().title + " has been added to your watch list" 
+
+    else:
+        return "Please sign in to add a movie to your watch list"
+            
+
     
 
 if __name__ == "__main__":
