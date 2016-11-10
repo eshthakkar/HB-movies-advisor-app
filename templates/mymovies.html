@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a href="/browse">Browse</a>
+
+<div>
+{% for movie in user_movies %}
+<div class="image-container">
+    <img src="{{ movie.thumbnail_url }}">
+    <div class="remove btn btn-default">Remove</div>
+</div>
+{% endfor %}
+</div>
+
+
+
+{% endblock %}

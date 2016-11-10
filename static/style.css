@@ -13,8 +13,41 @@
 
 }
 
+.remove{
+    display: inline;
+    position: absolute;
+    float: left;
+    left: 0px;
+    font-weight: bold;
+    padding: 5px;
+    background-color: orange;
+
+}
+
 .image-container{
     display: inline;
     position: relative;
 }
 
+.ms-options-wrap > .ms-options > ul label {
+    /*position: relative;
+    display: inline-block;*/
+    width: 100%;
+    /*padding: 4px; */
+    /*margin: 1px 0; */
+    background-color: #9DCEFF;
+    
+}
+#slider {
+  width: 10%;
+}
+
+.ms-options-wrap > .ms-options > ul li.selected label,
+.ms-options-wrap > .ms-options > ul label:hover {
+    background-color: #003A75;
+    color:#fff;
+}
+
+.ms-options-wrap > button:focus, .ms-options-wrap > button, .ms-options-wrap > .ms-options {
+  width: 20%;
+}

@@ -167,6 +167,16 @@ def signout():
 def show_watch_list():
     """Show movie watch list for the user"""
 
+    if 'user_id' in session:
+        user_movies = User.query.filter(User.user_id == session['user_id']).one().movies
+        return render_template("mymovies.html",user_movies=user_movies)
+    else:
+        flash("Please sign in to view your watch list") 
+        return redirect('/')     
+
+
+
+
 
 @app.route('/watchlist',methods=["POST"]) 
 def add_movie_to_watchlist():  
