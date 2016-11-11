@@ -111,8 +111,10 @@ $('.remove').on('click',function(){
     $('#' + data).empty();
 
   });
-
 });
+
+
+
 
 
 

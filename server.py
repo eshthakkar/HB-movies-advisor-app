@@ -92,12 +92,13 @@ def movie_details(movie_id):
         else:
             continue    
         
-
+    date = movie.released_at
+    date = date.strftime("%b %d, %Y")
     movie_details = {"title": movie.title,
                     "imdb_rating": movie.imdb_rating,
                     "plot": movie.plot,
                     "poster_url": movie.poster_url,
-                    "released_at": movie.released_at,
+                    "released_at": date,
                     "runtime": movie.runtime,
                     "actors": movie.actors,
                     "genres": genre_list,
