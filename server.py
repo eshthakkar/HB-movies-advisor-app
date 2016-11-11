@@ -186,7 +186,8 @@ def add_movie_to_watchlist():
         user_movies = User.query.filter(User.user_id == session['user_id']).one().movies
         for movie in user_movies:
             if movie_add_id == movie.movie_id:
-                return "Movie already in watch list"
+                text = "Movie already in watch list"
+                return jsonify(status="prevent", id=movie_add_id, text=text)
             else:
                 continue 
 
@@ -195,10 +196,11 @@ def add_movie_to_watchlist():
         db.session.add(movie_watched)
 
         db.session.commit() 
-        return Movie.query.filter(Movie.movie_id == movie_add_id).one().title + " has been added to your watch list" 
-
+        text = Movie.query.filter(Movie.movie_id == movie_add_id).one().title + " has been added to your watch list" 
+        return jsonify(status="success", id=movie_add_id, text=text)
     else:
-        return "Sign in to add a movie to your watch list"
+        text = "Sign in to add a movie to your watch list"
+        return jsonify(status="fail", text=text)
             
 
 @app.route('/remove',methods=["POST"])
@@ -208,7 +210,7 @@ def remove_movie_from_watchlist():
     movie_remove_id = int(request.form.get("movie_remove_id"))
     MovieWatched.query.filter(MovieWatched.movie_id == movie_remove_id, MovieWatched.user_id == session['user_id']).delete()
     db.session.commit()
-    
+
     return "container_" + str(movie_remove_id)
     
        

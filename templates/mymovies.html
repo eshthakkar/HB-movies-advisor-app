@@ -3,6 +3,7 @@
 
 <a href="/browse">Browse</a>
 
+{% if user_movies %}
 <div>
 {% for movie in user_movies %}
 <div class="image-container" id="container_{{ movie.movie_id }}">
@@ -11,6 +12,11 @@
 </div>
 {% endfor %}
 </div>
+
+{% else %}
+<p><h3>There are no movies in your watchlist yet!</h3></p>
+{% endif %}
+
 
 
 

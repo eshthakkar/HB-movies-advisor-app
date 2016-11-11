@@ -35,14 +35,18 @@ function hidebuttons(){
 
 function addMovieToWatchList(){
   // Add the movie to user's watch list
-
   var movie_to_add = {
     "movie_identifier": $(this).attr('id')
   };
 
   $.post('/watchlist',movie_to_add,function(result){
     console.log(result);
-    $('#movie_add_resp').html(result);
+    $('#movie_add_resp').html(result.text);
+
+    if(result.status === "success" || result.status === "prevent"){
+    $('#button_' + result.id).attr("disabled",true);
+  }
+
   });
 }
 function sendGenre(){
