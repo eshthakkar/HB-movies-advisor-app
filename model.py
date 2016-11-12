@@ -153,21 +153,28 @@ class MovieWatched(db.Model):
                                                                                self.user_id)
 
 
+def example_data():
+    """Create some sample data."""
 
+    # In case this is run more than once, empty out existing data
+    Genre.query.delete()
 
+    # Add sample employees and departments
+    g1 = Genre(genre='Crime')
+    g2 = Genre(genre='Adventure')
 
-
-
+    db.session.add_all([g1,g2])
+    db.session.commit()
 
 
 ##############################################################################
 # Helper functions
 
-def connect_to_db(app):
+def connect_to_db(app,db_uri="postgresql:///movies_advisor"):
     """Connect the database to our Flask app."""
 
     # Configure to use our PstgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///movies_advisor'
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     db.app = app
     db.init_app(app)
 
