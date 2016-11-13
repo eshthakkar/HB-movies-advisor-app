@@ -76,8 +76,22 @@ class FlaskTestsDatabase(TestCase):
         """Test genres displayed on browse page in the dropdown."""
 
         result = self.client.get("/browse")
-        self.assertIn("Crime", result.data)    
+        self.assertIn("Crime", result.data) 
+        self.assertNotIn("Thriller",result.data)
 
+
+    def test_movie_details(self):
+        """Test movie details returned from server based on a movie_id."""
+
+        result = self.client.get("/movie.json/112659")
+        self.assertIn('"imdb_rating": 8.6',result.data)
+        self.assertNotIn("Room",result.data)
+
+        result = self.client.get("/movie.json/2")
+        self.assertIn("No movie found!",result.data)
+
+        result = self.client.get("/movie.json/abcd")
+        self.assertIn("Error! Not a valid movie Identification",result.data)
 
 
 

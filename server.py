@@ -77,34 +77,39 @@ def thumbnails():
 @app.route('/movie.json/<movie_id>')
 def movie_details(movie_id): 
     """ Returns movie details in json"""
-    
-    movie = Movie.query.filter(Movie.movie_id == movie_id).one() 
-    
-    genre_list = []
-    sources = {}
+    if movie_id.isdigit():
+        try:
+            movie = Movie.query.filter(Movie.movie_id == movie_id).one() 
+            
+            genre_list = []
+            sources = {}
 
-    for genre in movie.genres:
-        genre_list.append(genre.genre)
+            for genre in movie.genres:
+                genre_list.append(genre.genre)
 
-    for source in movie.movies_sources:
-        if source.src_code is not None:
-            sources[source.src_code] = source.source_url
-        else:
-            continue    
-        
-    date = movie.released_at
-    date = date.strftime("%b %d, %Y")
-    movie_details = {"title": movie.title,
-                    "imdb_rating": movie.imdb_rating,
-                    "plot": movie.plot,
-                    "poster_url": movie.poster_url,
-                    "released_at": date,
-                    "runtime": movie.runtime,
-                    "actors": movie.actors,
-                    "genres": genre_list,
-                    "sources": sources}
+            for source in movie.movies_sources:
+                if source.src_code is not None:
+                    sources[source.src_code] = source.source_url
+                else:
+                    continue    
+                
+            date = movie.released_at
+            date = date.strftime("%b %d, %Y")
+            movie_details = {"title": movie.title,
+                            "imdb_rating": movie.imdb_rating,
+                            "plot": movie.plot,
+                            "poster_url": movie.poster_url,
+                            "released_at": date,
+                            "runtime": movie.runtime,
+                            "actors": movie.actors,
+                            "genres": genre_list,
+                            "sources": sources}
 
-    return jsonify(movie_details)
+            return jsonify(movie_details)
+        except NoResultFound:
+            return "No movie found!" 
+    else:
+        return "Error! Not a valid movie Identification"           
 
 @app.route('/signup',methods=["POST"])
 def register_process():
@@ -178,7 +183,7 @@ def show_watch_list():
 
 @app.route('/watchlist',methods=["POST"]) 
 def add_movie_to_watchlist():  
-    """Add a movie to user's watchlist""" 
+    """Add a movie to user's watchlist and return json response""" 
 
     if 'user_id' in session:
         movie_to_add_id = request.form.get("movie_identifier")

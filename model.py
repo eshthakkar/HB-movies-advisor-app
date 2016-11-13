@@ -2,6 +2,8 @@
 
 from flask_sqlalchemy import SQLAlchemy
 import sys
+from datetime import datetime
+
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -158,6 +160,12 @@ def example_data():
 
     # In case this is run more than once, empty out existing data
     Genre.query.delete()
+    Source.query.delete()
+    Movie.query.delete()
+    MovieSource.query.delete()
+    MovieGenre.query.delete()
+
+    movie_id = 112659
 
     # Add sample employees and departments
     g1 = Genre(genre='Crime')
@@ -165,6 +173,51 @@ def example_data():
 
     db.session.add_all([g1,g2])
     db.session.commit()
+
+    release_date = "2006-09-09"
+    released_at = datetime.strptime(release_date,"%Y-%m-%d")
+
+
+    movie1 = Movie(movie_id=movie_id,title='Interstellar',
+                    imdb_rating=8.6,
+                    poster_url='http://static-api.guidebox.com/022615/thumbnails_movies/-alt--112659-7058153888-2123715375-9311010409-large-400x570-alt-.jpg',
+                    thumbnail_url='http://static-api.guidebox.com/022615/thumbnails_movies_medium/112659-2890660241-7792228088-5750318360-medium-240x342-alt-.jpg',
+                    plot='A  team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.',
+                    runtime='169 min',
+                    actors='Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow',
+                    released_at=released_at)
+    db.session.add(movie1)
+    db.session.commit()
+
+
+    source1 = Source(src_code="AZN",
+                    source="Amazon")
+
+    source2 = Source(src_code="NFX",
+                    source="Netflix")
+
+    source3 = Source(src_code="HULU",
+                    source="Hulu")
+
+    db.session.add_all([source1,source2,source3])
+    db.session.commit()
+
+
+    movie_src1 = MovieSource(movie_id=movie_id,
+                            src_code="AZN",
+                            source_url='http://www.amazon.com/gp/product/B00TU9UFTS')
+
+    movie_src2 = MovieSource(movie_id=movie_id,
+                            src_code="NFX",
+                            source_url='http://www.hulu.com/watch/876132')
+
+    movie_genre = MovieGenre(movie_id=movie_id,
+                            genre_id=g2.genre_id)
+
+    db.session.add_all([movie_src1,movie_src2,movie_genre])
+    db.session.commit()
+
+
 
 
 ##############################################################################

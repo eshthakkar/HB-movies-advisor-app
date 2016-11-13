@@ -69,27 +69,32 @@ function showDetails(){
 
   var mid = $(this).attr('id');
   $.get("/movie.json/" + mid,function(results){
-    $('#myModalLabel').html(results["title"]);
+    if (results === "No movie found!" || results === "Error! Not a valid movie Identification"){
+        $('#myModalLabel').html(results);
 
-    $('#rating').html("imdb rating: " + results["imdb_rating"]);
-    $('#release').html("Released On: " + results["released_at"]);
-    $('#runtime').html("Runtime: " + results["runtime"]);
-    $('#actors').html("Actors: " + results["actors"]);
-
-    $("#genres").empty();
-    for(var i=0; i < results["genres"].length; i++){
-      $("#genres").append("<li>" + results["genres"][i] + "</li>");
     }
+    else{
+      $('#myModalLabel').html(results["title"]);
 
-    $("#sources").empty();
-    for (var k in results["sources"]){
-      $("#sources").append('<a href=' + results["sources"][k] + '><button>' + k + '</button></a>')
-    }
+      $('#rating').html("imdb rating: " + results["imdb_rating"]);
+      $('#release').html("Released On: " + results["released_at"]);
+      $('#runtime').html("Runtime: " + results["runtime"]);
+      $('#actors').html("Actors: " + results["actors"]);
+
+      $("#genres").empty();
+      for(var i=0; i < results["genres"].length; i++){
+        $("#genres").append("<li>" + results["genres"][i] + "</li>");
+      }
+
+      $("#sources").empty();
+      for (var k in results["sources"]){
+        $("#sources").append('<a href=' + results["sources"][k] + '><button>' + k + '</button></a>')
+      }
 
 
-    $('#synopsis p').html(results["plot"]);
-    $('#poster img').attr('src',results["poster_url"]);
-
+      $('#synopsis p').html(results["plot"]);
+      $('#poster img').attr('src',results["poster_url"]);
+    }  
   });
 }
 
