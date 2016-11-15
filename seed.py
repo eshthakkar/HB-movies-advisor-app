@@ -1,7 +1,8 @@
 """Utility file to seed movies_advisor database"""
 
 from sqlalchemy import func
-from model import Movie,Source,MovieSource,Genre,MovieGenre,User,MovieWatched  
+from model import (Movie,Source,MovieSource,Genre,MovieGenre,User,MovieWatched,T1Keyword,
+                   MovieKeywordRating)  
 
 
 from model import connect_to_db, db
@@ -20,6 +21,8 @@ def load_movies():
     """Load movies into database"""
 
     # Movie.query.delete()
+    Movie.query.delete()
+
 
     json_string = open(argv[1]).read()
 
@@ -29,6 +32,10 @@ def load_movies():
     num_results = movie_info["total_returned"]
 
     guidebox_key = os.environ["GUIDEBOX_PRODUCTION_KEY"]
+
+    keywrd_ids = get_keyword_ids()
+    print keywrd_ids
+
 
     for i in range(num_results):
         movie_id = movie_info["results"][i].get("id")
@@ -75,15 +82,20 @@ def load_movies():
 
         db.session.add(movie)
         db.session.commit() 
+
         load_movie_source_links(movie_id,amazon_link,netflix_hulu_link)
         load_movie_genre_info(movie_id,genres)
+        load_movie_keywords(movie_id,keywrd_ids)
+
 
 
 
 def load_sources():
     """Loads the available sources"""
 
-    # Source.query.delete()  
+    # Source.query.delete() 
+    Source.query.delete()  
+ 
 
     source1 = Source(src_code="AZN",
                     source="Amazon")
@@ -167,13 +179,40 @@ def load_movie_genre_info(movie_id,genres):
     db.session.commit()    
        
 
+def load_keywords():
+    """Loads T1 keywords for questions"""
 
-                   
-        
+    T1Keyword.query.delete() 
 
 
+    for row in open("data/keywords.txt"):
+        keyword = row.rstrip()
+        qt = T1Keyword(descriptive_keyword=keyword)
+        db.session.add(qt)
+    db.session.commit()
+
+def load_movie_keywords(movie_id,keyword_ids):
+    """Loads movies, their keywords and ratings"""
+
+    for keyword_id in keyword_ids:
+        movie_key_rating = MovieKeywordRating(movie_id=movie_id,
+                                             keyword_id=keyword_id)
+        db.session.add(movie_key_rating)
+    db.session.commit()    
 
     
+def get_keyword_ids():
+    keywords = T1Keyword.query.all()
+
+    id_list = []
+
+    for keywrd in keywords:
+        id_list.append(keywrd.qk_id) 
+
+    return id_list    
+
+
+
 
 if __name__ == "__main__":
     connect_to_db(app)
@@ -184,4 +223,10 @@ if __name__ == "__main__":
     # Import different types of data
     # load_genres()
     # load_sources()
+
+    load_genres()
+    load_sources()
+    load_keywords()
+
     load_movies()
+

@@ -24,11 +24,11 @@ class Movie(db.Model):
 
     movie_id = db.Column(db.Integer,primary_key=True)
     title = db.Column(db.String(150), nullable=False)
-    imdb_rating = db.Column(db.Float)
-    released_at = db.Column(db.DateTime)
+    imdb_rating = db.Column(db.Float, nullable=False)
+    released_at = db.Column(db.DateTime, nullable=False)
     poster_url = db.Column(db.String(200),nullable=False)
     thumbnail_url = db.Column(db.String(200),nullable=False)
-    plot = db.Column(db.String(500))
+    plot = db.Column(db.String(500), nullable=False)
     runtime = db.Column(db.String(20),nullable=False)
     actors = db.Column(db.String(300),nullable=False)
 
@@ -39,6 +39,9 @@ class Movie(db.Model):
     users = db.relationship("User",
                             secondary="movies_watched",
                             backref="movies")
+
+    movie_keywords = db.relationship("MovieKeywordRating",
+                                     backref="movies")
 
 
     def __repr__(self):
@@ -129,6 +132,9 @@ class User(db.Model):
     email = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(64), nullable=False)
 
+    user_movie_keywords = db.relationship("MovieKeywordRating",
+                                     backref="users")
+
     def __repr__(self):
         """ Provide helpful representation of user when printed"""
 
@@ -153,6 +159,42 @@ class MovieWatched(db.Model):
 
         return "<MovieWatched movies_watched_id=%s movie_id=%s user_id=%s>" % (self.movies_watched_id, self.movie_id,
                                                                                self.user_id)
+
+class T1Keyword(db.Model):
+    """Tier 1 question keywords"""
+
+    __tablename__ = "t1_keywords"
+
+    qk_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
+    descriptive_keyword = db.Column(db.String(50),nullable=False,unique=True)
+
+    def __repr__(self):
+        """Provide helpful representation of T1 question keywords when printed"""
+
+        return "<T1Keyword qk_id=%s descriptive_keyword=%s>" % (self.qk_id,self.descriptive_keyword)
+
+
+class MovieKeywordRating(db.Model):
+    """Tier 1 question keywords for a movie and their ratings"""
+
+    __tablename__ = "movie_keywords_ratings"
+
+    mkr_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
+    keyword_id = db.Column(db.Integer,
+                 db.ForeignKey("t1_keywords.qk_id"),
+                 nullable=False)
+    movie_id = db.Column(db.Integer,
+               db.ForeignKey("movies.movie_id"),
+               nullable=False)
+    user_id = db.Column(db.Integer,
+              db.ForeignKey("users.user_id"))
+    keyword_rating = db.Column(db.Integer,default=0)
+
+    def __repr__(self):
+        """Provide helpful representation of rated keywords when printed"""
+
+        return "<MovieKeywordRating mkr_id=%s keyword_id=%s movie_id=%s keyword_rating=%s user_id=%s>" % (self.mkr_id,
+            self.keyword_id, self.movie_id, self.keyword_rating,self.user_id)
 
 
 def example_data():

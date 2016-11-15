@@ -6,6 +6,7 @@ from model import (connect_to_db, db)
 from flask_debugtoolbar import DebugToolbarExtension
 from model import (connect_to_db,db,User,Movie,Source,MovieSource,Genre,MovieGenre,MovieWatched)
 import bcrypt
+from helper import question
 
 
 from sqlalchemy.orm.exc import NoResultFound
@@ -186,6 +187,7 @@ def add_movie_to_watchlist():
     """Add a movie to user's watchlist and return json response""" 
 
     if 'user_id' in session:
+        question()
         movie_to_add_id = request.form.get("movie_identifier")
         movie_add_id = int(movie_to_add_id.split("_")[-1])
 
@@ -202,6 +204,7 @@ def add_movie_to_watchlist():
         db.session.add(movie_watched)
 
         db.session.commit() 
+
         text = Movie.query.filter(Movie.movie_id == movie_add_id).one().title + " has been added to your watch list" 
         return jsonify(status="success", id=movie_add_id, text=text)
     else:

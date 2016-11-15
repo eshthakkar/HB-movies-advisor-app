@@ -11,6 +11,8 @@ function showMovieResults(results){
   //Display movie thumbnails for the selected genre/genres 
 
   $('#thumbnails').empty();
+  $('#movie_add_resp').empty();
+  
   for (var movieid in results) {
     var thumbnail_url = results[movieid];
     $('<div class="image-container"><img src=' + thumbnail_url + ' data-toggle="modal" data-target=".bs-example-modal-lg" class="image" id=' + movieid + '><div class="addbutton btn btn-default" id=button_' + movieid + '>Add</div></div>').appendTo('#thumbnails');
