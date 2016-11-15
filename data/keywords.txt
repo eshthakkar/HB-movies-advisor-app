@@ -1,0 +1,24 @@
+Action
+Adventure
+Animation
+Biography
+Children's
+Comedy
+Crime Story
+Documentary
+Dramatic
+Family Oriented
+Fantasy
+Film-Noir
+Food Related
+Historical
+Horror
+Musical
+Mystery
+Romantic
+Science-Fiction
+based on Sports
+Suspense
+Thriller
+War
+Western

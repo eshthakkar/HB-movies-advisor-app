@@ -14,6 +14,8 @@ import requests
 import json
 import os
 import re
+from sqlalchemy.orm.exc import NoResultFound
+
 
 
 
@@ -34,7 +36,6 @@ def load_movies():
     guidebox_key = os.environ["GUIDEBOX_PRODUCTION_KEY"]
 
     keywrd_ids = get_keyword_ids()
-    print keywrd_ids
 
 
     for i in range(num_results):
@@ -85,9 +86,9 @@ def load_movies():
 
         load_movie_source_links(movie_id,amazon_link,netflix_hulu_link)
         load_movie_genre_info(movie_id,genres)
+        genres = get_genres(movie_id)
         load_movie_keywords(movie_id,keywrd_ids)
-
-
+        update_keyword_rating(genres,movie_id)
 
 
 def load_sources():
@@ -209,7 +210,41 @@ def get_keyword_ids():
     for keywrd in keywords:
         id_list.append(keywrd.qk_id) 
 
-    return id_list    
+    return id_list  
+
+
+def get_genres(movie_id):
+    genres = Movie.query.filter(Movie.movie_id == movie_id).one().genres
+
+    genre_list = []
+
+    for genre in genres:
+        genre_list.append(genre.genre) 
+
+    return genre_list  
+
+def update_keyword_rating(genres,movie_id):
+    """Update keyword rating based on genres""" 
+
+    for gen in genres:
+        try:
+            keyword_update_row = db.session.\
+            query(MovieKeywordRating).\
+            join(Movie,MovieKeywordRating.movie_id == Movie.movie_id).\
+            join(T1Keyword,MovieKeywordRating.keyword_id == T1Keyword.qk_id).\
+            filter(MovieKeywordRating.movie_id == movie_id, 
+            MovieKeywordRating.keyword_id == T1Keyword.query.filter(T1Keyword.descriptive_keyword.like(gen + '%')).one().qk_id).\
+            one()
+
+            keyword_update_row.keyword_rating = 50
+            db.session.commit()
+
+        except NoResultFound:
+            continue    
+
+
+
+
 
 
 
