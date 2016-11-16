@@ -58,7 +58,11 @@ function addMovieToWatchList(){
     if(result.status === "success"){
         $('#genre-question').html(result.quest);
         $('#quest_resp_movie_id').attr('value', result.id);
-        $('#keywrd_id').attr('value',result.key_wrd_id);
+
+        $('#keyword_id1').attr('value',result.key_wrd1_id).after(result.keywrd1);
+        $('#keyword_id2').attr('value',result.key_wrd2_id).after(result.keywrd2);
+
+
         $('#quiz-form').show();
       } 
       else{

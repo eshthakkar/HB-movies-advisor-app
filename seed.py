@@ -204,7 +204,7 @@ def load_movie_keywords(movie_id,keyword_ids):
     
 def get_keyword_ids():
     """Return keywords id list"""
-    
+
     keywords = T1Keyword.query.all()
 
     id_list = []
@@ -240,7 +240,7 @@ def update_keyword_rating(genres,movie_id):
             MovieKeywordRating.keyword_id == T1Keyword.query.filter(T1Keyword.descriptive_keyword.like(gen + '%')).one().qk_id).\
             one()
 
-            keyword_update_row.keyword_rating = 50
+            keyword_update_row.keyword_rating = 1000
             db.session.commit()
 
         except NoResultFound:

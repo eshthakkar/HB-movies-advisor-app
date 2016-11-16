@@ -210,7 +210,8 @@ def add_movie_to_watchlist():
             question = question_params['q']
 
             text = Movie.query.filter(Movie.movie_id == movie_add_id).one().title + " has been added to your watch list" 
-            return jsonify(status="success", id=movie_add_id, text=text, quest=question, key_wrd_id=question_params['k_id'])
+            return jsonify(status="success", id=movie_add_id, text=text, quest=question, key_wrd1_id=question_params['k_id1'],
+                           key_wrd2_id=question_params['k_id2'], keywrd1=question_params['quest_keyword1'],keywrd2=question_params['quest_keyword2'])
 
         except NoResultFound:
             text = "Sign up/Sign in again to add a movie to your watch list"
@@ -234,9 +235,13 @@ def remove_movie_from_watchlist():
     
 @app.route('/record-answers',methods=["POST"])
 def record_user_response():
-    """Records user's submitted response for the movie genre question"""
+    """Records user's submitted response for the movie question"""
 
-    # response = request.form.get()
+    response = request.form.get("movie_quest")
+    movie_id = request.form.get("movie_id")
+    print response, movie_id
+
+    return redirect("/watchlist")
 
 
 

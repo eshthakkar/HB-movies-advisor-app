@@ -62,11 +62,12 @@
       <div class="modal-body">
         <form id="quiz-form" action="/record-answers" method="POST">
           <label><p id="genre-question"></p></label><br>
-          <input type="radio" name="yesno" value="yes">Agree
-          <input type="radio" name="yesno" value="no">Disagree<br>
+          <input type="radio" name="movie_quest" id="keyword_id1">
+          <input type="radio" name="movie_quest" id="keyword_id2">
+          <input type="radio" name="movie_quest" value="-1">Neither<br>
 
           <input type="hidden" name="movie_id" id="quest_resp_movie_id">
-          <input type="hidden" name="keywrd_id" id="keywrd_id">
+          
           <button type="submit" class="btn btn-default">Submit</button>
         </form>
       </div>
