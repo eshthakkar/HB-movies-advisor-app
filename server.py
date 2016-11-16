@@ -6,7 +6,7 @@ from model import (connect_to_db, db)
 from flask_debugtoolbar import DebugToolbarExtension
 from model import (connect_to_db,db,User,Movie,Source,MovieSource,Genre,MovieGenre,MovieWatched)
 import bcrypt
-from helper import question
+from helper import form_question
 
 
 from sqlalchemy.orm.exc import NoResultFound
@@ -187,26 +187,35 @@ def add_movie_to_watchlist():
     """Add a movie to user's watchlist and return json response""" 
 
     if 'user_id' in session:
-        question()
         movie_to_add_id = request.form.get("movie_identifier")
         movie_add_id = int(movie_to_add_id.split("_")[-1])
 
-        user_movies = User.query.filter(User.user_id == session['user_id']).one().movies
-        for movie in user_movies:
-            if movie_add_id == movie.movie_id:
-                text = "Movie already in watch list"
-                return jsonify(status="prevent", id=movie_add_id, text=text)
-            else:
-                continue 
+        try:
+            user_movies = User.query.filter(User.user_id == session['user_id']).one().movies
+            for movie in user_movies:
+                if movie_add_id == movie.movie_id:
+                    text = "Movie already in watch list"
+                    return jsonify(status="prevent", id=movie_add_id, text=text)
+                else:
+                    continue 
 
-        movie_watched = MovieWatched(movie_id=movie_add_id,
-                                     user_id=session['user_id'])
-        db.session.add(movie_watched)
+            movie_watched = MovieWatched(movie_id=movie_add_id,
+                                         user_id=session['user_id'])
+            db.session.add(movie_watched)
 
-        db.session.commit() 
+            db.session.commit() 
 
-        text = Movie.query.filter(Movie.movie_id == movie_add_id).one().title + " has been added to your watch list" 
-        return jsonify(status="success", id=movie_add_id, text=text)
+            question_params = form_question(movie_add_id)
+
+            question = question_params['q']
+
+            text = Movie.query.filter(Movie.movie_id == movie_add_id).one().title + " has been added to your watch list" 
+            return jsonify(status="success", id=movie_add_id, text=text, quest=question, key_wrd_id=question_params['k_id'])
+
+        except NoResultFound:
+            text = "Sign up/Sign in again to add a movie to your watch list"
+            return jsonify(status="fail", text=text)
+                
     else:
         text = "Sign in to add a movie to your watch list"
         return jsonify(status="fail", text=text)
@@ -221,8 +230,16 @@ def remove_movie_from_watchlist():
     db.session.commit()
 
     return "container_" + str(movie_remove_id)
+
     
-       
+@app.route('/record-answers',methods=["POST"])
+def record_user_response():
+    """Records user's submitted response for the movie genre question"""
+
+    # response = request.form.get()
+
+
+
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the

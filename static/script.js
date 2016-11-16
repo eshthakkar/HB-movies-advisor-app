@@ -12,10 +12,11 @@ function showMovieResults(results){
 
   $('#thumbnails').empty();
   $('#movie_add_resp').empty();
-  
+
   for (var movieid in results) {
     var thumbnail_url = results[movieid];
-    $('<div class="image-container"><img src=' + thumbnail_url + ' data-toggle="modal" data-target=".bs-example-modal-lg" class="image" id=' + movieid + '><div class="addbutton btn btn-default" id=button_' + movieid + '>Add</div></div>').appendTo('#thumbnails');
+    $('<div class="image-container"><img src=' + thumbnail_url + ' data-toggle="modal" data-target=".bs-example-modal-lg" class="image" id=' + movieid + '> \
+      <div class="addbutton btn btn-default" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" id=button_' + movieid + '>Add</div></div>').appendTo('#thumbnails');
 
   }
   $('.image').on('click',showDetails);
@@ -43,11 +44,29 @@ function addMovieToWatchList(){
 
   $.post('/watchlist',movie_to_add,function(result){
     console.log(result);
-    $('#movie_add_resp').html(result.text);
 
+    // Updates the response text in modal window for all cases
+    $('#myModalLabelQuiz').html(result.text);
+
+    // Disables add button when a movie was successfully added or the movie to
+    // be added exists in watch list already
     if(result.status === "success" || result.status === "prevent"){
-    $('#button_' + result.id).attr("disabled",true);
-  }
+      $('#button_' + result.id).attr("disabled",true); 
+    }
+
+    // Display question and form when movie is successfully added to database, pass in ids to form
+    if(result.status === "success"){
+        $('#genre-question').html(result.quest);
+        $('#quest_resp_movie_id').attr('value', result.id);
+        $('#keywrd_id').attr('value',result.key_wrd_id);
+        $('#quiz-form').show();
+      } 
+      else{
+          $('#quiz-form').hide();
+      } 
+
+
+
 
   });
 }

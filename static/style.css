@@ -24,6 +24,10 @@
 
 }
 
+#quiz-form{
+    display: none;
+}
+
 .image-container{
     display: inline;
     position: relative;

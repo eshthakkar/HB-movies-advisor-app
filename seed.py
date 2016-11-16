@@ -203,6 +203,8 @@ def load_movie_keywords(movie_id,keyword_ids):
 
     
 def get_keyword_ids():
+    """Return keywords id list"""
+    
     keywords = T1Keyword.query.all()
 
     id_list = []
@@ -214,6 +216,8 @@ def get_keyword_ids():
 
 
 def get_genres(movie_id):
+    """Return genres list for a movie based on its id"""
+
     genres = Movie.query.filter(Movie.movie_id == movie_id).one().genres
 
     genre_list = []
