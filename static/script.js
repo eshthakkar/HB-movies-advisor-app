@@ -9,7 +9,6 @@ $('select[multiple]').multiselect({
 
 function showMovieResults(results){
   //Display movie thumbnails for the selected genre/genres 
-
   $('#thumbnails').empty();
   $('#movie_add_resp').empty();
 
@@ -20,8 +19,7 @@ function showMovieResults(results){
 
   }
   $('.image').on('click',showDetails);
-  $('.image-container').on('mouseover',showbuttons);
-  $('.image-container').on('mouseout',hidebuttons);
+  $('.image-container').on('mouseover',showbuttons).on('mouseout',hidebuttons);
   $('.addbutton').on('click',addMovieToWatchList);
 
 }
@@ -93,6 +91,9 @@ function showDetails(){
   // Show details related to a movie
 
   var mid = $(this).attr('id');
+  var genres_query = $("#genres");
+  var sources_query = $("#sources");
+
   $.get("/movie.json/" + mid,function(results){
     if (results === "No movie found!" || results === "Error! Not a valid movie Identification"){
         $('#myModalLabel').html(results);
@@ -106,14 +107,14 @@ function showDetails(){
       $('#runtime').html("Runtime: " + results["runtime"]);
       $('#actors').html("Actors: " + results["actors"]);
 
-      $("#genres").empty();
+      genres_query.empty();
       for(var i=0; i < results["genres"].length; i++){
-        $("#genres").append("<li>" + results["genres"][i] + "</li>");
+        genres_query.append("<li>" + results["genres"][i] + "</li>");
       }
 
-      $("#sources").empty();
+      sources_query.empty();
       for (var k in results["sources"]){
-        $("#sources").append('<a href=' + results["sources"][k] + '><button>' + k + '</button></a>')
+        sources_query.append('<a href=' + results["sources"][k] + '><button>' + k + '</button></a>')
       }
 
 

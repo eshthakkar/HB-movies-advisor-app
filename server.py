@@ -146,7 +146,8 @@ def signin_process():
 
     try: 
         verify_user_info = User.query.filter(User.email == email).one()
-        if bcrypt.hashpw(password.encode('utf-8'), verify_user_info.password.encode('utf-8')) == verify_user_info.password:
+        
+        if bcrypt.checkpw(password.encode('utf-8'), verify_user_info.password.encode('utf-8')):
             session['user_id'] = verify_user_info.user_id
             flash("Logged in as %s" % email)
             print session['user_id']
