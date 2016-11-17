@@ -209,11 +209,23 @@ def add_movie_to_watchlist():
 
             question_params = form_question(movie_add_id)
 
-            question = question_params['q']
+            movie_question = question_params['q1']
+            user_question = question_params['q2']
+
+            print movie_question
+            print user_question
 
             text = Movie.query.filter(Movie.movie_id == movie_add_id).one().title + " has been added to your watch list" 
-            return jsonify(status="success", id=movie_add_id, text=text, quest=question, key_wrd1_id=question_params['k_id1'],
-                           key_wrd2_id=question_params['k_id2'], keywrd1=question_params['quest_keyword1'],keywrd2=question_params['quest_keyword2'])
+
+            return jsonify(status="success", 
+                           id=movie_add_id, 
+                           text=text, 
+                           mquest=movie_question, 
+                           uquest=user_question, 
+                           key_wrd1_id=question_params['k_id1'],
+                           key_wrd2_id=question_params['k_id2'],
+                           keywrd1=question_params['quest_keyword1'],
+                           keywrd2=question_params['quest_keyword2'])
 
         except NoResultFound:
             text = "Sign up/Sign in again to add a movie to your watch list"
@@ -245,15 +257,14 @@ def record_user_response():
     keyword_id2 = request.form.get("keyword_id2")
 
     print keyword_id_chosen, movie_id, keyword_id1, keyword_id2
-    print type(keyword_id_chosen), type(movie_id), type(keyword_id1), type(keyword_id2)
 
     # When either of the keyword options was picked
     if int(keyword_id_chosen) > 0:
         movie_keyword_chosen = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id_chosen).one()
 
         # condition to check before bumping up chosen rating score
-        if movie_keyword_chosen.keyword_rating <= 1450:
-            movie_keyword_chosen.keyword_rating += 50
+        if movie_keyword_chosen.keyword_rating <= 1000:
+            movie_keyword_chosen.keyword_rating += 2
 
         # conditions to determine which keyword needs to be decremented    
         if keyword_id_chosen == keyword_id1:
@@ -263,20 +274,20 @@ def record_user_response():
             movie_keyword_not_picked = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id1).one()
 
         # condition to check before reducing remaining keyword's rating score
-        if movie_keyword_not_picked.keyword_rating >= 200:    
-            movie_keyword_not_picked.keyword_rating -= 100       
+        if movie_keyword_not_picked.keyword_rating >= 2:    
+            movie_keyword_not_picked.keyword_rating -= 1       
 
     # When option neither was picked        
     else:
         movie_keyword1 = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id1).one()
         # condition to check before reducing keyword's rating score
-        if movie_keyword1.keyword_rating >= 200:
-            movie_keyword1.keyword_rating -= 100
+        if movie_keyword1.keyword_rating >= 2:
+            movie_keyword1.keyword_rating -= 1
 
         movie_keyword2 = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id2).one()
         # condition to check before reducing remaining keyword's rating score
-        if movie_keyword2.keyword_rating >= 200:
-            movie_keyword2.keyword_rating -= 100
+        if movie_keyword2.keyword_rating >= 2:
+            movie_keyword2.keyword_rating -= 1
 
 
     db.session.commit()

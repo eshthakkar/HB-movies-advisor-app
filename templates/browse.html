@@ -62,9 +62,14 @@
       <div class="modal-body">
         <form id="quiz-form" action="/record-answers" method="POST">
           <label><p id="genre-question"></p></label><br>
-          <input type="radio" name="movie_quest" id="keyword_id1">
-          <input type="radio" name="movie_quest" id="keyword_id2">
-          <input type="radio" name="movie_quest" value="-1">Neither<br>
+          <input type="radio" name="movie_quest" id="keyword_id1"><label for="keyword_id1"></label>
+          <input type="radio" name="movie_quest" id="keyword_id2"><label for="keyword_id2"></label>
+          <input type="radio" name="movie_quest" id="meh" value="-1"><label for="meh">Neither</label><br>
+
+          <label><p id="user-question"></p></label><br>
+          <input type="radio" name="user_quest" id="userkeyword_id1"><label for="userkeyword_id1"></label>
+          <input type="radio" name="user_quest" id="userkeyword_id2"><label for="userkeyword_id2"></label>
+          <input type="radio" name="user_quest" id="usermeh" value="-1"><label for="usermeh">Neither</label><br>
 
           <input type="hidden" name="movie_id" id="quest_resp_movie_id">
           <input type="hidden" name="keyword_id1" id="quest_resp_keyword_id1">

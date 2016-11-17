@@ -54,13 +54,23 @@ function addMovieToWatchList(){
 
     // Display question and form when movie is successfully added to database, pass in ids to form
     if(result.status === "success"){
-        $('#genre-question').html(result.quest);
+        $('#genre-question').text(result.mquest);
         $('#quest_resp_movie_id').attr('value', result.id);
 
-        $('#keyword_id1').attr('value',result.key_wrd1_id).after(result.keywrd1);
-        $('#keyword_id2').attr('value',result.key_wrd2_id).after(result.keywrd2);
+        $('#keyword_id1').attr('value',result.key_wrd1_id);
+        $('label[for=keyword_id1]').html(result.keywrd1);
+        $('#keyword_id2').attr('value',result.key_wrd2_id);
+        $('label[for=keyword_id2]').html(result.keywrd2);
+
         $('#quest_resp_keyword_id1').attr('value',result.key_wrd1_id);
         $('#quest_resp_keyword_id2').attr('value',result.key_wrd2_id);
+
+        $('#user-question').text(result.uquest);
+        $('#userkeyword_id1').attr('value',result.key_wrd1_id);
+        $('label[for=userkeyword_id1]').html(result.keywrd1);
+        $('#userkeyword_id2').attr('value',result.key_wrd2_id);
+        $('label[for=userkeyword_id2]').html(result.keywrd2);
+
 
 
 

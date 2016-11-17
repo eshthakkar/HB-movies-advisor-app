@@ -132,9 +132,6 @@ class User(db.Model):
     email = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(64), nullable=False)
 
-    user_movie_keywords = db.relationship("MovieKeywordRating",
-                                     backref="users")
-
     def __repr__(self):
         """ Provide helpful representation of user when printed"""
 
@@ -186,15 +183,13 @@ class MovieKeywordRating(db.Model):
     movie_id = db.Column(db.Integer,
                db.ForeignKey("movies.movie_id"),
                nullable=False)
-    user_id = db.Column(db.Integer,
-              db.ForeignKey("users.user_id"))
-    keyword_rating = db.Column(db.Integer,default=300)
+    keyword_rating = db.Column(db.Integer,default=20)
 
     def __repr__(self):
         """Provide helpful representation of rated keywords when printed"""
 
-        return "<MovieKeywordRating mkr_id=%s keyword_id=%s movie_id=%s keyword_rating=%s user_id=%s>" % (self.mkr_id,
-            self.keyword_id, self.movie_id, self.keyword_rating,self.user_id)
+        return "<MovieKeywordRating mkr_id=%s keyword_id=%s movie_id=%s keyword_rating=%s>" % (self.mkr_id,
+            self.keyword_id, self.movie_id, self.keyword_rating)
 
 
 def example_data():

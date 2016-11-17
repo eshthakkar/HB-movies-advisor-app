@@ -240,7 +240,7 @@ def update_keyword_rating(genres,movie_id):
             MovieKeywordRating.keyword_id == T1Keyword.query.filter(T1Keyword.descriptive_keyword.like(gen + '%')).one().qk_id).\
             one()
 
-            keyword_update_row.keyword_rating = 600
+            keyword_update_row.keyword_rating = 50
             db.session.commit()
 
         except NoResultFound:

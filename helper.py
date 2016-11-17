@@ -23,14 +23,12 @@ def form_question(movie_id):
     quest_keyword2 = quest_keyword2_elements['quest_keyword']
     picked_keyword_row2 = quest_keyword2_elements['picked_keyword_row']
 
+    question1 = "Did you find the movie more of " + get_preposition(quest_keyword1) + " " + quest_keyword1 + " or " + get_preposition(quest_keyword2) + " " + quest_keyword2 + " movie?"
 
-    if (quest_keyword1[0] == 'A' or quest_keyword1[0] == 'E' or quest_keyword1[0] == 'I' or
-        quest_keyword1[0] == 'O' or quest_keyword1[0] == 'U'):
-        question = "Did you find the movie more of an " + quest_keyword1 + " or a " + quest_keyword2 + " movie?"
-    else:    
-        question = "Did you find the movie more of a " + quest_keyword1 + " or a " + quest_keyword2 + " movie?"
+    question2 = "Do you like " + quest_keyword1 + " or " + quest_keyword2 + " movies?"
+    
         
-    return {'q': question, 'k_id1': picked_keyword_row1.keyword_id, 'k_id2': picked_keyword_row2.keyword_id,
+    return {'q1': question1, 'q2': question2, 'k_id1': picked_keyword_row1.keyword_id, 'k_id2': picked_keyword_row2.keyword_id,
            'quest_keyword1': quest_keyword1, 'quest_keyword2': quest_keyword2}
 
 
@@ -69,7 +67,20 @@ def quest_keyword(keywords):
     quest_keyword = T1Keyword.query.filter(T1Keyword.qk_id == picked_keyword_row.keyword_id).one().descriptive_keyword
         
     return {'quest_keyword':quest_keyword,
-            'picked_keyword_row': picked_keyword_row}          
+            'picked_keyword_row': picked_keyword_row}  
+
+
+def get_preposition(keyword):
+    """checks if the keyword startswith a vowel and returns the correct preposition for it"""
+
+    vowels = ('a','e','i','o','u','A','E','I','O','U')
+
+    if keyword.startswith(vowels):
+        return 'an'
+    else:
+        return 'a'    
+
+
     
 
 
