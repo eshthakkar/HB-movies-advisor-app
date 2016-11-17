@@ -59,6 +59,9 @@ function addMovieToWatchList(){
 
         $('#keyword_id1').attr('value',result.key_wrd1_id).after(result.keywrd1);
         $('#keyword_id2').attr('value',result.key_wrd2_id).after(result.keywrd2);
+        $('#quest_resp_keyword_id1').attr('value',result.key_wrd1_id);
+        $('#quest_resp_keyword_id2').attr('value',result.key_wrd2_id);
+
 
 
         $('#quiz-form').show();

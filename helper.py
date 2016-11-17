@@ -58,11 +58,9 @@ def quest_keyword(keywords):
         keyword_cum_ratings.append(cum_score)
         
     pick = randint(1,total_score)
-    # print pick 
 
     for i,j in enumerate(keyword_cum_ratings):
         if j >= pick:
-            # print i,j,keywords[i]
             picked_keyword_row = keywords[i]
             break
         else:

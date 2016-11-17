@@ -188,7 +188,7 @@ class MovieKeywordRating(db.Model):
                nullable=False)
     user_id = db.Column(db.Integer,
               db.ForeignKey("users.user_id"))
-    keyword_rating = db.Column(db.Integer,default=10)
+    keyword_rating = db.Column(db.Integer,default=300)
 
     def __repr__(self):
         """Provide helpful representation of rated keywords when printed"""

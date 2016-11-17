@@ -4,7 +4,8 @@ from flask import (Flask, jsonify, render_template, redirect,flash, session,requ
 from jinja2 import StrictUndefined
 from model import (connect_to_db, db)
 from flask_debugtoolbar import DebugToolbarExtension
-from model import (connect_to_db,db,User,Movie,Source,MovieSource,Genre,MovieGenre,MovieWatched)
+from model import (connect_to_db,db,User,Movie,Source,MovieSource,Genre,MovieGenre,MovieWatched,
+                  T1Keyword, MovieKeywordRating)
 import bcrypt
 from helper import form_question
 
@@ -146,7 +147,7 @@ def signin_process():
 
     try: 
         verify_user_info = User.query.filter(User.email == email).one()
-        
+
         if bcrypt.checkpw(password.encode('utf-8'), verify_user_info.password.encode('utf-8')):
             session['user_id'] = verify_user_info.user_id
             flash("Logged in as %s" % email)
@@ -236,11 +237,49 @@ def remove_movie_from_watchlist():
     
 @app.route('/record-answers',methods=["POST"])
 def record_user_response():
-    """Records user's submitted response for the movie question"""
+    """Records user's submitted response for the movie question in the database"""
 
-    response = request.form.get("movie_quest")
+    keyword_id_chosen = request.form.get("movie_quest")
     movie_id = request.form.get("movie_id")
-    print response, movie_id
+    keyword_id1 = request.form.get("keyword_id1")
+    keyword_id2 = request.form.get("keyword_id2")
+
+    print keyword_id_chosen, movie_id, keyword_id1, keyword_id2
+    print type(keyword_id_chosen), type(movie_id), type(keyword_id1), type(keyword_id2)
+
+    # When either of the keyword options was picked
+    if int(keyword_id_chosen) > 0:
+        movie_keyword_chosen = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id_chosen).one()
+
+        # condition to check before bumping up chosen rating score
+        if movie_keyword_chosen.keyword_rating <= 1450:
+            movie_keyword_chosen.keyword_rating += 50
+
+        # conditions to determine which keyword needs to be decremented    
+        if keyword_id_chosen == keyword_id1:
+            movie_keyword_not_picked = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id2).one()
+            
+        else:
+            movie_keyword_not_picked = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id1).one()
+
+        # condition to check before reducing remaining keyword's rating score
+        if movie_keyword_not_picked.keyword_rating >= 200:    
+            movie_keyword_not_picked.keyword_rating -= 100       
+
+    # When option neither was picked        
+    else:
+        movie_keyword1 = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id1).one()
+        # condition to check before reducing keyword's rating score
+        if movie_keyword1.keyword_rating >= 200:
+            movie_keyword1.keyword_rating -= 100
+
+        movie_keyword2 = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id2).one()
+        # condition to check before reducing remaining keyword's rating score
+        if movie_keyword2.keyword_rating >= 200:
+            movie_keyword2.keyword_rating -= 100
+
+
+    db.session.commit()
 
     return redirect("/watchlist")
 
