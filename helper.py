@@ -1,6 +1,9 @@
 from random import randint
-from model import T1Keyword, Movie, MovieKeywordRating
+from model import T1Keyword, Movie, MovieKeywordRating, User, UserPreference
 from model import (connect_to_db, db)
+
+from sqlalchemy.orm.exc import NoResultFound
+
 
 
 def form_question(movie_id):
@@ -78,7 +81,80 @@ def get_preposition(keyword):
     if keyword.startswith(vowels):
         return 'an'
     else:
-        return 'a'    
+        return 'a' 
+
+
+def update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2): 
+    """updates keyword ratings for a movie based on user feedback"""
+
+     # When either of the keyword options was picked
+    if int(keyword_id_chosen) > 0:
+        movie_keyword_chosen = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id_chosen).one()
+
+        # condition to check before bumping up chosen rating score
+        if movie_keyword_chosen.keyword_rating <= 1000:
+            movie_keyword_chosen.keyword_rating += 2
+
+        # conditions to determine which keyword needs to be decremented    
+        if keyword_id_chosen == keyword_id1:
+            movie_keyword_not_picked = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id2).one()
+            
+        else:
+            movie_keyword_not_picked = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id1).one()
+
+        # condition to check before reducing remaining keyword's rating score
+        if movie_keyword_not_picked.keyword_rating >= 2:    
+            movie_keyword_not_picked.keyword_rating -= 1       
+
+    # When option neither was picked        
+    else:
+        movie_keyword1 = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id1).one()
+        # condition to check before reducing keyword's rating score
+        if movie_keyword1.keyword_rating >= 2:
+            movie_keyword1.keyword_rating -= 1
+
+        movie_keyword2 = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie_id, MovieKeywordRating.keyword_id == keyword_id2).one()
+        # condition to check before reducing remaining keyword's rating score
+        if movie_keyword2.keyword_rating >= 2:
+            movie_keyword2.keyword_rating -= 1
+
+    db.session.commit()
+
+
+def add_update_user_preference(user_id, chosen_genre_id,keyword_id1,keyword_id2):
+    """Add/Update user's genre preferences"""
+
+    if chosen_genre_id < 0:
+        try:
+            row = UserPreference.query.filter(UserPreference.user_id == user_id, 
+                                        UserPreference.keyword_id == keyword_id1).one()
+            row.genre_rating -= 1
+        except NoResultFound:
+            pass
+
+        try:
+            row = UserPreference.query.filter(UserPreference.user_id == user_id, 
+                                        UserPreference.keyword_id == keyword_id2).one()
+            row.genre_rating -= 1
+        except NoResultFound:
+            pass    
+                
+    else:    
+        try:
+            row = UserPreference.query.filter(UserPreference.user_id == user_id, 
+                                        UserPreference.keyword_id == chosen_genre_id).one()
+            row.genre_rating += 1
+
+        except NoResultFound: 
+            user_preference = UserPreference(user_id=user_id,
+                                            keyword_id=chosen_genre_id,
+                                            genre_rating=1)
+            db.session.add(user_preference)
+
+    db.session.commit()                                   
+
+
+
 
 
     

@@ -41,7 +41,7 @@ class Movie(db.Model):
                             backref="movies")
 
     movie_keywords = db.relationship("MovieKeywordRating",
-                                     backref="movies")
+                                     backref="movie")
 
 
     def __repr__(self):
@@ -132,6 +132,10 @@ class User(db.Model):
     email = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(64), nullable=False)
 
+    genre_ratings = db.relationship("UserPreference",
+                                     backref="user")
+
+
     def __repr__(self):
         """ Provide helpful representation of user when printed"""
 
@@ -150,6 +154,8 @@ class MovieWatched(db.Model):
     user_id = db.Column(db.Integer,
               db.ForeignKey("users.user_id"),
               nullable=False)
+
+
 
     def __repr__(self):
         """Provide helpful representation of movie watched by user when printed"""
@@ -190,6 +196,27 @@ class MovieKeywordRating(db.Model):
 
         return "<MovieKeywordRating mkr_id=%s keyword_id=%s movie_id=%s keyword_rating=%s>" % (self.mkr_id,
             self.keyword_id, self.movie_id, self.keyword_rating)
+
+
+class UserPreference(db.Model):
+    """Tier 1 question keywords to understand user's preferred genres"""
+
+    __tablename__ = "users_preferences"
+
+    up_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
+    keyword_id = db.Column(db.Integer,
+                 db.ForeignKey("t1_keywords.qk_id"),
+                 nullable=False)
+    user_id = db.Column(db.Integer,
+               db.ForeignKey("users.user_id"),
+               nullable=False)
+    genre_rating = db.Column(db.Integer,default=0)
+
+    def __repr__(self):
+        """Provide helpful representation of user's preferences when printed"""
+
+        return "<UserPreference up_id=%s keyword_id=%s user_id=%s genre_rating=%s>" % (self.up_id,
+            self.keyword_id, self.user_id, self.genre_rating)
 
 
 def example_data():

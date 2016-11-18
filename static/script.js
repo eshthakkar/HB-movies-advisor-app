@@ -41,7 +41,6 @@ function addMovieToWatchList(){
   };
 
   $.post('/watchlist',movie_to_add,function(result){
-    console.log(result);
 
     // Updates the response text in modal window for all cases
     $('#myModalLabelQuiz').html(result.text);
@@ -54,14 +53,15 @@ function addMovieToWatchList(){
 
     // Display question and form when movie is successfully added to database, pass in ids to form
     if(result.status === "success"){
+      
         $('#genre-question').text(result.mquest);
-        $('#quest_resp_movie_id').attr('value', result.id);
-
         $('#keyword_id1').attr('value',result.key_wrd1_id);
         $('label[for=keyword_id1]').html(result.keywrd1);
         $('#keyword_id2').attr('value',result.key_wrd2_id);
         $('label[for=keyword_id2]').html(result.keywrd2);
 
+        $('#quest_resp_movie_id').attr('value', result.id);
+        $('#quest_resp_user_id').attr('value', result.user_id);
         $('#quest_resp_keyword_id1').attr('value',result.key_wrd1_id);
         $('#quest_resp_keyword_id2').attr('value',result.key_wrd2_id);
 
