@@ -15,6 +15,8 @@ import json
 import os
 import re
 from sqlalchemy.orm.exc import NoResultFound
+import bcrypt
+
 
 
 
@@ -244,12 +246,28 @@ def update_keyword_rating(genres,movie_id):
             db.session.commit()
 
         except NoResultFound:
-            continue    
+            continue  
 
 
+def load_users():
+    """Read users from a file and add to database"""
+
+    User.query.delete() 
+    ROUNDS = 10
 
 
+    for row in open("data/users.txt"):
+        email,password = row.rstrip().split('|')
 
+        # Hash a password for the first time
+        password=bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(ROUNDS))
+
+        new_user = User(email=email,
+                    password=password)
+        db.session.add(new_user)
+
+    db.session.commit()
+  
 
 
 
@@ -266,6 +284,6 @@ if __name__ == "__main__":
     load_genres()
     load_sources()
     load_keywords()
-
     load_movies()
+    load_users()
 

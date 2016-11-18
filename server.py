@@ -4,7 +4,7 @@ from flask import (Flask, jsonify, render_template, redirect,flash, session,requ
 from jinja2 import StrictUndefined
 from model import (connect_to_db, db)
 from flask_debugtoolbar import DebugToolbarExtension
-from model import (connect_to_db,db,User,Movie,Source,MovieSource,Genre,MovieGenre,MovieWatched,
+from model import (User,Movie,Source,MovieSource,Genre,MovieGenre,MovieWatched,
                   T1Keyword, MovieKeywordRating)
 import bcrypt
 from helper import form_question,update_movie_profile,add_update_user_preference
