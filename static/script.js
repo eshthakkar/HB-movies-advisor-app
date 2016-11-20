@@ -53,7 +53,7 @@ function addMovieToWatchList(){
 
     // Display question and form when movie is successfully added to database, pass in ids to form
     if(result.status === "success"){
-      
+
         $('#genre-question').text(result.mquest);
         $('#keyword_id1').attr('value',result.key_wrd1_id);
         $('label[for=keyword_id1]').html(result.keywrd1);
@@ -106,6 +106,8 @@ function showDetails(){
   var mid = $(this).attr('id');
   var genres_query = $("#genres");
   var sources_query = $("#sources");
+
+  console.log(mid);
 
   $.get("/movie.json/" + mid,function(results){
     if (results === "No movie found!" || results === "Error! Not a valid movie Identification"){
