@@ -15,7 +15,8 @@ function showMovieResults(results){
   for (var movieid in results) {
     var thumbnail_url = results[movieid];
     $('<div class="image-container"><img src=' + thumbnail_url + ' data-toggle="modal" data-target=".bs-example-modal-lg" class="image" id=' + movieid + '> \
-      <div class="addbutton btn btn-default" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" id=button_' + movieid + '>Add</div></div>').appendTo('#thumbnails');
+      <div class="addbutton btn btn-default" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" id=button_' + movieid + '> \
+      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Seen</div></div>').appendTo('#thumbnails');
 
   }
   $('.image').on('click',showDetails);
