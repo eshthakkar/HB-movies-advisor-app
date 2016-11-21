@@ -1,4 +1,4 @@
-from helper import form_question,update_movie_profile,add_update_user_preference
+from helper import form_question,update_movie_profile,add_update_user_preference, clustering
 from server import app
 from model import connect_to_db,User
 from random import choice
@@ -27,7 +27,23 @@ def pick_keyword_for_movie(movie_id, keywords_id):
         movie_genre_id_pick = 6
     elif movie_id == 79969 and (7 in keywords_id):
         movie_genre_id_pick = 7
+
+    elif movie_id == 112659 and (2 in keywords_id and 19 in keywords_id):
+        movie_genre_id_pick = choice(keywords_id[1:])
+    elif movie_id == 112659 and (2 in keywords_id):
+        movie_genre_id_pick = 2
+    elif movie_id == 112659 and (19 in keywords_id):
+        movie_genre_id_pick = 19    
         
+    elif movie_id == 26106 and (19 in keywords_id and 17 in keywords_id):
+        movie_genre_id_pick = choice(keywords_id[1:])
+    elif movie_id == 26106 and (17 in keywords_id):
+        movie_genre_id_pick = 17
+    elif movie_id == 26106 and (19 in keywords_id):
+        movie_genre_id_pick = 19 
+    elif movie_id == 26106 and (18 in keywords_id):
+        movie_genre_id_pick = 18        
+            
     else:
         movie_genre_id_pick = -1           
 
@@ -68,9 +84,20 @@ for i in range(100):
         
         # [<Genre genre_id=7 genre=Crime>, <Genre genre_id=9 genre=Drama>],
         # needs to be categorized as comedy, thriller, 
-
         # Tier 2 : violent, tarantino, great plot
         movie_user_profiling(79969,user.user_id)  #pulp fiction 
+
+        # Interstellar, genres: Adventure, Drama, Sci-fi,
+        # Strong, adventure, scifi
+        movie_user_profiling(112659, user.user_id)
+
+        # Upstream color, drama, mystery, scifi
+        # strong romantic, sci fi, mystery
+        movie_user_profiling(26106, user.user_id)
+
+clustering()        
+
+
 
 
 

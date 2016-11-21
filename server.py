@@ -52,7 +52,7 @@ def thumbnails():
     movie_thumbnails = {}
 
     # Query based on genre and rating
-    if selected_genre:
+    try:
         
         movies = db.session.\
         query(Movie).\
@@ -62,17 +62,11 @@ def thumbnails():
         filter(Genre.genre.in_(selected_genre), Movie.imdb_rating >= selected_rating).\
         all()
 
-    # Query just based on rating
-    else:
-        movies = db.session.\
-        query(Movie).\
-        distinct().\
-        filter(Movie.imdb_rating >= selected_rating).\
-        all()
-
-    for movie in movies:
-            movie_thumbnails[movie.movie_id] = movie.thumbnail_url
+        for movie in movies:
+                movie_thumbnails[movie.movie_id] = movie.thumbnail_url
     
+    except:
+        pass
 
     return jsonify(movie_thumbnails)        
 
