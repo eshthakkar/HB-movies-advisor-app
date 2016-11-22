@@ -3,16 +3,20 @@
 
 <a href="/browse">Browse</a>
 
-{% if user_genre_ratings %}
-<ul>
-  {% for rating in user_genre_ratings %}
-  <li>{{ rating }}</li>
+{% if cluster_movies %}
+<div>
+  {% for movie in cluster_movies %}
+  <div class="image-container-reco" id="container_{{ movie.movie_id }}">
+    <img src="{{ movie.thumbnail_url }}" data-toggle="modal" data-target=".bs-example-modal-lg" class="image_seen" id="{{ movie.movie_id }}">
+    <div class="addbutton-reco btn btn-default" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" id="button_{{ movie.movie_id }}"> 
+    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Seen</div>
+  </div>
   {% endfor %}
-</ul>
+</div>
 
 
 {% else %}
-  <p><h3>There are no ratings to show!</h3></p>
+  <p><h3>There are no suggestions to show!</h3></p>
 {% endif %}
 
 
@@ -20,3 +24,4 @@
 
 
 {% endblock %}
+

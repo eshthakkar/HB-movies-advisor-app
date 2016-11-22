@@ -41,6 +41,8 @@ function addMovieToWatchList(){
     "movie_identifier": $(this).attr('id')
   };
 
+  console.log(movie_to_add);
+
   $.post('/watchlist',movie_to_add,function(result){
 
     // Updates the response text in modal window for all cases
@@ -162,14 +164,26 @@ $('.remove').on('click',function(){
   });
 });
 
-// on clicking image thumbnail on see list page, show movie
+// on clicking image thumbnail on my movies and reco page, show movie
 //details
 $('.image_seen').on('click',showDetails);
+$('.image-container-reco').on('mouseover',showbuttons_reco).on('mouseout',hidebuttons_reco);
+$('.addbutton-reco').on('click',addMovieToWatchList);
 
 // Event to show submit button only when a radio button is selected
 $("#quiz-form input:radio").change(function () {
   $("#quiz-submit").css('display','inline');
 });
+
+function showbuttons_reco(){
+  // Show add buttons on top of thumbnail
+  $(this).find('.addbutton-reco').css('display','inline');
+}
+
+function hidebuttons_reco(){
+  // Hide add button which displayed on top of thumbnail
+  $(this).find('.addbutton-reco').css('display','none');
+}
 
 
 

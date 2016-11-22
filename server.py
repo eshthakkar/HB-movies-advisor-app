@@ -7,8 +7,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import (User,Movie,Source,MovieSource,Genre,MovieGenre,MovieWatched,
                   T1Keyword, MovieKeywordRating)
 import bcrypt
-from helper import form_question,update_movie_profile,add_update_user_preference
-
+from helper import form_question,update_movie_profile,add_update_user_preference,clustering
+from helper import duplicates
 
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -160,10 +160,6 @@ def signout():
 
     if 'user_id' in session:
         del session['user_id']
-
-        if 'cluster_labels' in session:
-            del session['cluster_labels']
-
         flash("Logged Out!") 
         return redirect('/') 
 
@@ -258,8 +254,8 @@ def record_user_response():
     # when user profiles a movie
     if keyword_id_chosen is not None:
 
-        labels = update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2)
-        session['cluster_labels'] = labels.tolist()
+        update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2)
+
     else:
         pass    
 
@@ -291,11 +287,21 @@ def show_recommendations():
             print "top genre"
             print user_top_rated_genre
 
-            if 'cluster_labels' in session:
-                print session['cluster_labels']
+        clustered_data = clustering()
+        labels = clustered_data["labels"]
+        dataset = clustered_data["movies"]
+        print labels
+        cluster_indices = duplicates(labels,0)
+        print cluster_indices
+        cluster_movies = []
+
+        for i in cluster_indices:
+            cluster_movies.append(dataset[i])
 
 
-        return render_template("recommendations.html",user_genre_ratings=user_genre_ratings)
+
+
+        return render_template("recommendations.html",cluster_movies=cluster_movies)
     else:
         flash("Please sign in to view movie suggestions for you!") 
         return redirect('/')     

@@ -3,7 +3,7 @@
     position:relative;
 }
 
-.addbutton{
+.addbutton, .addbutton-reco{
     display: none;
     position: absolute;
     float: left;
@@ -28,7 +28,7 @@
     display: none;
 }
 
-.image-container{
+.image-container, .image-container-reco{
     display: inline;
     position: relative;
 }

@@ -129,26 +129,23 @@ def clustering():
         movie_keywords_ratings = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie.movie_id).all()
 
         movie_id_list.append(movie.movie_id)
-        # instance['movie_id'] = movie.movie_id                     
 
         for keyword in movie_keywords_ratings:
             instance[keyword.keyword_id] = keyword.keyword_rating
 
         dataset.append(instance)
 
-    ranked_movie_data = vec.fit_transform(dataset).toarray() 
+    ranked_movie_data = vec.fit_transform(dataset).toarray()
 
     # k means clustering on dataset ranked_movie_data array
     k_means = cluster.KMeans(n_clusters=5) 
     KM = k_means.fit(ranked_movie_data) 
     labels = k_means.predict(ranked_movie_data)
-
-    # print "predicted labels"
-    # print labels
     
 
     analyze_clusters(ranked_movie_data, labels)
-    return labels
+    return {"labels": labels.tolist(),
+            "movies" : movies}
 
 
 def update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2): 
@@ -187,9 +184,7 @@ def update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2):
 
     db.session.commit()
 
-    labels = clustering()
-
-    return labels
+    
 
 
 def add_update_user_preference(user_id,chosen_genre_id,keyword_id1,keyword_id2):
@@ -232,6 +227,12 @@ def add_update_user_preference(user_id,chosen_genre_id,keyword_id1,keyword_id2):
             db.session.add(user_preference)
 
     db.session.commit() 
+
+
+def duplicates(lst, item):
+    """Returns list of indices of duplicates from a list"""
+
+    return [i for i, x in enumerate(lst) if x == item]
 
 
 

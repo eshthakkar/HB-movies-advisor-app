@@ -99,6 +99,39 @@
 </div>
 
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabelQuiz"></h4>
+      </div>
+      <div class="modal-body">
+        <form id="quiz-form" action="/record-answers" method="POST">
+          <label><p id="genre-question"></p></label><br>
+          <input type="radio" name="movie_quest" id="keyword_id1"><label for="keyword_id1"></label>
+          <input type="radio" name="movie_quest" id="keyword_id2"><label for="keyword_id2"></label>
+          <input type="radio" name="movie_quest" id="meh" value="-1"><label for="meh">Neither</label><br>
+
+          <label><p id="user-question"></p></label><br>
+          <input type="radio" name="user_quest" id="userkeyword_id1"><label for="userkeyword_id1"></label>
+          <input type="radio" name="user_quest" id="userkeyword_id2"><label for="userkeyword_id2"></label>
+          <input type="radio" name="user_quest" id="usermeh" value="-1"><label for="usermeh">Neither</label><br>
+
+          <input type="hidden" name="movie_id" id="quest_resp_movie_id">
+          <input type="hidden" name="user_id" id="quest_resp_user_id">
+          <input type="hidden" name="keyword_id1" id="quest_resp_keyword_id1">
+          <input type="hidden" name="keyword_id2" id="quest_resp_keyword_id2">
+
+
+          
+          <button type="submit" class="btn btn-default" id="quiz-submit" style="display:none">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> 
+
 
   {% block content %} put your content here {% endblock %}
 
