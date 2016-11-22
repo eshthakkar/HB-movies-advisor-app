@@ -251,14 +251,22 @@ def record_user_response():
 
     print keyword_id_chosen, movie_id, keyword_id1, keyword_id2
 
-    update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2)
+    if keyword_id_chosen is not None:
+
+        update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2)
+    else:
+        pass    
 
     user_id = request.form.get("user_id")
     chosen_genre_id = request.form.get("user_quest")
 
-    print user_id, chosen_genre_id
+    print user_id, chosen_genre_id, keyword_id1, keyword_id2
 
-    add_update_user_preference(user_id,chosen_genre_id,keyword_id1,keyword_id2)
+    if chosen_genre_id is not None:
+
+        add_update_user_preference(user_id,chosen_genre_id,keyword_id1,keyword_id2)
+    else:
+        pass    
 
     return redirect("/watchlist")
 

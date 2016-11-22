@@ -34,8 +34,8 @@ def form_question(movie_id):
 
     question2 = "Do you like " + quest_keyword1 + " or " + quest_keyword2 + " movies?"
     
-    print quest_keyword1, picked_keyword_row1.keyword_id
-    print quest_keyword2,picked_keyword_row2.keyword_id  
+    # print quest_keyword1, picked_keyword_row1.keyword_id
+    # print quest_keyword2,picked_keyword_row2.keyword_id  
       
     return {'q1': question1, 'q2': question2, 'k_id1': picked_keyword_row1.keyword_id, 'k_id2': picked_keyword_row2.keyword_id,
            'quest_keyword1': quest_keyword1, 'quest_keyword2': quest_keyword2}
@@ -90,8 +90,68 @@ def get_preposition(keyword):
         return 'a' 
 
 
+def analyze_clusters(df, labels):
+            """
+            given pandas DataFrame and labels of each point returns dictionary of cluster_num to list of cluster items
+            :param df: pandas DataFrame
+            :param labels: numpy.ndarray labels of each point
+            :return: dictionary {cluster_num: [cluster_item_1, ..., cluster_item_n]}
+            """
+            clusters_to_items = defaultdict(list)
+            vec = DictVectorizer()
+
+            for i, item in enumerate(labels):
+                    clusters_to_items[item].append(df[i])
+
+            for key in clusters_to_items:
+                print "Cluster: %s" % key
+                print "Total items: %s" % len(clusters_to_items[key]) 
+                for item in  (clusters_to_items[key]):
+                    item = item.tolist()
+                    print item
+            return  clusters_to_items
+
+
+def clustering():
+    """ preprocessing of data and k means clustering on it"""
+
+    print "clustering was called"
+
+    # preprocessing of data by querying first from database and converting to numpy array
+    movies = Movie.query.all()
+    dataset = []
+    vec = DictVectorizer()
+    movie_id_list = []
+
+
+    for movie in movies:
+        instance = {}
+        movie_keywords_ratings = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie.movie_id).all()
+
+        movie_id_list.append(movie.movie_id)
+        # instance['movie_id'] = movie.movie_id                     
+
+        for keyword in movie_keywords_ratings:
+            instance[keyword.keyword_id] = keyword.keyword_rating
+
+        dataset.append(instance)
+
+    ranked_movie_data = vec.fit_transform(dataset).toarray() 
+
+    # k means clustering on dataset ranked_movie_data array
+    k_means = cluster.KMeans(n_clusters=5) 
+    KM = k_means.fit(ranked_movie_data) 
+    labels = k_means.predict(ranked_movie_data)
+
+    print "predicted labels"
+    print labels
+    
+
+    analyze_clusters(ranked_movie_data, labels)
+
+
 def update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2): 
-    """updates keyword ratings for a movie based on user feedback"""
+    """updates keyword ratings for a movie based on user feedback and cluster them"""
 
      # When either of the keyword options was picked
     if int(keyword_id_chosen) > 0:
@@ -126,31 +186,42 @@ def update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2):
 
     db.session.commit()
 
+    clustering()
 
-def add_update_user_preference(user_id, chosen_genre_id,keyword_id1,keyword_id2):
+
+def add_update_user_preference(user_id,chosen_genre_id,keyword_id1,keyword_id2):
     """Add/Update user's genre preferences"""
 
-    if chosen_genre_id < 0:
+
+    # neither option was selected by user
+    if int(chosen_genre_id) < 0:
         try:
             row = UserPreference.query.filter(UserPreference.user_id == user_id, 
                                         UserPreference.keyword_id == keyword_id1).one()
             row.genre_rating -= 1
+
         except NoResultFound:
-            pass
+            return
 
         try:
             row = UserPreference.query.filter(UserPreference.user_id == user_id, 
                                         UserPreference.keyword_id == keyword_id2).one()
             row.genre_rating -= 1
+
         except NoResultFound:
-            pass    
-                
-    else:    
+            return    
+    
+
+    # chosen_genre_id is one of the keywords            
+    else:
+
+        # search for user with selected keyword in database    
         try:
             row = UserPreference.query.filter(UserPreference.user_id == user_id, 
                                         UserPreference.keyword_id == chosen_genre_id).one()
             row.genre_rating += 1
 
+        # otherwise create new user    
         except NoResultFound: 
             user_preference = UserPreference(user_id=user_id,
                                             keyword_id=chosen_genre_id,
@@ -159,80 +230,10 @@ def add_update_user_preference(user_id, chosen_genre_id,keyword_id1,keyword_id2)
 
     db.session.commit() 
 
-def analyze_clusters(df, labels):
-            """
-            given pandas DataFrame and labels of each point returns dictionary of cluster_num to list of cluster items
-            :param df: pandas DataFrame
-            :param labels: numpy.ndarray labels of each point
-            :return: dictionary {cluster_num: [cluster_item_1, ..., cluster_item_n]}
-            """
-            clusters_to_items = defaultdict(list)
-            vec = DictVectorizer()
-
-            for i, item in enumerate(labels):
-                    clusters_to_items[item].append(df[i])
-
-            for key in clusters_to_items:
-                print "Cluster: %s" % key
-                print "Total items: %s" % len(clusters_to_items[key]) 
-                for item in  (clusters_to_items[key]):
-                    item = item.tolist()
-                    print item
-            return  clusters_to_items
-
-
-def clustering():
-    """ preprocessing of data and k means clustering on it"""
-
-    # preprocessing of data by querying first from database and converting to numpy array
-    movies = Movie.query.all()
-    dataset = []
-    vec = DictVectorizer()
-
-
-    for movie in movies:
-        instance = {}
-        movie_keywords_ratings = MovieKeywordRating.query.filter(MovieKeywordRating.movie_id == movie.movie_id).all()
-
-        instance['movie_id'] = movie.movie_id                     
-
-        for keyword in movie_keywords_ratings:
-            instance[keyword.keyword_id] = keyword.keyword_rating
-
-        dataset.append(instance)
-
-    ranked_movie_data = vec.fit_transform(dataset).toarray() 
-
-    # k means clustering on dataset ranked_movie_data array
-    k_means = cluster.KMeans(n_clusters=10) 
-    KM = k_means.fit(ranked_movie_data) 
-    labels = k_means.predict(ranked_movie_data)
-
-    # print labels
-    # print type(KM)
-    # print dir(KM)
-    # print type(ranked_movie_data)
-
-    analyze_clusters(ranked_movie_data, labels)
 
 
 
-    # Get info from clusters and write it to a file
-    # clusters = {}
-    # n = 0
-    # for item in labels:
-    #     if item in clusters:
-    #         clusters[item].append(ranked_movie_data[n])
-    #     else:
-    #         clusters[item] = [ranked_movie_data[n]]
-    #     n +=1
 
-    # for item in clusters:
-    #     print "Cluster ", item
-    #     print len(clusters[item])
-    #     print type(clusters[item])
-    #     for i in clusters[item]:
-    #         print vec.inverse_transform(i) 
                                
 
 

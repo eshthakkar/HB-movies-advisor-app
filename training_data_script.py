@@ -65,7 +65,7 @@ def movie_user_profiling(movie_id,user_id):
     update_movie_profile(movie_id,movie_genre_id_pick,data['k_id1'],data['k_id2'])
 
     user_rated_genre = choice(keywords_id)
-    print user_rated_genre
+    # print user_rated_genre
     add_update_user_preference(user_id,user_rated_genre,data['k_id1'],data['k_id2'])
 
 
@@ -73,7 +73,7 @@ def movie_user_profiling(movie_id,user_id):
 
 users = User.query.all()
 
-for i in range(100):
+for i in range(10):
     for user in users:
 
         # romantic comedy. Punch drunk love. 3 genres given. Strongly fits in 2.

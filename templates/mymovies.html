@@ -7,14 +7,14 @@
 <div>
 {% for movie in user_movies %}
 <div class="image-container" id="container_{{ movie.movie_id }}">
-    <img src="{{ movie.thumbnail_url }}">
-    <div class="remove btn btn-default" id="{{ movie.movie_id }}">Remove</div>
+    <img src="{{ movie.thumbnail_url }}" data-toggle="modal" data-target=".bs-example-modal-lg" class="image_seen" id="{{ movie.movie_id }}">
+    <div class="remove btn btn-default" id="btn_{{ movie.movie_id }}">Remove</div>
 </div>
 {% endfor %}
 </div>
 
 {% else %}
-<p><h3>There are no movies in your watchlist yet!</h3></p>
+<p><h3>There are no movies in your seen list yet!</h3></p>
 {% endif %}
 
 

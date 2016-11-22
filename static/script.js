@@ -150,14 +150,25 @@ $('#slider').on('input',function(){
 
 // Event when remove button is clicked
 $('.remove').on('click',function(){
+  var button = $(this).attr('id');
+  button = button.split("_");
   var remove_id = {
-    "movie_remove_id" : $(this).attr('id')
+    "movie_remove_id" : button[1]
   };
 
   $.post('/remove',remove_id,function(data){
     $('#' + data).empty();
 
   });
+});
+
+// on clicking image thumbnail on see list page, show movie
+//details
+$('.image_seen').on('click',showDetails);
+
+// Event to show submit button only when a radio button is selected
+$("#quiz-form input:radio").change(function () {
+  $("#quiz-submit").css('display','inline');
 });
 
 

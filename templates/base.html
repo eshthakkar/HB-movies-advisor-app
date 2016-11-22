@@ -19,7 +19,7 @@
   </div>
 
   {% if 'user_id' in session %}
-    <a href="/watchlist">My Watch List</a><br>
+    <a href="/watchlist">My seen movies</a><br>
     <a href="/signout">Sign Out</a>
   {% else %} 
     <a href="" data-toggle="modal" data-target=".bs-example-modal-sm">Sign Up</a>
@@ -66,7 +66,37 @@
     </div>
   </div>
 
-  
+
+  <!-- Movie Details-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <div id="synopsis">
+          <h3>Synopsis</h3>
+          <p></p>
+        </div>
+        <div id="details">
+          <h4>Details</h4>
+          <ul>
+            <li id="rating"></li>
+            <li id="release"></li>
+            <li id="runtime"></li>
+            <li id="actors"></li>
+            <li>Genres: <ul id="genres"></ul></li>
+            <li id="sources"></li>
+          </ul>
+        </div>
+        <div id="poster"><img src=""></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
   {% block content %} put your content here {% endblock %}
