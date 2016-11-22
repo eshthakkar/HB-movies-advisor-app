@@ -278,6 +278,8 @@ def show_recommendations():
     """Show movie recommendations to user learning from his/her taste"""
 
     if 'user_id' in session:
+
+        # Get user's ratings for various genres. To get user's most liked genre
         user_genre_ratings = User.query.filter(User.user_id == session['user_id']).one().genre_ratings
 
         if user_genre_ratings:
@@ -287,14 +289,42 @@ def show_recommendations():
             print "top genre"
             print user_top_rated_genre
 
+        # cluster the movies including most current feedbacks    
         clustered_data = clustering()
+
+        # labels info which tells us which cluster each movie belongs to from datset of movies objects
         labels = clustered_data["labels"]
         dataset = clustered_data["movies"]
+        mids = []
         print labels
-        cluster_indices = duplicates(labels,0)
+
+        # creating a list of movie ids from dataset of movies.
+        for movie in dataset:
+            mids.append(movie.movie_id)
+
+        print "movie ids list"    
+        print mids    
+
+        # Find the movie id with the user's preferred genre rated as highest
+        highest_user_preferred_rating_on_movie = MovieKeywordRating.query.filter(MovieKeywordRating.keyword_id == user_top_rated_genre.keyword_id). \
+                                                 order_by(MovieKeywordRating.keyword_rating.desc()).all() 
+
+        highest_preferred_rating_mid = highest_user_preferred_rating_on_movie[0].movie_id
+
+        print "movie id and its index"
+        index = mids.index(highest_preferred_rating_mid)
+        print highest_preferred_rating_mid, index
+
+        # identifying the cluster to which the movie belongs to
+        cluster_info_on_movie = labels[index] 
+        print cluster_info_on_movie
+
+        # get indices of all movies belonging to that cluster
+        cluster_indices = duplicates(labels,cluster_info_on_movie)
         print cluster_indices
         cluster_movies = []
 
+        # get movies from dataset based on indices info
         for i in cluster_indices:
             cluster_movies.append(dataset[i])
 

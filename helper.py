@@ -143,7 +143,7 @@ def clustering():
     labels = k_means.predict(ranked_movie_data)
     
 
-    analyze_clusters(ranked_movie_data, labels)
+    # analyze_clusters(ranked_movie_data, labels)
     return {"labels": labels.tolist(),
             "movies" : movies}
 
