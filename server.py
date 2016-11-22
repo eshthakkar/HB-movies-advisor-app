@@ -298,9 +298,6 @@ def show_recommendations():
         for i in cluster_indices:
             cluster_movies.append(dataset[i])
 
-
-
-
         return render_template("recommendations.html",cluster_movies=cluster_movies)
     else:
         flash("Please sign in to view movie suggestions for you!") 
