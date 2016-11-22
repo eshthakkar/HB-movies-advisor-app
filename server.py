@@ -169,7 +169,19 @@ def show_watch_list():
     """Show movie watch list for the user"""
 
     if 'user_id' in session:
-        user_movies = User.query.filter(User.user_id == session['user_id']).one().movies
+        user_movies = []
+
+        try:
+            user_watched = MovieWatched.query.filter(MovieWatched.user_id == session['user_id']). \
+                          order_by(MovieWatched.movies_watched_id.desc()).all()
+
+            for item in user_watched:
+                movie = Movie.query.filter(Movie.movie_id == item.movie_id).one()
+                user_movies.append(movie)
+
+        except NoResultFound: 
+            pass       
+
         return render_template("mymovies.html",user_movies=user_movies)
     else:
         flash("Please sign in to view your movie seen list") 
