@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a href="/browse">Browse</a>
+
+{% if user_genre_ratings %}
+<ul>
+  {% for rating in user_genre_ratings %}
+  <li>{{ rating }}</li>
+  {% endfor %}
+</ul>
+
+
+{% else %}
+  <p><h3>There are no ratings to show!</h3></p>
+{% endif %}
+
+
+
+
+
+{% endblock %}

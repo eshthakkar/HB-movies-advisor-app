@@ -143,11 +143,12 @@ def clustering():
     KM = k_means.fit(ranked_movie_data) 
     labels = k_means.predict(ranked_movie_data)
 
-    print "predicted labels"
-    print labels
+    # print "predicted labels"
+    # print labels
     
 
     analyze_clusters(ranked_movie_data, labels)
+    return labels
 
 
 def update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2): 
@@ -186,7 +187,9 @@ def update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2):
 
     db.session.commit()
 
-    clustering()
+    labels = clustering()
+
+    return labels
 
 
 def add_update_user_preference(user_id,chosen_genre_id,keyword_id1,keyword_id2):

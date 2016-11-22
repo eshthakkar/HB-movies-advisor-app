@@ -160,6 +160,10 @@ def signout():
 
     if 'user_id' in session:
         del session['user_id']
+
+        if 'cluster_labels' in session:
+            del session['cluster_labels']
+
         flash("Logged Out!") 
         return redirect('/') 
 
@@ -172,7 +176,7 @@ def show_watch_list():
         user_movies = User.query.filter(User.user_id == session['user_id']).one().movies
         return render_template("mymovies.html",user_movies=user_movies)
     else:
-        flash("Please sign in to view your watch list") 
+        flash("Please sign in to view your movie seen list") 
         return redirect('/')     
 
 
@@ -251,9 +255,11 @@ def record_user_response():
 
     print keyword_id_chosen, movie_id, keyword_id1, keyword_id2
 
+    # when user profiles a movie
     if keyword_id_chosen is not None:
 
-        update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2)
+        labels = update_movie_profile(movie_id,keyword_id_chosen,keyword_id1,keyword_id2)
+        session['cluster_labels'] = labels.tolist()
     else:
         pass    
 
@@ -269,6 +275,31 @@ def record_user_response():
         pass    
 
     return redirect("/watchlist")
+
+
+@app.route('/recommendations')
+def show_recommendations(): 
+    """Show movie recommendations to user learning from his/her taste"""
+
+    if 'user_id' in session:
+        user_genre_ratings = User.query.filter(User.user_id == session['user_id']).one().genre_ratings
+
+        if user_genre_ratings:
+            user_genre_ratings.sort(key=lambda x: x.genre_rating, reverse=True)
+            user_top_rated_genre = user_genre_ratings[0]
+
+            print "top genre"
+            print user_top_rated_genre
+
+            if 'cluster_labels' in session:
+                print session['cluster_labels']
+
+
+        return render_template("recommendations.html",user_genre_ratings=user_genre_ratings)
+    else:
+        flash("Please sign in to view movie suggestions for you!") 
+        return redirect('/')     
+
 
 
 
