@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<a href="/browse">Browse</a>
 
 {% if user_movies %}
 <div>
 {% for movie in user_movies %}
 <div class="image-container" id="container_{{ movie.movie_id }}">
     <img src="{{ movie.thumbnail_url }}" data-toggle="modal" data-target=".bs-example-modal-lg" class="image_seen" id="{{ movie.movie_id }}">
-    <div class="remove btn btn-default" id="btn_{{ movie.movie_id }}">Remove</div>
+    <div class="remove btn btn-default" id="btn_{{ movie.movie_id }}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove</div>
 </div>
 {% endfor %}
 </div>

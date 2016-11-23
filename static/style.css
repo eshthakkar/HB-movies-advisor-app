@@ -1,7 +1,12 @@
-.container {
-    border: 1px solid #DDDDDD;
-    position:relative;
+body { 
+    padding-top: 70px; 
 }
+
+
+#thumbnails {
+    width: 1200px;
+}
+
 
 .addbutton, .addbutton-reco{
     display: none;
@@ -20,7 +25,7 @@
     left: 0px;
     font-weight: bold;
     padding: 5px;
-    background-color: orange;
+    background-color: #FFA500;
 
 }
 
@@ -34,11 +39,7 @@
 }
 
 .ms-options-wrap > .ms-options > ul label {
-    /*position: relative;
-    display: inline-block;*/
     width: 100%;
-    /*padding: 4px; */
-    /*margin: 1px 0; */
     background-color: #9DCEFF;
     
 }
