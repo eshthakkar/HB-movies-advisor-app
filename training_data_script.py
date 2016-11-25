@@ -95,7 +95,7 @@ for i in range(10):
         # strong romantic, sci fi, mystery
         movie_user_profiling(26106, user.user_id)
 
-clustering()        
+# clustering()        
 
 
 

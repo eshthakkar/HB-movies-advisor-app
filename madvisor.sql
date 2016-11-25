@@ -427,7 +427,6 @@ ALTER TABLE ONLY users_preferences ALTER COLUMN up_id SET DEFAULT nextval('users
 
 COPY genres (genre_id, genre) FROM stdin;
 1	Action
-2	Action and Adventure
 3	Adventure
 4	Animation
 36	Biography
@@ -440,26 +439,16 @@ COPY genres (genre_id, genre) FROM stdin;
 11	Fantasy
 35	Film-Noir
 12	Food
-13	Game Show
 32	History
-14	Home and Garden
 15	Horror
-16	Mini-Series
 31	Music
 34	Musical
 17	Mystery
-18	News
-19	Reality
 20	Romance
 21	Science-Fiction
-22	Soap
-23	Special Interest
 24	Sport
 25	Suspense
-26	Talk Show
 27	Thriller
-28	Travel
-29	Variety
 33	War
 30	Western
 \.
@@ -543,11 +532,12 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 66	18	135227	20
 67	19	135227	20
 68	20	135227	20
+69	21	135227	20
 70	22	135227	20
 71	23	135227	20
 72	24	135227	20
 63	15	135227	50
-107	11	129206	19
+65	17	135227	50
 75	3	128834	20
 76	4	128834	20
 77	5	128834	20
@@ -579,6 +569,8 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 103	7	129206	20
 104	8	129206	20
 105	9	129206	20
+106	10	129206	20
+107	11	129206	20
 108	12	129206	20
 109	13	129206	20
 110	14	129206	20
@@ -587,11 +579,12 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 113	17	129206	20
 114	18	129206	20
 115	19	129206	20
+116	20	129206	20
 117	21	129206	20
 119	23	129206	20
 120	24	129206	20
 97	1	129206	50
-69	21	135227	19
+98	2	129206	50
 118	22	129206	50
 123	3	132455	20
 124	4	132455	20
@@ -606,6 +599,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 133	13	132455	20
 134	14	132455	20
 135	15	132455	20
+136	16	132455	20
 137	17	132455	20
 138	18	132455	20
 139	19	132455	20
@@ -614,11 +608,11 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 143	23	132455	20
 144	24	132455	20
 121	1	132455	50
-146	2	112659	81
+122	2	132455	50
 142	22	132455	50
-152	8	112659	10
-151	7	112659	11
-156	12	112659	13
+146	2	112659	143
+162	18	112659	8
+148	4	112659	6
 169	1	117737	20
 170	2	117737	20
 171	3	117737	20
@@ -634,28 +628,23 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 182	14	117737	20
 183	15	117737	20
 177	9	117737	50
-159	15	112659	12
-168	24	112659	9
-98	2	129206	52
-147	3	112659	14
-163	19	112659	74
-167	23	112659	17
-155	11	112659	13
-166	22	112659	13
-106	10	129206	19
-164	20	112659	15
-161	17	112659	12
-154	10	112659	17
-145	1	112659	16
-150	6	112659	16
-149	5	112659	13
-153	9	112659	37
-157	13	112659	14
-65	17	135227	49
-116	20	129206	19
-122	2	132455	52
-136	16	132455	19
-162	18	112659	11
+167	23	112659	11
+161	17	112659	11
+159	15	112659	9
+160	16	112659	11
+168	24	112659	10
+152	8	112659	9
+149	5	112659	9
+165	21	112659	11
+156	12	112659	7
+147	3	112659	10
+163	19	112659	217
+151	7	112659	10
+154	10	112659	8
+164	20	112659	6
+150	6	112659	11
+155	11	112659	6
+166	22	112659	8
 184	16	117737	20
 185	17	117737	20
 186	18	117737	20
@@ -689,15 +678,17 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 216	24	473	20
 194	2	473	50
 201	9	473	50
-218	2	79969	17
-244	4	117057	19
+235	19	79969	7
+222	6	79969	91
 241	1	117057	20
 242	2	117057	20
 243	3	117057	20
+244	4	117057	20
 245	5	117057	20
 246	6	117057	20
 247	7	117057	20
 248	8	117057	20
+250	10	117057	20
 251	11	117057	20
 252	12	117057	20
 253	13	117057	20
@@ -804,30 +795,28 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 354	18	132946	20
 355	19	132946	20
 345	9	132946	50
-223	7	79969	115
-233	17	79969	14
-222	6	79969	32
-238	22	79969	14
-237	21	79969	16
-224	8	79969	11
+227	11	79969	10
+223	7	79969	198
+232	16	79969	9
+239	23	79969	10
+228	12	79969	7
+237	21	79969	12
+220	4	79969	9
 236	20	79969	10
-234	18	79969	10
-220	4	79969	14
-227	11	79969	12
-219	3	79969	15
-229	13	79969	15
-240	24	79969	16
-230	14	79969	12
-221	5	79969	15
-225	9	79969	32
-250	10	117057	19
-217	1	79969	10
-239	23	79969	13
-235	19	79969	13
-226	10	79969	12
-228	12	79969	14
-231	15	79969	13
-232	16	79969	12
+224	8	79969	7
+238	22	79969	7
+229	13	79969	7
+234	18	79969	7
+240	24	79969	7
+233	17	79969	8
+230	14	79969	5
+221	5	79969	7
+231	15	79969	11
+217	1	79969	6
+219	3	79969	7
+218	2	79969	3
+226	10	79969	4
+225	9	79969	19
 357	21	132946	20
 358	22	132946	20
 359	23	132946	20
@@ -957,6 +946,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 482	2	296	20
 483	3	296	20
 484	4	296	20
+485	5	296	20
 486	6	296	20
 488	8	296	20
 490	10	296	20
@@ -975,6 +965,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 503	23	296	20
 504	24	296	20
 487	7	296	50
+489	9	296	50
 505	1	55117	20
 507	3	55117	20
 508	4	55117	20
@@ -997,8 +988,6 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 506	2	55117	50
 523	19	55117	50
 526	22	55117	50
-489	9	296	52
-485	5	296	19
 527	23	55117	20
 528	24	55117	20
 529	1	1854	20
@@ -1200,6 +1189,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 726	6	62222	20
 728	8	62222	20
 729	9	62222	20
+730	10	62222	20
 731	11	62222	20
 732	12	62222	20
 733	13	62222	20
@@ -1213,6 +1203,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 741	21	62222	20
 742	22	62222	20
 743	23	62222	20
+744	24	62222	20
 721	1	62222	50
 727	7	62222	50
 747	3	101745	20
@@ -1284,9 +1275,9 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 814	22	76622	20
 815	23	76622	20
 816	24	76622	20
-794	2	76622	50
-809	17	76622	50
 811	19	76622	50
+809	17	76622	50
+794	2	76622	50
 817	1	93689	20
 818	2	93689	20
 819	3	93689	20
@@ -1341,6 +1332,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 870	6	94073	20
 871	7	94073	20
 872	8	94073	20
+873	9	94073	20
 874	10	94073	20
 875	11	94073	20
 876	12	94073	20
@@ -1350,19 +1342,17 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 880	16	94073	20
 881	17	94073	20
 882	18	94073	20
+883	19	94073	20
 884	20	94073	20
 885	21	94073	20
 886	22	94073	20
 887	23	94073	20
-873	9	94073	22
+888	24	94073	20
+865	1	94073	50
 866	2	94073	50
 889	1	58645	20
 890	2	58645	20
 891	3	58645	20
-730	10	62222	19
-865	1	94073	52
-888	24	94073	19
-883	19	94073	19
 892	4	58645	20
 893	5	58645	20
 894	6	58645	20
@@ -1430,6 +1420,8 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 958	22	129839	20
 959	23	129839	20
 960	24	129839	20
+937	1	129839	50
+942	6	129839	50
 963	3	1213	20
 964	4	1213	20
 965	5	1213	20
@@ -1443,6 +1435,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 974	14	1213	20
 975	15	1213	20
 976	16	1213	20
+977	17	1213	20
 978	18	1213	20
 979	19	1213	20
 980	20	1213	20
@@ -1451,7 +1444,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 983	23	1213	20
 984	24	1213	20
 961	1	1213	50
-942	6	129839	52
+962	2	1213	50
 971	11	1213	50
 985	1	220	20
 986	2	220	20
@@ -1543,7 +1536,6 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 1074	18	50242	20
 1057	1	50242	50
 1063	7	50242	50
-937	1	129839	49
 1075	19	50242	20
 1076	20	50242	20
 1077	21	50242	20
@@ -1698,6 +1690,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 1226	2	61397	20
 1227	3	61397	20
 1228	4	61397	20
+1229	5	61397	20
 1230	6	61397	20
 1231	7	61397	20
 1232	8	61397	20
@@ -1712,10 +1705,9 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 1242	18	61397	20
 1244	20	61397	20
 1245	21	61397	20
+1239	15	61397	50
 1243	19	61397	50
 1246	22	61397	50
-1239	15	61397	52
-1229	5	61397	19
 1247	23	61397	20
 1248	24	61397	20
 1250	2	132550	20
@@ -2037,6 +2029,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 1568	8	69335	20
 1569	9	69335	20
 1570	10	69335	20
+1571	11	69335	20
 1572	12	69335	20
 1573	13	69335	20
 1574	14	69335	20
@@ -2052,7 +2045,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 1584	24	69335	20
 1561	1	69335	50
 1564	4	69335	50
-1612	4	1802	19
+1567	7	69335	50
 1585	1	73217	20
 1586	2	73217	20
 1587	3	73217	20
@@ -2079,19 +2072,22 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 1606	22	73217	50
 1609	1	1802	20
 1611	3	1802	20
-1571	11	69335	19
+1612	4	1802	20
 1613	5	1802	20
 1615	7	1802	20
 1616	8	1802	20
 1617	9	1802	20
 1619	11	1802	20
+1620	12	1802	20
 1621	13	1802	20
 1622	14	1802	20
 1623	15	1802	20
 1624	16	1802	20
 1625	17	1802	20
+1626	18	1802	20
 1627	19	1802	20
 1628	20	1802	20
+1629	21	1802	20
 1630	22	1802	20
 1631	23	1802	20
 1632	24	1802	20
@@ -2260,8 +2256,6 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 1793	17	1923	20
 1794	18	1923	20
 1782	6	1923	50
-1620	12	1802	19
-1629	21	1802	22
 1795	19	1923	20
 1797	21	1923	20
 1798	22	1923	20
@@ -2341,6 +2335,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 1863	15	13999	50
 1865	17	13999	50
 1875	3	650	20
+1876	4	650	20
 1877	5	650	20
 1878	6	650	20
 1879	7	650	20
@@ -2360,6 +2355,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 1894	22	650	20
 1895	23	650	20
 1896	24	650	20
+1873	1	650	50
 1874	2	650	50
 1881	9	650	50
 1899	3	15824	20
@@ -2442,7 +2438,6 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 1974	6	42872	20
 1975	7	42872	20
 1976	8	42872	20
-1873	1	650	52
 1978	10	42872	20
 1979	11	42872	20
 1980	12	42872	20
@@ -3009,17 +3004,17 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 2543	23	562	20
 2544	24	562	20
 2527	7	562	50
+2529	9	562	50
+2542	22	562	50
 2545	1	603	20
 2546	2	603	20
 2547	3	603	20
 2548	4	603	20
-2549	5	603	20
 2550	6	603	20
 2551	7	603	20
 2552	8	603	20
 2554	10	603	20
 2555	11	603	20
-2556	12	603	20
 2557	13	603	20
 2558	14	603	20
 2560	16	603	20
@@ -3170,7 +3165,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 2705	17	59506	20
 2706	18	59506	20
 2695	7	59506	50
-2542	22	562	49
+2556	12	603	19
 2707	19	59506	20
 2708	20	59506	20
 2709	21	59506	20
@@ -3492,6 +3487,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3010	10	21928	50
 3025	1	130769	20
 3026	2	130769	20
+3027	3	130769	20
 3029	5	130769	20
 3030	6	130769	20
 3031	7	130769	20
@@ -3511,8 +3507,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3046	22	130769	20
 3047	23	130769	20
 3028	4	130769	50
-3027	3	130769	19
-3033	9	130769	49
+3033	9	130769	50
 3048	24	130769	20
 3049	1	65856	20
 3050	2	65856	20
@@ -4130,12 +4125,15 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3664	16	214	20
 3665	17	214	20
 3666	18	214	20
+3668	20	214	20
 3669	21	214	20
 3670	22	214	20
+3671	23	214	20
 3672	24	214	20
 3649	1	214	50
 3650	2	214	50
 3667	19	214	50
+3673	1	92396	20
 3674	2	92396	20
 3675	3	92396	20
 3676	4	92396	20
@@ -4153,6 +4151,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3689	17	92396	20
 3690	18	92396	20
 3691	19	92396	20
+3692	20	92396	20
 3693	21	92396	20
 3694	22	92396	20
 3695	23	92396	20
@@ -4217,9 +4216,6 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3755	11	55924	20
 3750	6	55924	50
 3753	9	55924	50
-3668	20	214	19
-3673	1	92396	19
-3692	20	92396	19
 3756	12	55924	20
 3757	13	55924	20
 3758	14	55924	20
@@ -4282,6 +4278,8 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3803	11	92674	50
 3811	19	92674	50
 3817	1	211	20
+3818	2	211	20
+3819	3	211	20
 3820	4	211	20
 3821	5	211	20
 3823	7	211	20
@@ -4291,6 +4289,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3828	12	211	20
 3829	13	211	20
 3830	14	211	20
+3831	15	211	20
 3832	16	211	20
 3833	17	211	20
 3834	18	211	20
@@ -4301,6 +4300,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3839	23	211	20
 3840	24	211	20
 3822	6	211	50
+3825	9	211	50
 3841	1	12	20
 3842	2	12	20
 3843	3	12	20
@@ -4334,6 +4334,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3874	10	81056	20
 3875	11	81056	20
 3876	12	81056	20
+3877	13	81056	20
 3878	14	81056	20
 3879	15	81056	20
 3880	16	81056	20
@@ -4346,7 +4347,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3887	23	81056	20
 3888	24	81056	20
 3865	1	81056	50
-3831	15	211	19
+3870	6	81056	50
 3866	2	81056	50
 3889	1	23192	20
 3890	2	23192	20
@@ -4398,10 +4399,6 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3934	22	18708	50
 3937	1	115132	20
 3938	2	115132	20
-3870	6	81056	52
-3818	2	211	19
-3825	9	211	52
-3819	3	211	19
 3939	3	115132	20
 3940	4	115132	20
 3941	5	115132	20
@@ -4439,6 +4436,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3975	15	271	20
 3976	16	271	20
 3977	17	271	20
+3978	18	271	20
 3979	19	271	20
 3980	20	271	20
 3981	21	271	20
@@ -4446,6 +4444,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 3983	23	271	20
 3984	24	271	20
 3966	6	271	50
+3969	9	271	50
 3985	1	60478	20
 3986	2	60478	20
 3987	3	60478	20
@@ -4559,7 +4558,6 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 4120	16	116780	20
 4121	17	116780	20
 4113	9	116780	50
-3969	9	271	52
 4122	18	116780	20
 4123	19	116780	20
 4124	20	116780	20
@@ -4663,9 +4661,9 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 4223	23	34844	20
 4224	24	34844	20
 4206	6	34844	50
-4242	18	1713	14
-4230	6	1713	107
-4229	5	1713	13
+4235	11	1713	6
+4238	14	1713	9
+4230	6	1713	169
 4249	1	93495	20
 4250	2	93495	20
 4251	3	93495	20
@@ -4709,34 +4707,36 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 4290	18	94810	20
 4291	19	94810	20
 4281	9	94810	50
-4239	15	1713	90
-4231	7	1713	9
-4233	9	1713	12
-4228	4	1713	12
-4236	12	1713	12
-4234	10	1713	9
-4227	3	1713	15
-4235	11	1713	18
-4247	23	1713	11
-4232	8	1713	17
-4226	2	1713	14
-4243	19	1713	36
-4246	22	1713	13
-4225	1	1713	17
+4241	17	1713	8
+4243	19	1713	20
+4234	10	1713	7
+4239	15	1713	143
+4228	4	1713	8
+4248	24	1713	7
+4245	21	1713	10
+4229	5	1713	9
+4246	22	1713	8
+4242	18	1713	5
+4240	16	1713	9
+4225	1	1713	8
+4232	8	1713	9
+4227	3	1713	8
+4233	9	1713	2
+4236	12	1713	11
+4237	13	1713	9
+4247	23	1713	8
 4244	20	1713	13
-4240	16	1713	15
-4238	14	1713	18
-4237	13	1713	13
-4248	24	1713	16
-4245	21	1713	15
-4241	17	1713	17
+4226	2	1713	10
+4231	7	1713	8
 4292	20	94810	20
 4293	21	94810	20
 4295	23	94810	20
 4296	24	94810	20
 4294	22	94810	50
 4298	2	54798	20
+4299	3	54798	20
 4300	4	54798	20
+4301	5	54798	20
 4302	6	54798	20
 4304	8	54798	20
 4306	10	54798	20
@@ -4896,8 +4896,6 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 4459	19	22665	20
 4441	1	22665	50
 4447	7	22665	50
-4299	3	54798	19
-4301	5	54798	19
 4460	20	22665	20
 4461	21	22665	20
 4463	23	22665	20
@@ -4999,8 +4997,8 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 4559	23	95439	20
 4560	24	95439	20
 4545	9	95439	50
-4580	20	1308	12
-4572	12	1308	12
+4568	8	1308	9
+4566	6	1308	170
 4585	1	134160	20
 4586	2	134160	20
 4587	3	134160	20
@@ -5059,25 +5057,25 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 4641	9	46776	20
 4642	10	46776	20
 4638	6	46776	50
-4578	18	1308	40
-4565	5	1308	11
-4573	13	1308	12
-4582	22	1308	17
-4561	1	1308	10
-4570	10	1308	13
-4584	24	1308	15
-4575	15	1308	18
-4566	6	1308	97
+4570	10	1308	5
+4583	23	1308	10
+4575	15	1308	7
 4579	19	1308	11
-4583	23	1308	11
-4564	4	1308	14
-4568	8	1308	11
-4571	11	1308	15
-4569	9	1308	37
-4576	16	1308	11
-4563	3	1308	10
-4574	14	1308	14
-4577	17	1308	10
+4578	18	1308	120
+4564	4	1308	5
+4571	11	1308	10
+4582	22	1308	9
+4567	7	1308	8
+4562	2	1308	10
+4577	17	1308	9
+4580	20	1308	7
+4563	3	1308	8
+4565	5	1308	6
+4581	21	1308	7
+4561	1	1308	9
+4584	24	1308	4
+4572	12	1308	9
+4573	13	1308	9
 4643	11	46776	20
 4644	12	46776	20
 4645	13	46776	20
@@ -5657,12 +5655,14 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 5220	12	1022	20
 5221	13	1022	20
 5222	14	1022	20
+5224	16	1022	20
 5225	17	1022	20
 5226	18	1022	20
 5227	19	1022	20
 5228	20	1022	20
 5229	21	1022	20
 5230	22	1022	20
+5231	23	1022	20
 5232	24	1022	20
 5214	6	1022	50
 5223	15	1022	50
@@ -5796,7 +5796,6 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 5360	8	26943	20
 5362	10	26943	20
 5361	9	26943	50
-5231	23	1022	18
 5363	11	26943	20
 5364	12	26943	20
 5365	13	26943	20
@@ -5823,6 +5822,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 5389	13	4793	20
 5390	14	4793	20
 5391	15	4793	20
+5392	16	4793	20
 5393	17	4793	20
 5394	18	4793	20
 5395	19	4793	20
@@ -5833,6 +5833,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 5400	24	4793	20
 5377	1	4793	50
 5378	2	4793	50
+5385	9	4793	50
 5401	1	116409	20
 5402	2	116409	20
 5403	3	116409	20
@@ -5978,7 +5979,6 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 5529	9	135588	50
 5530	10	135588	50
 5545	1	116321	20
-5385	9	4793	52
 5547	3	116321	20
 5548	4	116321	20
 5549	5	116321	20
@@ -6170,9 +6170,9 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 5734	22	41847	20
 5735	23	41847	20
 5736	24	41847	20
-5747	11	26106	11
-5737	1	26106	13
-5738	2	26106	16
+5760	24	26106	9
+5755	19	26106	168
+5740	4	26106	9
 5761	1	3155	20
 5762	2	3155	20
 5763	3	3155	20
@@ -6311,27 +6311,27 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 5897	17	129648	20
 5898	18	129648	20
 5889	9	129648	50
-5760	24	26106	14
-5739	3	26106	13
-5753	17	26106	100
-5749	13	26106	17
-5751	15	26106	14
-5741	5	26106	10
-5756	20	26106	14
-5740	4	26106	14
-5750	14	26106	14
-5742	6	26106	16
-5752	16	26106	14
-5758	22	26106	14
-5755	19	26106	79
-5757	21	26106	16
-5744	8	26106	14
-5746	10	26106	18
-5743	7	26106	14
-5754	18	26106	33
-5759	23	26106	11
-5745	9	26106	30
-5748	12	26106	14
+5747	11	26106	5
+5746	10	26106	7
+5743	7	26106	8
+5753	17	26106	153
+5745	9	26106	16
+5751	15	26106	9
+5757	21	26106	10
+5748	12	26106	10
+5756	20	26106	8
+5749	13	26106	9
+5752	16	26106	9
+5742	6	26106	8
+5759	23	26106	10
+5750	14	26106	8
+5741	5	26106	14
+5758	22	26106	7
+5739	3	26106	8
+5738	2	26106	13
+5744	8	26106	11
+5754	18	26106	32
+5737	1	26106	8
 5899	19	129648	20
 5900	20	129648	20
 5901	21	129648	20
@@ -6363,13 +6363,16 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 5911	7	3912	50
 5913	9	3912	50
 5931	3	301	20
+5932	4	301	20
 5933	5	301	20
 5934	6	301	20
 5935	7	301	20
 5936	8	301	20
 5937	9	301	20
+5938	10	301	20
 5939	11	301	20
 5940	12	301	20
+5941	13	301	20
 5942	14	301	20
 5943	15	301	20
 5944	16	301	20
@@ -6382,6 +6385,7 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 5952	24	301	20
 5929	1	301	50
 5930	2	301	50
+5947	19	301	50
 5953	1	134864	20
 5954	2	134864	20
 5955	3	134864	20
@@ -6430,29 +6434,14 @@ COPY movie_keywords_ratings (mkr_id, keyword_id, movie_id, keyword_rating) FROM 
 5977	1	113616	50
 5983	7	113616	50
 5985	9	113616	50
-148	4	112659	8
-158	14	112659	12
-3671	23	214	19
-1626	18	1802	19
-4562	2	1308	10
-5947	19	301	49
-5941	13	301	19
-1876	4	650	19
-3877	13	81056	19
-744	24	62222	19
-1567	7	69335	49
-2529	9	562	49
-5224	16	1022	18
-5932	4	301	19
-5938	10	301	19
-5392	16	4793	19
-3978	18	271	19
-962	2	1213	52
-977	17	1213	19
-4567	7	1308	14
-160	16	112659	10
-165	21	112659	10
-4581	21	1308	13
+153	9	112659	22
+4576	16	1308	4
+4574	14	1308	4
+2549	5	603	19
+158	14	112659	11
+157	13	112659	9
+145	1	112659	7
+4569	9	1308	21
 \.
 
 
@@ -6553,12 +6542,11 @@ COPY movies (movie_id, title, imdb_rating, released_at, poster_url, thumbnail_ur
 42872	Before Sunrise	8.09999999999999964	1995-01-27 00:00:00	http://static-api.guidebox.com/thumbnails_movies/42872-2503660443-8585265204-6938288035-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/42872-7503929082-9376916941-8812094084-medium-240x342.jpg	A young man and woman meet on a train in Europe, and wind up spending one evening together in Vienna. Unfortunately, both know that this will probably be their only night together.	105 min	Ethan Hawke, Julie Delpy, Andrea Eckert, Hanno Pöschl
 91997	Tarzan	4.79999999999999982	2013-10-17 00:00:00	http://static-api.guidebox.com/120214/thumbnails_movies/-alt--91997-8704203693-9463277719-3735398124-large-400x570-alt-.jpg	http://static-api.guidebox.com/120214/thumbnails_movies_medium/91997-5099722873-2686638525-8076197016-medium-240x342-alt-.jpg	Tarzan and Jane Porter face a mercenary army dispatched by the evil CEO of Greystoke Energies, a man who took over the company from Tarzan's parents, after they died in a plane crash.	94 min	Kellan Lutz, Spencer Locke, Les Bubb, Joe Cappelletti
 477	The Hunt for Red October	7.59999999999999964	1990-03-02 00:00:00	http://static-api.guidebox.com/thumbnails_movies/477-2179077375-9678690740-9926411593-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/477-7625332502-1273688451-1191982208-large-240x342.jpg	In November 1984, the Soviet Union's best submarine captain in their newest sub violates orders and heads for the USA. Is he trying to defect or to start a war?	135 min	Sean Connery, Alec Baldwin, Scott Glenn, Sam Neill
-59838	Apollo 13	7.59999999999999964	1995-06-30 00:00:00	http://static-api.guidebox.com/thumbnails_movies/59838-5909505156-6914225425-6409450271-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/59838-5618296764-1305477545-8132116352-medium-240x342.jpg	N/A	140 min	Tom Hanks, Bill Paxton, Kevin Bacon, Gary Sinise
+59838	Apollo 13	7.59999999999999964	1995-06-30 00:00:00	http://static-api.guidebox.com/thumbnails_movies/59838-5909505156-6914225425-6409450271-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/59838-5618296764-1305477545-8132116352-medium-240x342.jpg	NASA must devise a strategy to return Apollo 13 to Earth safely after the spacecraft undergoes massive internal damage putting the lives of the three astronauts on board in jeopardy.	140 min	Tom Hanks, Bill Paxton, Kevin Bacon, Gary Sinise
 93587	A Most Wanted Man	6.79999999999999982	2014-07-25 00:00:00	http://static-api.guidebox.com/120214/thumbnails_movies/-alt--93587-4766179640-4416349051-7170946407-large-400x570-alt-.jpg	http://static-api.guidebox.com/120214/thumbnails_movies_medium/93587-5421210020-7129420875-3883396844-medium-240x342-alt-.jpg	A Chechen Muslim illegally immigrates to Hamburg, where he gets caught in the international war on terror.	122 min	Grigoriy Dobrygin, Philip Seymour Hoffman, Homayoun Ershadi, Mehdi Dehbi
 5108	Tucker & Dale vs. Evil	7.59999999999999964	2010-01-22 00:00:00	http://static-api.guidebox.com/thumbnails_movies/5108-4023650312-3074776284-1785834418-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/5108-3928387659-323397746-9473212636-medium-240x342.jpg	Tucker and Dale are on vacation at their dilapidated mountain cabin when they are attacked by a group of preppy college kids.	89 min	Tyler Labine, Alan Tudyk, Katrina Bowden, Jesse Moss
 117056	Hot Pursuit	5.09999999999999964	2015-05-08 00:00:00	http://static-api.guidebox.com/022615/thumbnails_movies/117056-3660359299-9913184419-7002042285-large-400x570.jpg	http://static-api.guidebox.com/022615/thumbnails_movies_medium/117056-3869966092-5455684843-7110977969-medium-240x342.jpg	An uptight and by-the-book cop tries to protect the outgoing widow of a drug boss as they race through Texas pursued by crooked cops and murderous gunmen.	87 min	Reese Witherspoon, Sofía Vergara, Matthew Del Negro, Michael Mosley
 129062	The Vatican Tapes	4.59999999999999964	2015-07-24 00:00:00	http://static-api.guidebox.com/060515/thumbnails_movies/129062-6906784582-3218662148-1765878056-large-400x570.jpg	http://static-api.guidebox.com/060515/thumbnails_movies_medium/129062-7226073285-2715889369-7704067211-medium-240x342.jpg	A priest and two Vatican exorcists must do battle with an ancient satanic force to save the soul of a young woman.	91 min	Kathleen Robertson, Alison Lohman, Olivia Taylor Dudley, Djimon Hounsou
-133307	Stonewall	4.59999999999999964	2015-09-18 00:00:00	http://static-api.guidebox.com/060515/thumbnails_movies/133307-2141039064-9564229757-1082369355-large-400x570.jpg	http://static-api.guidebox.com/060515/thumbnails_movies_medium/133307-2216251525-7590036499-7918284088-medium-240x342.jpg	A young man's political awakening and coming of age during the days and weeks leading up to the Stonewall Riots.	129 min	Jeremy Irvine, Jonny Beauchamp, Joey King, Caleb Landry Jones
 136416	Louder Than Bombs	6.70000000000000018	2015-05-18 00:00:00	http://static-api.guidebox.com/111615/thumbnails_movies/136416-1457528160-8059444506-6697418415-large-400x570.jpg	http://static-api.guidebox.com/111615/thumbnails_movies_medium/136416-8659781348-5866437894-8509417153-medium-240x342.jpg	The fractious family of a father and his two sons confront their different feelings and memories of their deceased wife and mother, a famed war photographer.	109 min	Gabriel Byrne, Isabelle Huppert, Jesse Eisenberg, Devin Druid
 92362	Behaving Badly	4.40000000000000036	2014-04-14 00:00:00	http://static-api.guidebox.com/120214/thumbnails_movies/-alt--92362-9820493343-3425918031-8675878998-large-400x570-alt-.jpg	http://static-api.guidebox.com/120214/thumbnails_movies_medium/92362-7444458054-3021622296-7848786483-medium-240x342-alt-.jpg	Teenager Rick Stevens has a crush on Nina Pennington. They form a friendship and embark on a rock n' roll journey together while Nina deals with her overbearing boyfriend, Kevin.	97 min	Nat Wolff, Selena Gomez, Mary-Louise Parker, Elisabeth Shue
 93061	Coherence	7.20000000000000018	2013-09-19 00:00:00	http://static-api.guidebox.com/120214/thumbnails_movies/-alt--93061-1671608715-3507607714-4627294769-large-400x570-alt-.jpg	http://static-api.guidebox.com/120214/thumbnails_movies_medium/93061-4251363827-8436904656-4357698825-medium-240x342-alt-.jpg	Strange things begin to happen when a group of friends gather for a dinner party on an evening when a comet is passing overhead.	89 min	Emily Baldoni, Maury Sterling, Nicholas Brendon, Lorene Scafaria
@@ -6590,6 +6578,7 @@ COPY movies (movie_id, title, imdb_rating, released_at, poster_url, thumbnail_ur
 113331	Wild Card	5.59999999999999964	2015-01-14 00:00:00	http://static-api.guidebox.com/120214/thumbnails_movies/-alt--113331-5545303668-825916110-6918653580-large-400x570-alt-.jpg	http://static-api.guidebox.com/120214/thumbnails_movies_medium/113331-9642143137-5514631793-2318728240-medium-240x342-alt-.jpg	When a Las Vegas bodyguard with lethal skills and a gambling problem gets in trouble with the mob, he has one last play...and it's all or nothing.	92 min	Jason Statham, Michael Angarano, Dominik García-Lorido, Hope Davis
 132553	Walt Before Mickey	6	2015-04-03 00:00:00	http://static-api.guidebox.com/060515/thumbnails_movies/132553-8697474794-1249925034-3648904744-large-400x570.jpg	http://static-api.guidebox.com/060515/thumbnails_movies_medium/132553-6026507658-5862768986-5348410457-medium-240x342.jpg	Based on the book "Walt Before Mickey" covers the early years of Walt Disney's career.	120 min	Ayla Kell, Jon Heder, Jodie Sweetin, David Henrie
 39587	1408	6.79999999999999982	2007-07-12 00:00:00	http://static-api.guidebox.com/thumbnails_movies/39587-7892661853-2091813796-5516899158-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/39587-4036556520-8618738930-7215612051-medium-240x342.jpg	A man who specializes in debunking paranormal occurrences checks into the fabled room 1408 in the Dolphin Hotel. Soon after settling in, he confronts genuine terror.	104 min	John Cusack, Paul Birchard, Margot Leicester, Walter Lewis
+133307	Stonewall	4.59999999999999964	2015-09-18 00:00:00	http://static-api.guidebox.com/060515/thumbnails_movies/133307-2141039064-9564229757-1082369355-large-400x570.jpg	http://static-api.guidebox.com/060515/thumbnails_movies_medium/133307-2216251525-7590036499-7918284088-medium-240x342.jpg	A young man's political awakening and coming of age during the days and weeks leading up to the Stonewall Riots.	129 min	Jeremy Irvine, Jonny Beauchamp, Joey King, Caleb Landry Jones
 89786	Inside Llewyn Davis	7.40000000000000036	2013-10-06 00:00:00	http://static-api.guidebox.com/120214/thumbnails_movies/-alt--89786-1233519656-774389673-5207895432-large-400x570-alt-.jpg	http://static-api.guidebox.com/120214/thumbnails_movies_medium/89786-9348838441-8981836191-3923205780-medium-240x342-alt-.jpg	A week in the life of a young singer as he navigates the Greenwich Village folk scene of 1961.	104 min	Oscar Isaac, Carey Mulligan, Justin Timberlake, Ethan Phillips
 134667	Southbound	5.90000000000000036	2015-09-17 00:00:00	http://static-api.guidebox.com/111615/thumbnails_movies/134667-3934482429-4161589416-592481900-large-400x570.jpg	http://static-api.guidebox.com/111615/thumbnails_movies_medium/134667-30912422-2869812250-6227479870-medium-240x342.jpg	Five interlocking tales of terror follow the fates of a group of weary travellers who confront their worst nightmares - and darkest secrets - over one long night on a desolate stretch of desert highway.	89 min	Chad Villella, Matt Bettinelli-Olpin, Kristina Pesic, Fabianne Therese
 21998	The Woman in Black	6.40000000000000036	2012-02-01 00:00:00	http://static-api.guidebox.com/thumbnails_movies/21998-9257219033-9717520270-168486103-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/21998-5973132397-5890576355-2207068270-medium-240x342.jpg	A young lawyer travels to a remote village where he discovers the vengeful ghost of a scorned woman is terrorizing the locals.	95 min	Emma Shorey, Molly Harmon, Ellisa Walker-Reid, Sophie Stuckey
@@ -6618,6 +6607,7 @@ COPY movies (movie_id, title, imdb_rating, released_at, poster_url, thumbnail_ur
 1082	Gosford Park	7.29999999999999982	2001-11-07 00:00:00	http://static-api.guidebox.com/thumbnails_movies/1082-5964477430-2137314887-6382034039-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/1082-9634298463-7182445838-8054424664-large-240x342.jpg	The lives of upstairs guests and downstairs servants at a party in 1932 in a country house in England as they investigate a murder involving one of them.	131 min	Maggie Smith, Michael Gambon, Kristin Scott Thomas, Camilla Rutherford
 116974	Slow West	6.90000000000000036	2015-04-16 00:00:00	http://static-api.guidebox.com/022615/thumbnails_movies/-alt--116974-3371823086-9958786447-5400157059-large-400x570-alt-.jpg	http://static-api.guidebox.com/022615/thumbnails_movies_medium/116974-9203405417-7232079259-2188665970-medium-240x342-alt-.jpg	A young Scottish man travels across America in pursuit of the woman he loves, attracting the attention of an outlaw who is willing to serve as a guide.	84 min	Kodi Smit-McPhee, Michael Fassbender, Ben Mendelsohn, Aorere Paki
 24925	Crocodile Dundee	6.5	1986-09-26 00:00:00	http://static-api.guidebox.com/thumbnails_movies/24925-2410784052-9793814895-8661728068-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/24925-4795572301-402741582-1912804991-medium-240x342.jpg	An American reporter goes to the Australian outback to meet an eccentric crocodile poacher and invites him to New York City.	97 min	Paul Hogan, Linda Kozlowski, John Meillon, David Gulpilil
+130615	Captive	5.29999999999999982	2015-09-17 00:00:00	http://static-api.guidebox.com/060515/thumbnails_movies/130615-4524152949-7475725892-8470464577-large-400x570.jpg	http://static-api.guidebox.com/060515/thumbnails_movies_medium/130615-7889658417-2453059801-3174194945-medium-240x342.jpg	N/A	97 min	Elle Graham, Kate Mara, Claudia Church, Gina Stewart
 131161	Mississippi Grind	6.29999999999999982	2015-07-04 00:00:00	http://static-api.guidebox.com/060515/thumbnails_movies/131161-1244251393-4799934076-7995628877-large-400x570.jpg	http://static-api.guidebox.com/060515/thumbnails_movies_medium/131161-6535148672-1710281461-9062118013-medium-240x342.jpg	Down on his luck and facing financial hardship, Gerry teams up with younger charismatic poker player, Curtis, in an attempt to change his luck. The two set off on a road trip through the South with visions of winning back what's been lost.	108 min	Ben Mendelsohn, Yvonne Landry, Anthony Howard, Ryan Reynolds
 31423	Flashdance	6.09999999999999964	1983-04-14 00:00:00	http://static-api.guidebox.com/thumbnails_movies/31423-336740185-4748004125-9316307143-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/31423-3135812823-7774866326-8389544426-medium-240x342.jpg	A Pittsburgh woman with two jobs as a welder and an exotic dancer wants to get into ballet school.	95 min	Jennifer Beals, Michael Nouri, Lilia Skala, Sunny Johnson
 214	Star Trek: Insurrection	6.40000000000000036	1998-12-10 00:00:00	http://static-api.guidebox.com/thumbnails_movies/214-9098213249-9588578604-8957996037-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/214-301406822-8240930130-4997038459-large-240x342.jpg	When the crew of the Enterprise learn of a Federation conspiracy against the inhabitants of a unique planet, Captain Picard begins an open rebellion.	103 min	Patrick Stewart, Jonathan Frakes, Brent Spiner, LeVar Burton
@@ -6638,17 +6628,16 @@ COPY movies (movie_id, title, imdb_rating, released_at, poster_url, thumbnail_ur
 85030	Pitfall	7.20000000000000018	1948-06-24 00:00:00	http://static-api.guidebox.com/thumbnails_movies/85030-51316019-7848616251-2784588640-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/85030-2102144412-8969641998-557140438-medium-240x342.jpg	Insurance executive John Forbes falls for femme fatale Mona Stevens while her boyfriend is in jail and he suffers serious consequences as a result.	86 min	Dick Powell, Lizabeth Scott, Jane Wyatt, Raymond Burr
 135304	Zoombies	3.5	2016-04-29 00:00:00	http://static-api.guidebox.com/111615/thumbnails_movies/135304-4348657792-3511628099-3496514517-large-400x570.jpg	http://static-api.guidebox.com/111615/thumbnails_movies_medium/135304-4657418975-3245178466-9253614391-medium-240x342.jpg	When a strange virus quickly spreads through a safari park and turns all the zoo animals undead, those left in the park must stop the creatures before they escape and zombify the whole city.	87 min	Ione Butler, Andrew Asper, LaLa Nestor, Kim Nielsen
 129411	The End of the Tour	7.29999999999999982	2015-07-31 00:00:00	http://static-api.guidebox.com/060515/thumbnails_movies/129411-6073058508-6265913597-7053203806-large-400x570.jpg	http://static-api.guidebox.com/060515/thumbnails_movies_medium/129411-8120975988-2359478520-6259799749-medium-240x342.jpg	The story of the five-day interview between Rolling Stone reporter David Lipsky and acclaimed novelist David Foster Wallace, which took place right after the 1996 publication of Wallace's groundbreaking epic novel, 'Infinite Jest.'	106 min	Joan Cusack, Jesse Eisenberg, Anna Chlumsky, Jason Segel
-116780	Mommy	8.09999999999999964	2014-05-22 00:00:00	http://static-api.guidebox.com/022615/thumbnails_movies/-alt--116780-8249216713-6339225620-3068857580-large-400x570-alt-.jpg	http://static-api.guidebox.com/022615/thumbnails_movies_medium/116780-6199229099-4466919140-6368757095-medium-240x342-alt-.jpg	A widowed single mother, raising her violent son alone, finds new hope when a mysterious neighbor inserts herself into their household.	139 min	Anne Dorval, Suzanne Clément, Antoine-Olivier Pilon, Patrick Huard
+116780	Mommy	8.09999999999999964	2014-05-22 00:00:00	http://static-api.guidebox.com/022615/thumbnails_movies/-alt--116780-8249216713-6339225620-3068857580-large-400x570-alt-.jpg	http://static-api.guidebox.com/022615/thumbnails_movies_medium/116780-6199229099-4466919140-6368757095-medium-240x342-alt-.jpg	A widowed single mother, raising her violent son alone, finds new hope when a mysterious neighbor inserts herself into their household.	139 min	Anne Dorval, Suzanne Clément, Antoine Olivier Pilon, Patrick Huard
 758	Dead Man	7.70000000000000018	1995-05-26 00:00:00	http://static-api.guidebox.com/thumbnails_movies/758-6591736460-5594293671-3271276970-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/758-1125764349-5646805242-1337377346-large-240x342.jpg	On the run after murdering a man, accountant William Blake encounters a strange North American man named Nobody who prepares him for his journey into the spiritual world.	121 min	Johnny Depp, Gary Farmer, Crispin Glover, Lance Henriksen
 5671	I Saw the Devil	7.79999999999999982	2010-08-12 00:00:00	http://static-api.guidebox.com/thumbnails_movies/5671-4206499900-8181997132-1508546542-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/5671-4684179211-6108464417-7775170724-medium-240x342.jpg	A secret agent exacts revenge on a serial killer through a series of captures and releases.	141 min	Byung-hun Lee, Min-sik Choi, In-seo Kim, Bo-ra Nam
 8070	V/H/S	5.79999999999999982	2012-07-28 00:00:00	http://static-api.guidebox.com/thumbnails_movies/8070-5537538310-7867998020-5605350784-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/8070-8582023824-7122227330-8157220697-medium-240x342.jpg	When a group of misfits are hired by an unknown third party to burglarize a desolate house and acquire a rare VHS tape, they discover more found footage than they bargained for.	116 min	Calvin Reeder, Lane Hughes, Kentucker Audley, Adam Wingard
 34844	Sleepover	5.29999999999999982	2004-07-09 00:00:00	http://static-api.guidebox.com/thumbnails_movies/34844-1324455035-2742858725-8155887802-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/34844-8993725120-8387095551-9715301110-medium-240x342.jpg	Four best friends, desperate to improve their social status, enter into an all-night scavenger hunt against the popular clique in their school.	89 min	Alexa PenaVega, Mika Boorem, Jane Lynch, Sam Huntington
 1713	Tremors	7.20000000000000018	1990-01-19 00:00:00	http://static-api.guidebox.com/thumbnails_movies/1713-5098855966-1484969571-5074003376-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/1713-3841513558-5357028977-1324936562-large-240x342.jpg	Natives of a small isolated town defend themselves against strange underground creatures which are killing them one by one.	96 min	Kevin Bacon, Fred Ward, Finn Carter, Michael Gross
 93495	Life After Beth	5.59999999999999964	2014-08-15 00:00:00	http://static-api.guidebox.com/091414/thumbnails_movies/93495-4246421768-9183090939-431708489-large-400x570.jpg	http://static-api.guidebox.com/091414/thumbnails_movies_medium/93495-6750530000-2121656966-5144481175-medium-240x342.jpg	A young man's recently deceased girlfriend mysteriously returns from the dead, but he slowly realizes she is not the way he remembered her.	89 min	Aubrey Plaza, Dane DeHaan, John C. Reilly, Molly Shannon
-94810	Deadly Daycare	5	2014-10-24 00:00:00	http://static-api.guidebox.com/091414/thumbnails_movies/94810-8875559368-6023714370-8674959479-large-400x570.jpg	http://static-api.guidebox.com/091414/thumbnails_movies_medium/94810-2365297568-7020925460-2801387594-medium-240x342.jpg	After a few years of financial hardship, a young mother (RACHEL) decides to go back to work to help her ex-husband with the mounting bills. With no one to watch their 4-year-old daughter (...	88 min	Kayla Ewell, Christy Carlson Romano, Bryce Johnson, Ariella Nurkovic
+94810	Deadly Daycare	5.09999999999999964	2014-10-24 00:00:00	http://static-api.guidebox.com/091414/thumbnails_movies/94810-8875559368-6023714370-8674959479-large-400x570.jpg	http://static-api.guidebox.com/091414/thumbnails_movies_medium/94810-2365297568-7020925460-2801387594-medium-240x342.jpg	After a few years of financial hardship, a young mother (RACHEL) decides to go back to work to help her ex-husband with the mounting bills. With no one to watch their 4-year-old daughter (...	88 min	Kayla Ewell, Christy Carlson Romano, Bryce Johnson, Ariella Nurkovic
 54798	Patriot Games	6.90000000000000036	1992-06-04 00:00:00	http://static-api.guidebox.com/thumbnails_movies/54798-2529828758-6288847811-1342276452-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/54798-8927656221-9029532224-7746913801-medium-240x342.jpg	When CIA Analyst Jack Ryan interferes with an IRA assassination, a renegade faction targets him and his family for revenge.	117 min	Harrison Ford, Anne Archer, Patrick Bergin, Sean Bean
 113713	'71	7.20000000000000018	2014-10-10 00:00:00	http://static-api.guidebox.com/120214/thumbnails_movies/113713-2213345301-304527004-8316287808-large-400x570.jpg	http://static-api.guidebox.com/120214/thumbnails_movies_medium/113713-9887231159-137680108-6108453208-medium-240x342.jpg	In 1971, a young and disorientated British soldier is accidentally abandoned by his unit following a riot on the deadly streets of Belfast.	99 min	Jack O'Connell, Jack Lowden, Paul Popplewell, Adam Nagaitis
-130615	Captive	5.29999999999999982	2015-09-17 00:00:00	http://static-api.guidebox.com/060515/thumbnails_movies/130615-4524152949-7475725892-8470464577-large-400x570.jpg	http://static-api.guidebox.com/060515/thumbnails_movies_medium/130615-7889658417-2453059801-3174194945-medium-240x342.jpg	N/A	97 min	Elle Graham, Kate Mara, Claudia Church, Gina Stewart
 24015	Till the Clouds Roll By	6.5	1946-12-05 00:00:00	http://static-api.guidebox.com/thumbnails_movies/24015-870586727-9357203505-9742908375-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/24015-506463084-4711619411-9948385967-medium-240x342.jpg	Biography of songwriter, Broadway pioneer, Jerome Kern. Unable to find immediate success in the USA, Kern sought recognition abroad. He journeyed to England where his dreams of success became real and where he met his future wife Eva.	132 min	June Allyson, Lucille Bremer, Judy Garland, Kathryn Grayson
 48136	JFK	8	1991-12-20 00:00:00	http://static-api.guidebox.com/thumbnails_movies/48136-1086592381-6544408128-8605460161-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/48136-8440350392-3774562595-5534231034-medium-240x342.jpg	A New Orleans DA discovers there's more to the Kennedy assassination than the official story.	189 min	Sally Kirkland, Anthony Ramirez, Ray LePere, Steve Reed
 52059	The Spiderwick Chronicles	6.59999999999999964	2008-02-14 00:00:00	http://static-api.guidebox.com/thumbnails_movies/52059-8722856729-7485184329-6089031971-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/52059-1371015539-2507691239-8128923396-medium-240x342.jpg	Upon moving into the run-down Spiderwick Estate with their mother, twin brothers Jared and Simon Grace, along with their sister Mallory, find themselves pulled into an alternate world full of faeries and other creatures.	96 min	Freddie Highmore, Mary-Louise Parker, Nick Nolte, Sarah Bolger
@@ -6664,6 +6653,7 @@ COPY movies (movie_id, title, imdb_rating, released_at, poster_url, thumbnail_ur
 113239	Escobar: Paradise Lost	6.59999999999999964	2014-10-11 00:00:00	http://static-api.guidebox.com/120214/thumbnails_movies/-alt--113239-1725780443-5833291639-5967918024-large-400x570-alt-.jpg	http://static-api.guidebox.com/120214/thumbnails_movies_medium/113239-7606373778-3869863590-4449377102-medium-240x342-alt-.jpg	In Colombia, a young surfer meets the woman of his dreams - and then he meets her uncle, Pablo Escobar.	120 min	Benicio Del Toro, Josh Hutcherson, Brady Corbet, Carlos Bardem
 7647	Butter	6.20000000000000018	2011-09-03 00:00:00	http://static-api.guidebox.com/thumbnails_movies/7647-4050804754-4339569146-6604114869-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/7647-6275373930-8598870756-3099131277-medium-240x342.jpg	In Iowa, an adopted girl discovers her talent for butter carving and finds herself pitted against an ambitious local woman in their town's annual contest.	90 min	Jennifer Garner, Ty Burrell, Garrett Schenck, Kristen Schaal
 79225	The Pink Panther	5.59999999999999964	2006-01-18 00:00:00	http://static-api.guidebox.com/thumbnails_movies/79225-4957503038-9968393435-155164842-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/79225-8786788080-8885549320-5090032457-medium-240x342.jpg	Bumbling Inspector Clouseau must solve the murder of a famous soccer coach and find out who stole the infamous Pink Panther diamond.	93 min	Steve Martin, Kevin Kline, Jean Reno, Emily Mortimer
+93551	Obvious Child	6.79999999999999982	2014-06-06 00:00:00	http://static-api.guidebox.com/091414/thumbnails_movies/93551-6272937106-7783051356-3360161730-large-400x570.jpg	http://static-api.guidebox.com/091414/thumbnails_movies_medium/93551-8701055203-3170967219-2350845640-medium-240x342.jpg	A twenty-something comedienne's unplanned pregnancy forces her to confront the realities of independent womanhood for the first time.	84 min	Jenny Slate, Paul Briganti, Gaby Hoffmann, Stephen Singer
 286	The Piano	7.59999999999999964	1993-05-19 00:00:00	http://static-api.guidebox.com/thumbnails_movies/286-2056504502-8441466679-477381964-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/286-106795398-6800080873-6203883402-large-240x342.jpg	A mute woman is sent to 1850s New Zealand along with her young daughter and prized piano for an arranged marriage to a wealthy landowner, but is soon lusted after by a local worker on the plantation.	121 min	Holly Hunter, Harvey Keitel, Sam Neill, Anna Paquin
 2232	The Crying Game	7.29999999999999982	1992-09-02 00:00:00	http://static-api.guidebox.com/thumbnails_movies/2232-8711543451-5834031664-1994617605-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/2232-9496517251-3063343442-3518206310-medium-240x342.jpg	A British soldier is kidnapped by IRA terrorists. He befriends one of his captors, who is drawn into the soldier's world.	112 min	Forest Whitaker, Miranda Richardson, Stephen Rea, Adrian Dunbar
 94714	The Town That Dreaded Sundown	5.59999999999999964	2014-10-16 00:00:00	http://static-api.guidebox.com/091414/thumbnails_movies/94714-3214842486-1934684418-5406462657-large-400x570.jpg	http://static-api.guidebox.com/091414/thumbnails_movies_medium/94714-8810298540-2025421262-8853459451-medium-240x342.jpg	65 years after a masked serial killer terrorized the small town of Texarkana, the so-called 'moonlight murders' begin again. Is it a copycat or something even more sinister? A lonely high ...	86 min	Addison Timlin, Veronica Cartwright, Anthony Anderson, Travis Tope
@@ -6695,8 +6685,7 @@ COPY movies (movie_id, title, imdb_rating, released_at, poster_url, thumbnail_ur
 116409	Danny Collins	7	2015-03-20 00:00:00	http://static-api.guidebox.com/022615/thumbnails_movies/116409-3582254476-7648655907-4653251842-large-400x570.jpg	http://static-api.guidebox.com/022615/thumbnails_movies_medium/116409-3298864467-9830002631-3583089830-medium-240x342.jpg	An aging rock star decides to change his life when he discovers a 40-year-old letter written to him by John Lennon.	106 min	Al Pacino, Annette Bening, Jennifer Garner, Bobby Cannavale
 115747	Spring	6.70000000000000018	2015-03-20 00:00:00	http://static-api.guidebox.com/022615/thumbnails_movies/115747-3761418532-3755795588-4058732591-large-400x570.jpg	http://static-api.guidebox.com/022615/thumbnails_movies_medium/115747-3612881131-4840254295-9500631499-medium-240x342.jpg	A young man in a personal tailspin flees the US to Italy, where he sparks up a romance with a woman harboring a dark, primordial secret.	109 min	Lou Taylor Pucci, Nadia Hilker, Francesco Carnelutti, Nick Nevern
 39063	The Invasion	5.90000000000000036	2007-08-17 00:00:00	http://static-api.guidebox.com/thumbnails_movies/39063-1761509390-8141939966-3436671174-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/39063-3466501068-1847062544-7494369969-medium-240x342.jpg	As a Washington psychiatrist unearths the origin of an alien epidemic, she also discovers her son might be the only way it can be stopped.	99 min	Nicole Kidman, Daniel Craig, Jeremy Northam, Jackson Bond
-93551	Obvious Child	6.79999999999999982	2014-06-06 00:00:00	http://static-api.guidebox.com/091414/thumbnails_movies/93551-6272937106-7783051356-3360161730-large-400x570.jpg	http://static-api.guidebox.com/091414/thumbnails_movies_medium/93551-8701055203-3170967219-2350845640-medium-240x342.jpg	A twenty-something comedienne's unplanned pregnancy forces her to confront the realities of independent womanhood for the first time.	84 min	Jenny Slate, Paul Briganti, Gaby Hoffmann, Stephen Singer
-163	The Birth of a Nation	6.79999999999999982	1915-02-08 00:00:00	http://static-api.guidebox.com/thumbnails_movies/163-1879396709-7785321702-2645867421-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/163-1729263841-8984137596-6927361414-large-240x342.jpg	Two brothers, Phil and Ted Stoneman, visit their friends in Piedmont, South Carolina: the family Cameron. This friendship is affected by the Civil War, as the Stonemans and the Camerons ...	165 min	Lillian Gish, Mae Marsh, Henry B. Walthall, Miriam Cooper
+163	The Birth of a Nation	6.79999999999999982	1915-02-08 00:00:00	http://static-api.guidebox.com/thumbnails_movies/163-1879396709-7785321702-2645867421-large-400x570.jpg	http://static-api.guidebox.com/thumbnails_movies_medium/163-1729263841-8984137596-6927361414-large-240x342.jpg	The Stoneman family finds its friendship with the Camerons affected by the Civil War, both fighting in opposite armies. The development of the war in their lives plays through to Lincoln's assassination and the birth of the Ku Klux Klan.	165 min	Lillian Gish, Mae Marsh, Henry B. Walthall, Miriam Cooper
 135588	The Cokeville Miracle	4.90000000000000036	2015-06-05 00:00:00	http://static-api.guidebox.com/111615/thumbnails_movies/135588-8220373322-7324457895-6387643698-large-400x570.jpg	http://static-api.guidebox.com/111615/thumbnails_movies_medium/135588-9281449099-8963875887-9440005016-medium-240x342.jpg	Children who were held hostage in their elementary school tell stories of miraculous things, but many adults are skeptical that the Cokeville Miracle ever truly happened.	94 min	Jasen Wade, Sarah Kent, Kimball Stinger, Alexa Rae
 116321	The Hundred Year-Old Man Who Climbed Out of the Window and Disappeared	7.09999999999999964	2013-12-25 00:00:00	http://static-api.guidebox.com/022615/thumbnails_movies/116321-7528580809-1364678434-2284692601-large-400x570.jpg	http://static-api.guidebox.com/022615/thumbnails_movies_medium/116321-4268887094-1910047941-4966817820-medium-240x342.jpg	After living a long and colorful life, Allan Karlsson finds himself stuck in a nursing home. On his 100th birthday, he leaps out a window and begins an unexpected journey.	114 min	Robert Gustafsson, Mia Skäringer, Iwar Wiklander, David Wiberg
 134354	Mojave	5.29999999999999982	2015-04-18 00:00:00	http://static-api.guidebox.com/111615/thumbnails_movies/134354-505267899-2473284700-9213558305-large-400x570.jpg	http://static-api.guidebox.com/111615/thumbnails_movies_medium/134354-5947657889-4622200038-3507819409-medium-240x342.jpg	A suicidal artist goes into the desert, where he finds his doppelgänger, a homicidal drifter.	93 min	Garrett Hedlund, Louise Bourgoin, Cletus Young, Oscar Isaac
@@ -7726,21 +7715,8 @@ SELECT pg_catalog.setval('movies_sources_movie_source_id_seq', 365, true);
 --
 
 COPY movies_watched (movies_watched_id, movie_id, user_id) FROM stdin;
-30	301	12
-31	1802	12
-32	4793	12
-36	135227	11
-37	650	11
-41	117737	11
-42	117057	11
-47	94073	7
-48	132455	7
-49	112659	7
-50	13380	11
-52	63223	11
-53	54798	11
-54	211	13
-55	92396	13
+1	603	11
+2	115747	11
 \.
 
 
@@ -7748,7 +7724,7 @@ COPY movies_watched (movies_watched_id, movie_id, user_id) FROM stdin;
 -- Name: movies_watched_movies_watched_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
 --
 
-SELECT pg_catalog.setval('movies_watched_movies_watched_id_seq', 55, true);
+SELECT pg_catalog.setval('movies_watched_movies_watched_id_seq', 2, true);
 
 
 --
@@ -7806,19 +7782,17 @@ SELECT pg_catalog.setval('t1_keywords_qk_id_seq', 24, true);
 --
 
 COPY users (user_id, email, password) FROM stdin;
-1	noelis@noeliscoolcool.com	$2b$10$d7KqnOwYo0WKif2HdeYkruKfXaSgpNSUansCNNi7x0i1IpRr6sata
-2	vk@vk.com	$2b$10$JzYnxclHxVrPuvSbApNUCeWbPy9N4upb7z6v.oQXQZsQY027YK/iW
-3	crazy4@my.com	$2b$10$5GeEGm8m3egJiqkfoNcWXeeAIsdy3TFN9.YVFPyUvrXUxnm6rngzi
-4	angelcupid23@mycupid.com	$2b$10$oLJXLd3F96L9kTx8p65RAOJPL.MprUQ7n/9gZSK6Pi57NsXiA57qG
-5	amy@amy.com	$2b$10$g3h3o44QyXEGyal3avHo2uIj5zIKwBGCkvRNiH5blUzOXfHv/WKV2
-6	warren@gmail.com	$2b$10$d52PM/ovFCK9T6M2gZMCve.ktsEHAApvfW4S8c6/.1P.Rz2tbpE8e
-7	riya234@yahoo.com	$2b$10$aK9toKTDG0HJ.AFtVPHw0eGPgBdyOsfBS5vSKPb5SLpq1sh/mXVOW
-8	dumbledore@hpotter.com	$2b$10$6p/rE9uWgVA1jHqq91EbNeVCX96WU51RXJEqaMI067XD2ZMqufd0.
-9	mannaaa@gmail.com	$2b$10$uCEbvtinhZ2rsGCrA/3DaeVtp.Ps/mjIQJhnxHI8XcA/ivZke3bJC
-10	ilovemovies@yahoo.com	$2b$10$Xt9sZlPlXU.KHLW2OQQkb.Y/jVf63iA/B122tYIEW1tzpV07rcp.u
-11	evk@evk.com	$2b$10$aW0YYJuc4O3b4zn1ex8PKelmUEuitVSUM/Q3c/AUscE186JrEWRSq
-12	evktravels@gmail.com	$2b$10$ToyIv.DoymPeTwLuLujmEuhw4lsU2kc0mGQiE8mLgvDs1Q8geF3zi
-13	vkaushal21@gmail.com	$2b$10$ibCVP3nCDEJKMIPpaPTYuuVuMHhvPpx3xE1BBezLYUEocoTORWkNC
+1	noelis@noeliscoolcool.com	$2b$10$Vi2UgwJCm/vTs4vWTsTnxeMwp8bKbzYsw8N/y2GYjyrw/4H1qfaM6
+2	vk@vk.com	$2b$10$lODXLEDxA7wo1fiC1o74aehi8YOu9Om9A8sM89Wp99Jr5jiLjfrQq
+3	crazy4@my.com	$2b$10$Nl4/ekXbGpgaHViXnwSULet2CpmCTCtxHm/wtWuOYhasFfQuIKC.O
+4	angelcupid23@mycupid.com	$2b$10$aYHwzuJZ.Ozo//ksVQoWGuSPRdp.6XhcHp1xHOO3EqJQFkCpEVWmW
+5	amy@amy.com	$2b$10$TRaeF0wdoyTwEx.3Bhm2BeqT6EOsctnRwsw1sfdOFLAn8u01ey1Tq
+6	warren@gmail.com	$2b$10$Bzfv4oRe1M/5leG9bItTtOSs6mnBPD6weOI4JB6rrjNkGoJVgFHA2
+7	riya234@yahoo.com	$2b$10$tI8pn24jLWIrmNS5WbNLNeCttgzn21xwUq3UYskv9dLgTh9O9k0RC
+8	dumbledore@hpotter.com	$2b$10$DCauR1/8GHtmMKgC.B9yYeLuDYOu7wllmSgoDwTND9kSYaTmUSEl.
+9	mannaaa@gmail.com	$2b$10$KEfQkcTPEAL07S90DVh3y.zl.1HFm1D/0RePr8YgIrbmoEAYotMXC
+10	ilovemovies@yahoo.com	$2b$10$CHKI985lcs0QFXoJaYgra.GieZZleqSIYKSsV2rayz8Ub1shH7U0i
+11	evk@evk.com	$2b$10$aLS/oW/mZhuYfL6klPHteujJlMiaA2dSrqa2M9kYFumQDVZ5SULQ.
 \.
 
 
@@ -7827,200 +7801,243 @@ COPY users (user_id, email, password) FROM stdin;
 --
 
 COPY users_preferences (up_id, keyword_id, user_id, genre_rating) FROM stdin;
-142	19	4	1
-68	13	4	2
-5	18	2	2
-61	21	10	0
-87	9	4	2
-58	10	9	0
-139	18	1	0
-156	3	5	1
-59	12	9	0
-25	15	9	1
-136	5	8	0
-49	4	6	1
-134	23	7	3
-137	2	9	0
-53	14	7	1
-54	8	8	1
-129	4	5	3
-62	22	10	1
-103	6	10	2
-37	14	2	2
-34	5	1	2
-154	17	3	-1
-38	5	2	1
-40	11	3	0
-106	11	1	2
-165	4	4	2
-149	23	10	1
-72	11	5	2
-78	19	9	-1
-31	9	10	-1
-150	2	10	2
-133	7	6	2
-29	7	10	-2
-123	14	10	0
-122	5	10	3
-45	8	5	2
-36	4	2	-2
-107	7	2	1
-82	24	1	1
-124	15	1	2
-33	4	1	0
-83	8	1	1
-155	12	4	0
-7	7	3	-2
-110	24	3	2
-43	18	4	1
-104	13	10	2
-86	6	3	-1
-42	23	4	2
-11	17	4	3
-90	10	5	1
-167	8	6	1
-76	15	8	-1
-94	23	6	1
-71	1	4	1
-52	16	7	1
-88	2	4	1
-63	24	10	2
-109	14	3	1
-127	21	5	1
-128	1	5	2
-12	9	5	1
-65	1	2	-1
+8	9	3	3
+172	12	11	2
+23	23	7	1
+156	24	4	2
+99	11	6	-2
+27	24	8	1
+114	19	6	1
+65	12	2	1
+72	21	4	2
+9	11	3	1
+45	17	5	1
+97	14	6	0
+125	23	8	0
+169	17	7	2
+152	16	10	1
+100	16	6	-1
+70	10	3	-3
+92	2	3	-1
+7	9	2	-3
+73	20	5	1
+54	16	8	0
+69	12	3	0
+109	18	3	1
+95	1	4	1
+136	22	8	1
+148	6	7	3
+112	19	4	8
+81	8	8	5
+21	24	6	1
+160	15	9	3
+129	17	10	0
+139	3	9	2
+25	13	7	-2
+168	11	7	0
+90	5	2	3
+105	12	10	1
+145	7	3	2
+19	6	6	-3
+49	13	6	2
+122	12	5	0
+107	16	2	1
+104	3	8	1
+111	1	3	4
+162	20	10	2
+29	9	9	8
+137	1	8	4
+117	13	8	1
+98	5	6	3
+127	10	9	2
+37	9	1	1
+130	22	2	0
+22	18	7	2
+91	24	2	-1
+146	2	4	-1
+43	22	4	7
+120	18	2	-2
+30	7	9	7
+77	14	5	0
+157	16	4	2
+101	2	7	0
+78	4	6	4
+123	6	5	-4
+102	1	7	0
+31	11	10	2
+32	8	10	2
+3	3	1	5
+87	4	1	3
+118	21	9	3
+140	11	9	-1
+108	17	2	-2
+11	9	4	4
+110	6	3	0
+149	3	7	2
+93	24	3	0
+82	2	8	-1
+14	12	4	3
+135	14	7	1
+159	21	8	1
+141	22	10	1
+39	6	2	5
+10	23	3	5
+12	14	4	2
+15	20	4	1
+24	21	7	1
 2	21	1	3
-85	9	2	-2
-70	16	4	1
-111	13	5	1
-44	18	5	3
-55	20	8	1
-48	13	6	2
-112	14	6	1
-15	17	6	1
-97	9	7	1
-115	17	8	1
-56	16	8	2
-51	19	7	2
-4	12	2	3
-8	4	3	1
-100	18	8	2
-116	5	9	1
-120	11	10	1
-161	14	1	1
-105	1	1	2
-32	23	1	2
-57	9	9	-3
-50	2	6	3
-132	24	6	1
-19	24	7	3
-113	6	7	-1
-135	7	7	1
-75	19	8	2
-21	23	8	1
-99	6	8	-2
-77	4	8	0
-114	12	8	1
-30	3	10	3
-20	2	7	6
-126	19	2	2
-41	9	3	-1
-164	21	4	1
-141	6	4	0
-140	18	3	1
-92	6	6	-2
-69	20	4	1
-16	21	6	2
-14	9	6	0
-145	12	7	1
-146	17	7	3
-96	10	7	2
-101	24	8	2
-60	23	9	0
-79	22	9	0
-118	7	9	4
-117	1	9	1
-148	17	9	1
-28	10	10	0
-1	9	1	4
-125	7	1	3
-152	13	1	1
-108	21	2	3
-66	19	3	5
-153	6	2	1
-143	20	5	0
-130	5	5	2
-47	5	6	-1
-17	18	6	1
-159	1	7	-1
-98	11	7	1
-147	13	8	2
-22	9	8	1
-119	11	9	3
-138	18	10	-1
-27	20	10	2
-151	6	1	2
-39	20	2	0
-3	10	2	0
-64	17	2	-2
-84	8	2	2
-6	3	2	-1
-162	10	3	2
-9	21	3	3
-163	3	4	1
-89	11	4	1
-13	16	5	-1
-10	8	4	0
-157	6	5	2
-166	23	5	1
-73	22	5	2
-91	17	5	0
-131	3	6	1
-23	1	8	1
-168	3	8	1
-170	2	8	1
-26	16	9	-1
-172	21	9	1
-171	20	9	0
-121	15	10	0
-173	12	10	2
-174	10	1	1
-175	22	1	2
-35	17	1	1
-176	22	2	1
-67	12	3	2
-177	10	4	1
-46	24	5	1
-158	19	5	0
-93	12	6	0
-144	1	6	0
-178	15	6	1
-74	22	6	0
-160	3	7	1
-179	10	8	1
-169	7	8	1
-80	3	9	0
-24	6	9	0
-102	13	9	2
-81	19	10	0
-180	17	10	1
-181	20	11	1
-184	10	11	1
-185	19	11	1
-183	9	11	2
-190	16	12	1
-191	21	11	1
-192	15	11	1
-182	18	11	4
-193	4	11	1
-194	21	7	1
-95	15	7	-3
-18	20	7	-1
-186	1	11	3
-195	3	11	1
-196	9	13	1
-197	1	13	1
+86	18	10	2
+6	3	2	2
+142	23	10	-2
+106	10	1	1
+62	8	1	2
+131	4	2	1
+13	13	4	1
+96	11	4	1
+67	20	3	1
+76	19	5	-3
+52	22	7	0
+28	12	8	0
+116	4	8	2
+158	23	6	-1
+61	3	10	4
+57	14	9	1
+128	15	10	-1
+35	5	1	0
+4	14	1	0
+161	1	10	0
+132	19	2	-4
+74	11	5	0
+89	20	2	0
+144	15	3	-3
+113	8	4	-1
+94	3	4	4
+166	4	5	3
+167	24	5	3
+55	15	8	7
+20	2	6	4
+147	15	6	3
+47	1	5	0
+124	1	6	3
+134	10	7	-1
+115	24	7	2
+85	12	9	0
+171	4	10	2
+68	14	3	1
+1	13	1	1
+121	17	3	1
+233	18	6	0
+44	3	5	-2
+234	12	6	0
+205	7	11	0
+210	16	11	0
+180	22	11	1
+38	10	2	-3
+183	21	2	1
+185	8	3	1
+199	8	6	2
+231	17	11	1
+223	24	11	1
+50	10	6	0
+194	12	1	1
+80	7	7	-2
+64	17	1	6
+63	11	1	2
+197	22	3	1
+184	3	3	2
+198	10	4	1
+209	9	7	3
+201	14	8	0
+33	9	10	4
+40	14	2	1
+207	9	11	1
+165	19	3	0
+71	17	4	8
+176	10	8	1
+208	6	4	1
+164	23	2	1
+17	21	5	0
+225	7	8	1
+232	5	5	1
+42	7	4	4
+150	17	8	4
+174	20	6	2
+170	18	8	5
+200	5	7	0
+75	9	5	-4
+48	9	6	0
+213	1	1	1
+163	13	2	0
+41	21	3	2
+219	23	4	1
+186	16	5	0
+79	21	6	5
+177	5	9	4
+51	15	7	7
+151	17	9	-3
+84	8	9	2
+203	1	9	2
+202	22	9	2
+179	14	10	1
+191	8	11	0
+222	24	10	2
+53	19	7	-1
+206	5	11	2
+215	7	1	2
+88	22	1	-2
+126	6	8	-1
+217	5	3	0
+216	13	3	0
+103	9	8	-1
+60	7	10	2
+187	22	5	1
+83	19	9	2
+190	2	10	-2
+119	19	10	2
+153	6	10	-5
+175	16	7	3
+189	5	8	-1
+224	10	11	0
+193	18	11	0
+56	6	9	5
+138	20	9	2
+59	2	9	1
+58	4	9	1
+154	13	10	0
+181	20	11	0
+226	5	10	1
+173	15	11	1
+36	6	1	5
+227	1	11	1
+214	16	1	0
+212	6	11	4
+204	4	11	0
+211	2	11	0
+192	19	11	3
+235	24	1	1
+182	2	1	2
+228	4	4	1
+18	7	5	-1
+133	22	6	-1
+188	7	6	-1
+229	17	6	1
+221	12	7	3
+26	19	8	4
+178	18	9	3
+230	23	9	1
+34	21	10	1
+143	18	1	1
+5	19	1	1
+66	2	2	-6
+195	15	2	0
+155	7	2	2
+236	4	3	1
+196	16	3	0
+218	18	4	2
+16	15	5	-1
+220	18	5	0
+237	10	5	1
+46	2	5	6
 \.
 
 
@@ -8028,14 +8045,14 @@ COPY users_preferences (up_id, keyword_id, user_id, genre_rating) FROM stdin;
 -- Name: users_preferences_up_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
 --
 
-SELECT pg_catalog.setval('users_preferences_up_id_seq', 197, true);
+SELECT pg_catalog.setval('users_preferences_up_id_seq', 237, true);
 
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
 --
 
-SELECT pg_catalog.setval('users_user_id_seq', 13, true);
+SELECT pg_catalog.setval('users_user_id_seq', 11, true);
 
 
 --
