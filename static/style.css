@@ -3,30 +3,28 @@ body {
 }
 
 
-#thumbnails {
-    width: 1200px;
-}
-
-
 .addbutton, .addbutton-reco{
     display: none;
     position: absolute;
-    float: left;
     left: 0px;
-    font-weight: bold;
-    padding: 5px;
+    top: 0px;
+    width: 40%;
+    background-color: #FFA500;
 
 }
 
 .remove{
-    display: inline;
     position: absolute;
-    float: left;
     left: 0px;
-    font-weight: bold;
-    padding: 5px;
+    top: 0px;
     background-color: #FFA500;
+}
+#remove-text, #seen-text{
+    color: white;
+}
 
+.glyphicon-remove, .glyphicon-eye-open{
+    color: grey;
 }
 
 #quiz-form{
@@ -34,8 +32,10 @@ body {
 }
 
 .image-container, .image-container-reco{
-    display: inline;
-    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    position:relative;
 }
 
 .ms-options-wrap > .ms-options > ul label {
@@ -43,9 +43,7 @@ body {
     background-color: #9DCEFF;
     
 }
-#slider {
-  width: 10%;
-}
+
 
 .ms-options-wrap > .ms-options > ul li.selected label,
 .ms-options-wrap > .ms-options > ul label:hover {
@@ -53,6 +51,7 @@ body {
     color:#fff;
 }
 
-.ms-options-wrap > button:focus, .ms-options-wrap > button, .ms-options-wrap > .ms-options {
-  width: 20%;
+#slider-limit{
+    float: right;
 }
+
