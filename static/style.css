@@ -9,7 +9,7 @@ body {
     left: 0px;
     top: 0px;
     width: 40%;
-    background-color: #FFA500;
+    background-color: #AA4A39;
 
 }
 
@@ -17,14 +17,23 @@ body {
     position: absolute;
     left: 0px;
     top: 0px;
-    background-color: #FFA500;
+    background-color: #AA4A39;
 }
+
+.remove:hover, .addbutton:hover, .addbutton-reco:hover{
+    background-color: #802615;
+}
+
 #remove-text, #seen-text{
     color: white;
 }
 
-.glyphicon-remove, .glyphicon-eye-open{
-    color: grey;
+.glyphicon-remove{
+    color: #550D00;
+}
+
+.glyphicon-eye-open{
+    color: white;
 }
 
 #quiz-form{
@@ -33,25 +42,21 @@ body {
 
 .image-container, .image-container-reco{
     display: inline-block;
-    margin-right: 20px;
+    margin-left: 30px;
     margin-bottom: 20px;
     position:relative;
 }
 
-.ms-options-wrap > .ms-options > ul label {
-    width: 100%;
-    background-color: #9DCEFF;
-    
-}
-
-
-.ms-options-wrap > .ms-options > ul li.selected label,
-.ms-options-wrap > .ms-options > ul label:hover {
-    background-color: #003A75;
-    color:#fff;
-}
 
 #slider-limit{
     float: right;
+}
+
+.navbar{
+    background-color: #191919;
+}
+
+.nav.navbar-nav.navbar-right li a{
+    color: white;
 }
 

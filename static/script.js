@@ -1,10 +1,15 @@
 
 "use strict";
 
-$('select[multiple]').multiselect({
+//http://www.erichynds.com/blog/jquery-ui-multiselect-widget
+$('select[multiple]').multiselect({  
     columns: 1,
     placeholder: 'Select options',
-    selectAll : true
+    selectAll : true    
+});
+
+$( document ).ready(function() {
+    $("#check").multiselect("checkAll");
 });
 
 function showMovieResults(results){
@@ -16,7 +21,7 @@ function showMovieResults(results){
     var thumbnail_url = results[movieid];
     $('<div class="image-container"><img src=' + thumbnail_url + ' data-toggle="modal" data-target=".bs-example-modal-lg" class="image" id=' + movieid + '> \
       <div class="addbutton btn btn-default" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" id=button_' + movieid + '> \
-      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span id="seen-text"> Seen</span></div></div>').appendTo('#thumbnails');
+      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span id="seen-text">  Seen</span></div></div>').appendTo('#thumbnails');
 
   }
   $('.image').on('click',showDetails);

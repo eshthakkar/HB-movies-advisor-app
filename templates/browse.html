@@ -6,8 +6,9 @@
   <div class="row">
     <div class="col-lg-2" id="filter">
       <label>Genres</label><br>
-      <select name="multicheckbox[]" multiple="multiple" class="4col formcls" id="check">
-        {% for genre in genres %}
+<!--       <select name="multicheckbox[]" multiple="multiple" class="4col formcls" id="check">--> 
+      <select id="check" name="multicheckbox[]" multiple="multiple">
+       {% for genre in genres %}
           <option class="chk" value="{{ genre.genre }}">{{ genre.genre }}</option>
         {% endfor %}
       </select><br> 

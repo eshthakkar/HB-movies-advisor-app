@@ -2,10 +2,14 @@
 <html>
 <head>
   <title>Movies Advisor</title>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/dark-hive/jquery-ui.css'>
+  <link rel="stylesheet" type="text/css" href='../static/jquery-ui.css'>
   <link rel="stylesheet" type="text/css" href="../static/jquery.multiselect.css">
+  <link rel="stylesheet" type="text/css" href='../static/jquery-ui.theme.css'>
   <link rel="stylesheet" type="text/css" href="../static/style.css">
+
 </head>
 
 <body>
@@ -20,14 +24,14 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/browse">Browse</a></li>
+        <li><a href="/browse" class="color-me">Browse</a></li>
       {% if 'user_id' in session %}
-        <li><a href="/recommendations">You might like these</a></li>
-        <li><a href="/watchlist">My seen movies</a></li>
-        <li><a href="/signout">Sign Out</a></li>
+        <li><a href="/recommendations">Suggested</a></li>
+        <li><a href="/watchlist">Watched</a></li>
+        <li><a href="/signout">Log Out</a></li>
       {% else %} 
         <li><a href="" data-toggle="modal" data-target=".bs-example-modal-sm">Sign Up</a></li>
-        <li><a href="" data-toggle="modal" data-target=".bs-example-modal-sm-signin">Sign In</a></li>     
+        <li><a href="" data-toggle="modal" data-target=".bs-example-modal-sm-signin">Log In</a></li>     
       {% endif %}
       </ul>    
   </div>
@@ -144,7 +148,7 @@
 
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.js"></script>
 <script src="../static/jquery.multiselect.js"></script>
 <script src="../static/script.js"></script>
 
