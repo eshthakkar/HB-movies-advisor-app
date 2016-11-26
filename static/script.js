@@ -164,7 +164,8 @@ $('.remove').on('click',function(){
   };
 
   $.post('/remove',remove_id,function(data){
-    $('#' + data).empty();
+    $('#' + data).remove();
+
 
   });
 });
