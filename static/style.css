@@ -3,6 +3,9 @@ body {
     
 }    
 
+h4#myModalLabelQuiz{
+    color: #AA4A39;
+}
 
 .addbutton, .addbutton-reco{
     display: none;
