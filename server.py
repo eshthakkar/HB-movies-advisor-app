@@ -29,10 +29,10 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage"""
 
-    if 'user_id' in session:
-        return redirect("/browse")
-    else:    
-        return render_template("homepage.html")
+    # if 'user_id' in session:
+    return redirect("/browse")
+    # else:    
+    #     return render_template("homepage.html")
 
 @app.route('/browse')
 def show_browse():
