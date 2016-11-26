@@ -64,3 +64,12 @@ h4#myModalLabelQuiz{
     color: white;
 }
 
+.form-horizontal, .control-label{
+        padding-top: 7px;
+        margin-left: 5px;
+}
+
+
+#signup, #signin {
+    margin-bottom: 20px;
+}
