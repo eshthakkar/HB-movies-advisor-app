@@ -138,7 +138,7 @@ def clustering():
     ranked_movie_data = vec.fit_transform(dataset).toarray()
 
     # k means clustering on dataset ranked_movie_data array
-    k_means = cluster.KMeans(n_clusters=5) 
+    k_means = cluster.KMeans(n_clusters=3) 
     KM = k_means.fit(ranked_movie_data) 
     labels = k_means.predict(ranked_movie_data)
     
