@@ -6,5 +6,5 @@ Movie Advisor App deals with these problems for you and suggests you movies whic
 Tech Stack:
 PostgreSQL, SQLAlchemy, Python, AJAX, Flask, Jinja, Javascript, JQuery,Bootstrap,k means clustering algorithm, scikit-learn, bcrypt
 
-![alt text](https://github.com/eshthakkar/HB-movies-advisor-app/tree/master/static/images/browse_page.png "Home page")
+![alt tag](https://github.com/eshthakkar/HB-movies-advisor-app/tree/master/static/images/browse_page.png)
 
