@@ -14,9 +14,9 @@ Movie Advisor App deals with these problems for you and suggests you movies whic
 
 ### Technology Stack
 
- ** Application:** Python, Flask, Jinja, PostgreSQL, SQLAlchemy, k means clustering algorithm, scikit-learn, bcrypt
- **APIs: GuideBox, OMDb
- **Front-End:** AJAX,Javascript, JQuery, Bootstrap, HTML/CSS, JQuery multiselect widget
+ * **Application:** Python, Flask, Jinja, PostgreSQL, SQLAlchemy, k means clustering algorithm, scikit-learn, bcrypt
+ * **APIs: GuideBox, OMDb
+ * **Front-End:** AJAX,Javascript, JQuery, Bootstrap, HTML/CSS, JQuery multiselect widget
 
 
 <img src="static/images/browse_page.png">
