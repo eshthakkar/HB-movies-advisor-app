@@ -7,5 +7,5 @@ Tech Stack:
 PostgreSQL, SQLAlchemy, Python, AJAX, Flask, Jinja, Javascript, JQuery,Bootstrap,k means clustering algorithm, scikit-learn, bcrypt
 
 
-<img src="static/images/browse_page.png" height="350">
+<img src="static/images/browse_page.png">
 
