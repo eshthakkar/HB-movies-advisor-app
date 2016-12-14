@@ -19,5 +19,13 @@ Movie Advisor App deals with these problems for you and suggests you movies whic
  * **Front-End:** AJAX,Javascript, JQuery, Bootstrap, HTML/CSS, JQuery multiselect widget
 
 
+**Screenshot of Homepage**
+
 <img src="static/images/browse_page.png">
+
+**Filtering movies by rating and genres and viewing details**
+
+<kbd>![](/static/browse.gif)</kbd>
+
+
 
