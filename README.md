@@ -3,6 +3,8 @@
 Finding movies as per your individual taste has always been a hassle. Movie ratings and long reviews are your only ways to filter out movies.
 Movie Advisor App deals with these problems for you and suggests you movies which are customized to you so that you spend time watching a movie, not in finding one.
 
+<img src="static/images/browse_page.png">
+
 **How it works**
 
  * User can filter movies based on genres and imdb ratings. Whenever an option is checked/unchecked from the dropdown menu, an ajax request is sent to the server, the relevant movies are queried from the postgres database, their thumbnails are sent back as response to the page and they get updated in place. 
@@ -19,13 +21,13 @@ Movie Advisor App deals with these problems for you and suggests you movies whic
  * **Front-End:** AJAX,Javascript, JQuery, Bootstrap, HTML/CSS, JQuery multiselect widget
 
 
-**Screenshot of Homepage**
-
-<img src="static/images/browse_page.png">
-
-**Filtering movies by rating and genres and viewing details**
+**Filtering movies by ratings, genres and viewing movie details**
 
 <kbd>![](/static/browse.gif)</kbd>
+
+**Adding/removing a movie to/from watched list**
+
+<kbd>![](/static/watched.gif)</kbd>
 
 
 
