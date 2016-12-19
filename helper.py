@@ -34,8 +34,6 @@ def form_question(movie_id):
 
     question2 = "Do you like " + quest_keyword1 + " or " + quest_keyword2 + " movies?"
     
-    # print quest_keyword1, picked_keyword_row1.keyword_id
-    # print quest_keyword2,picked_keyword_row2.keyword_id  
       
     return {'q1': question1, 'q2': question2, 'k_id1': picked_keyword_row1.keyword_id, 'k_id2': picked_keyword_row2.keyword_id,
            'quest_keyword1': quest_keyword1, 'quest_keyword2': quest_keyword2}
@@ -115,7 +113,6 @@ def analyze_clusters(df, labels):
 def clustering():
     """ preprocessing of data and k means clustering on it"""
 
-    print "clustering was called"
 
     # preprocessing of data by querying first from database and converting to numpy array
     movies = Movie.query.all()

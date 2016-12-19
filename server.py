@@ -29,10 +29,9 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage"""
 
-    # if 'user_id' in session:
+    
     return redirect("/browse")
-    # else:    
-    #     return render_template("homepage.html")
+    
 
 @app.route('/browse')
 def show_browse():
@@ -216,8 +215,6 @@ def add_movie_to_watchlist():
             movie_question = question_params['q1']
             user_question = question_params['q2']
 
-            print movie_question
-            print user_question
 
             text = Movie.query.filter(Movie.movie_id == movie_add_id).one().title + " has been added to your watch list" 
 
@@ -261,7 +258,6 @@ def record_user_response():
     keyword_id1 = request.form.get("keyword_id1")
     keyword_id2 = request.form.get("keyword_id2")
 
-    print keyword_id_chosen, movie_id, keyword_id1, keyword_id2
 
     # when user profiles a movie
     if keyword_id_chosen is not None:
@@ -298,8 +294,7 @@ def show_recommendations():
             user_genre_ratings.sort(key=lambda x: x.genre_rating, reverse=True)
             user_top_rated_genre = user_genre_ratings[0]
 
-            print "top genre"
-            print user_top_rated_genre
+            
 
             # cluster the movies including most current feedbacks    
             clustered_data = clustering()
@@ -308,14 +303,11 @@ def show_recommendations():
             labels = clustered_data["labels"]
             dataset = clustered_data["movies"]
             mids = []
-            print labels
 
             # creating a list of movie ids from dataset of movies.
             for movie in dataset:
                 mids.append(movie.movie_id)
-
-            print "movie ids list"    
-            print mids    
+   
 
             # Find the movie id with the user's preferred genre rated as highest
             highest_user_preferred_rating_on_movie = MovieKeywordRating.query.filter(MovieKeywordRating.keyword_id == user_top_rated_genre.keyword_id). \
@@ -323,17 +315,13 @@ def show_recommendations():
 
             highest_preferred_rating_mid = highest_user_preferred_rating_on_movie[0].movie_id
 
-            print "movie id and its index"
             index = mids.index(highest_preferred_rating_mid)
-            print highest_preferred_rating_mid, index
 
             # identifying the cluster to which the movie belongs to
             cluster_info_on_movie = labels[index] 
-            print cluster_info_on_movie
 
             # get indices of all movies belonging to that cluster
             cluster_indices = duplicates(labels,cluster_info_on_movie)
-            print cluster_indices
             cluster_movies = []
 
             # get movies from dataset based on indices info
